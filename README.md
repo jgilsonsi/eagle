@@ -10,3 +10,4 @@ A API RESTful contém as seguintes características:
 * Migração de banco de dados com Flyway
 * Testes unitários e de integração com JUnit
 * Integração contínua com TravisCI
+* Documentação da API com Swagger
