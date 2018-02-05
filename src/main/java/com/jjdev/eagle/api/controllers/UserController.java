@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author JGilson
  */
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/v1/user")
 @CrossOrigin(origins = "*")
 public class UserController {
 
