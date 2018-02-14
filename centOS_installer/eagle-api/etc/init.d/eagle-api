@@ -1,0 +1,131 @@
+#!/bin/sh
+#
+# Service startup script
+#
+# chkconfig: 2345 90 60
+# description: Service daemon.
+# pidfile:
+#
+
+#----------------------------------------------------------------------
+# Source function library
+#----------------------------------------------------------------------
+. /etc/rc.d/init.d/functions
+#----------------------------------------------------------------------
+
+#----------------------------------------------------------------------
+# Allow configuration overrides in /etc/sysconfig
+#----------------------------------------------------------------------
+CONFIG0=$(readlink $0)
+if [ "$CONFIG0" = "" ]; then
+	SERVICE_CONFIG=/etc/sysconfig/$(basename $0)
+else
+	SERVICE_CONFIG=/etc/sysconfig/$(basename $CONFIG0)
+fi
+if ! [ -r "$SERVICE_CONFIG" ]; then
+	echo "ERROR: File $SERVICE_CONFIG could not be read" 1>&2
+	exit 1
+fi
+. "$SERVICE_CONFIG"
+
+
+STOP_TIMEOUT=${STOP_TIMEOUT-10}
+RETVAL=0
+
+pidfile=$SERVICE_PIDFILE
+lockfile=$SERVICE_LOCKFILE
+logfile=$SERVICE_LOGFILE
+user=$SERVICE_USER
+
+prog_name=$(basename $SERVICE_CONFIG)
+prog=$SERVICE_HOME/bin/service_start.sh
+prog_args=
+
+
+if ! [ -x $prog ]; then
+	echo "ERROR: $prog not found"
+	exit 0
+fi
+if [ -z "$SERVICE_PIDFILE" ]; then
+	echo "ERROR: Service pid file not given" 1>&2
+	exit 1
+fi
+if [ -z "$SERVICE_LOGFILE" ]; then
+	echo "ERROR: Service log file not given" 1>&2
+	exit 1
+fi
+if [ -z "$SERVICE_LOCKFILE" ]; then
+	echo "ERROR: Service lock file not given" 1>&2
+	exit 1
+fi
+
+start() {
+	echo -n $"Starting $prog_name: "
+	if [ -f $pidfile ]; then
+		read ppid < $pidfile
+		if [ "$(ps --pid $ppid 2> /dev/null | grep -c $ppid 2> /dev/null)" -eq '1' ]; then
+			echo -n "$prog_name is already running"
+			failure
+			echo
+			return 1
+		else
+			rm -f $pidfile
+		fi
+	fi
+	dirs=("$(dirname $pidfile)" "$(dirname $logfile)" "$(dirname $lockfile)")
+	for i in "${dirs[@]}"; do
+		if ! [ -d "$i" ]; then
+			mkdir -p "$i"
+			test -n "$user" && chown $user:$user "$i"
+		fi
+	done
+	if [ -z "$user" ]; then
+		daemon --pidfile=${pidfile} $prog $prog_args
+	else
+		daemon --user=${user} --pidfile=${pidfile} $prog $prog_args
+	fi
+	RETVAL=$?
+	[ $RETVAL = 0 ] && touch ${lockfile}
+	echo
+	return $RETVAL
+}
+
+stop() {
+	echo -n $"Stopping $prog_name: "
+	killproc -p ${pidfile} -d ${STOP_TIMEOUT} $prog
+	RETVAL=$?
+	[ $RETVAL = 0 ] && rm -f ${lockfile} ${pidfile}
+	echo
+	return $RETVAL
+}
+
+restart() {
+	stop
+	start
+}
+#----------------------------------------------------------------------
+
+
+#----------------------------------------------------------------------
+# See how we were called
+#----------------------------------------------------------------------
+case "$1" in
+  start)
+	start
+	;;
+  stop)
+	stop
+	;;
+  restart)
+	restart
+	;;
+  status)
+	status -p $pidfile $prog_name
+	;;
+  *)
+	echo "Usage: $prog_name {start|stop|restart|status}"
+	exit 1
+esac
+
+exit $?
+#----------------------------------------------------------------------
