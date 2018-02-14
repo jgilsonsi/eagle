@@ -19,11 +19,11 @@ public class JPasswordUtils {
      * Generate password using BCrypt.
      *
      * @param password
-     * @return String
+     * @return encoded password
      */
     public static String generateBCrypt(String password) {
         if (password == null) {
-            log.info("Password generator received null value");
+            log.error("Password generator received null value");
             return password;
         }
         BCryptPasswordEncoder bCryptEncoder = new BCryptPasswordEncoder();

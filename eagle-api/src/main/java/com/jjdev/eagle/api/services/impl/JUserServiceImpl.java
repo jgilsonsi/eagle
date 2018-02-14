@@ -41,4 +41,12 @@ public class JUserServiceImpl implements IUserService {
         this.userRepository.delete(id);
     }
 
+    @Override
+    public boolean update(JUser user) {
+        int status = this.userRepository.update(user.getId(), user.getName(),
+                user.getPassword(), user.getRole());
+
+        return status == 1;
+    }
+
 }

@@ -30,7 +30,7 @@ import com.jjdev.eagle.api.services.IUserService;
  * @author JGilson
  */
 @RestController
-@RequestMapping("/v1/user")
+@RequestMapping("/api/v1/user")
 @CrossOrigin(origins = "*")
 public class JUserController {
 
@@ -46,7 +46,7 @@ public class JUserController {
      * Return user by email.
      *
      * @param email
-     * @return ResponseEntity<JResponse<UserDto>>
+     * @return ResponseEntity<JResponse<JUserDto>>
      */
     @GetMapping(value = "/{email:.+}")
     public ResponseEntity<JResponse<JUserDto>> readByEmail(@PathVariable("email") String email) {
@@ -54,8 +54,8 @@ public class JUserController {
         log.info("Searching user by email: {}", email);
 
         JResponse<JUserDto> response = new JResponse<>();
-        Optional<JUser> user = this.userService.findByEmail(email);
 
+        Optional<JUser> user = this.userService.findByEmail(email);
         if (!user.isPresent()) {
             log.info("User not found for email: {}", email);
             response.getErrors().add("User not found for email: " + email);
@@ -71,11 +71,11 @@ public class JUserController {
      *
      * @param user
      * @param result
-     * @return ResponseEntity<JResponse<UserDto>> @throws ParseException
+     * @return ResponseEntity<JResponse<JUserDto>>
      */
     @PostMapping
     public ResponseEntity<JResponse<JUserDto>> create(@Valid @RequestBody JUserDto userDto,
-            BindingResult result) throws ParseException, NoSuchAlgorithmException {
+            BindingResult result) {
 
         log.info("Creating user: {}", userDto.getEmail());
 
@@ -86,8 +86,9 @@ public class JUserController {
             return ResponseEntity.badRequest().body(response);
         }
 
-        JUser user = this.dtoToUser(userDto, result);
+        JUser user = this.dtoToUser(userDto);
         user = this.userService.create(user);
+
         response.setData(this.userToDto(user));
         return ResponseEntity.ok(response);
     }
@@ -107,7 +108,7 @@ public class JUserController {
 
         JResponse<JUserDto> response = new JResponse<>();
         userDto.setId(id);
-        JUser user = this.dtoToUser(userDto, result);
+        JUser user = this.dtoToUser(userDto);
 
         if (result.hasErrors()) {
             log.error("Validation errors: {}", result.getAllErrors());
@@ -115,19 +116,24 @@ public class JUserController {
             return ResponseEntity.badRequest().body(response);
         }
 
-        user = this.userService.create(user);
+        if (!this.userService.update(user)) {
+            log.info("Error while updating id: {}", id);
+            response.getErrors().add("Error while updating id: " + id);
+            return ResponseEntity.badRequest().body(response);
+        }
+
         response.setData(this.userToDto(user));
         return ResponseEntity.ok(response);
     }
 
     /**
-     * Remove user by id.
+     * Delete user by id.
      *
      * @param id
-     * @return ResponseEntity<JResponse<User>>
+     * @return ResponseEntity<JResponse<JUser>>
      */
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<JResponse<String>> remove(@PathVariable("id") Long id) {
+    public ResponseEntity<JResponse<String>> delete(@PathVariable("id") Long id) {
 
         log.info("Removing user by id: {}", id);
 
@@ -141,6 +147,7 @@ public class JUserController {
         }
 
         this.userService.remove(id);
+
         return ResponseEntity.ok(new JResponse<>());
     }
 
@@ -148,12 +155,11 @@ public class JUserController {
      * Convert DTO to JUser.
      *
      * @param userDto
-     * @param result
      * @return JUser
-     * @throws NoSuchAlgorithmException
      */
-    private JUser dtoToUser(JUserDto userDto, BindingResult result) throws NoSuchAlgorithmException {
+    private JUser dtoToUser(JUserDto userDto) {
         JUser user = new JUser();
+        user.setId(userDto.getId());
         user.setName(userDto.getName());
         user.setEmail(userDto.getEmail());
         user.setPassword(JPasswordUtils.generateBCrypt(userDto.getPassword()));
