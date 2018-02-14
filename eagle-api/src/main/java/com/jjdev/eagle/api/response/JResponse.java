@@ -7,12 +7,12 @@ import java.util.List;
  *
  * @author JGilson
  */
-public class Response<T> {
+public class JResponse<T> {
 
     private T data;
     private List<String> errors;
 
-    public Response() {
+    public JResponse() {
     }
 
     public T getData() {

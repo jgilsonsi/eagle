@@ -1,38 +1,38 @@
 package com.jjdev.eagle.api.services.impl;
 
-import com.jjdev.eagle.api.entities.User;
+import com.jjdev.eagle.api.entities.JUser;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.jjdev.eagle.api.repositories.UserRepository;
-import com.jjdev.eagle.api.services.UserService;
+import com.jjdev.eagle.api.repositories.IUserRepository;
+import com.jjdev.eagle.api.services.IUserService;
 
 /**
  *
  * @author JGilson
  */
 @Service
-public class UserServiceImpl implements UserService {
+public class JUserServiceImpl implements IUserService {
 
-    private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(JUserServiceImpl.class);
 
     @Autowired
-    private UserRepository userRepository;
+    private IUserRepository userRepository;
 
     @Override
-    public Optional<User> findById(Long id) {
+    public Optional<JUser> findById(Long id) {
         return Optional.ofNullable(this.userRepository.findOne(id));
     }
 
     @Override
-    public Optional<User> findByEmail(String email) {
+    public Optional<JUser> findByEmail(String email) {
         return Optional.ofNullable(this.userRepository.findByEmail(email));
     }
 
     @Override
-    public User create(User user) {
+    public JUser create(JUser user) {
         return this.userRepository.save(user);
     }
 

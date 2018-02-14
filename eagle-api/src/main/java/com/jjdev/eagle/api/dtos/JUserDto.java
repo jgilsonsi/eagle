@@ -1,40 +1,34 @@
-package com.jjdev.eagle.api.entities;
+package com.jjdev.eagle.api.dtos;
 
-import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
  * @author JGilson
  */
-@Entity
-@Table(name = "_user")
-public class User implements Serializable {
+public class JUserDto {
 
-    private static final long serialVersionUID = 0L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "name", nullable = false, length = 255)
+    @NotEmpty(message = "Name cannot be empty.")
+    @Length(max = 255, message = "Name must be contain a maximum of 255 characters.")
     private String name;
 
-    @Column(name = "email", unique = true, nullable = false, length = 255)
+    @NotEmpty(message = "Email cannot be empty.")
+    @Length(min = 5, max = 255, message = "User must be contain between 5 and 255 characters.")
+    @Email(message = "Invalid email.")
     private String email;
 
-    @Column(name = "password", nullable = false, length = 255)
+    @NotEmpty(message = "Password cannot be empty.")
+    @Length(min = 6, max = 255, message = "Password must be contain between 6 and 255 characters.")
     private String password;
 
-    @Column(name = "role", nullable = false, length = 20)
+    @NotEmpty(message = "Role cannot be empty.")
     private String role;
 
-    public User() {
+    public JUserDto() {
     }
 
     public Long getId() {
@@ -79,7 +73,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", name=" + name + ", email=" + email
+        return "UserDto{" + "id=" + id + ", name=" + name + ", email=" + email
                 + ", password=" + password + ", role=" + role + '}';
     }
 

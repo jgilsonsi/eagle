@@ -8,11 +8,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  *
  * @author JGilson
  */
-public class PasswordUtils {
+public class JPasswordUtils {
 
-    private static final Logger log = LoggerFactory.getLogger(PasswordUtils.class);
+    private static final Logger log = LoggerFactory.getLogger(JPasswordUtils.class);
 
-    public PasswordUtils() {
+    public JPasswordUtils() {
     }
 
     /**
