@@ -5,13 +5,11 @@ import com.jjdev.eagle.api.entities.JUser;
 import com.jjdev.eagle.api.enums.EUserType;
 import com.jjdev.eagle.api.response.JResponse;
 import com.jjdev.eagle.api.utils.JPasswordUtils;
-import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.expression.ParseException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -82,7 +80,8 @@ public class JUserController {
         JResponse<JUserDto> response = new JResponse<>();
         if (result.hasErrors()) {
             log.info("Validation erros: {}", result.getAllErrors());
-            result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
+            result.getAllErrors().forEach(error -> response.getErrors()
+                    .add(error.getDefaultMessage()));
             return ResponseEntity.badRequest().body(response);
         }
 
@@ -98,17 +97,15 @@ public class JUserController {
      *
      * @param id
      * @param userDto
-     * @return ResponseEntity<JResponse<UserDto>>
+     * @return ResponseEntity<JResponse<JUserDto>>
      */
     @PutMapping(value = "/{id}")
     public ResponseEntity<JResponse<JUserDto>> update(@PathVariable("id") Long id,
-            @Valid @RequestBody JUserDto userDto, BindingResult result) throws ParseException, NoSuchAlgorithmException {
+            @Valid @RequestBody JUserDto userDto, BindingResult result) {
 
         log.info("Updating user: {}", userDto.getEmail());
 
         JResponse<JUserDto> response = new JResponse<>();
-        userDto.setId(id);
-        JUser user = this.dtoToUser(userDto);
 
         if (result.hasErrors()) {
             log.info("Validation errors: {}", result.getAllErrors());
@@ -116,9 +113,11 @@ public class JUserController {
             return ResponseEntity.badRequest().body(response);
         }
 
+        userDto.setId(id);
+        JUser user = this.dtoToUser(userDto);
         if (!this.userService.update(user)) {
-            log.info("Error while updating id: {}", id);
-            response.getErrors().add("Error while updating id: " + id);
+            log.info("Invalid user id: {}", id);
+            response.getErrors().add("Invalid user id: " + id);
             return ResponseEntity.badRequest().body(response);
         }
 
@@ -184,4 +183,5 @@ public class JUserController {
 
         return userDto;
     }
+
 }

@@ -34,13 +34,6 @@ public interface IUserService {
     JUser create(JUser user);
 
     /**
-     * Remove a user.
-     *
-     * @param id
-     */
-    void remove(Long id);
-
-    /**
      * Update a user.
      *
      * @param user
@@ -48,4 +41,10 @@ public interface IUserService {
      */
     boolean update(JUser user);
 
+    /**
+     * Remove a user.
+     *
+     * @param id
+     */
+    void remove(Long id);
 }
