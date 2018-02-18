@@ -81,7 +81,7 @@ public class JUserController {
 
         JResponse<JUserDto> response = new JResponse<>();
         if (result.hasErrors()) {
-            log.error("Validation erros: {}", result.getAllErrors());
+            log.info("Validation erros: {}", result.getAllErrors());
             result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
             return ResponseEntity.badRequest().body(response);
         }
@@ -98,7 +98,7 @@ public class JUserController {
      *
      * @param id
      * @param userDto
-     * @return ResponseEntity<JResponse<UserDto>> @throws ParseException
+     * @return ResponseEntity<JResponse<UserDto>>
      */
     @PutMapping(value = "/{id}")
     public ResponseEntity<JResponse<JUserDto>> update(@PathVariable("id") Long id,
@@ -111,7 +111,7 @@ public class JUserController {
         JUser user = this.dtoToUser(userDto);
 
         if (result.hasErrors()) {
-            log.error("Validation errors: {}", result.getAllErrors());
+            log.info("Validation errors: {}", result.getAllErrors());
             result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
             return ResponseEntity.badRequest().body(response);
         }

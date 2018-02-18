@@ -17,12 +17,12 @@ public class JUserDto {
     private String name;
 
     @NotEmpty(message = "Email cannot be empty.")
-    @Length(min = 5, max = 255, message = "User must be contain between 5 and 255 characters.")
+    @Length(min = 5, max = 255, message = "User must be contain between {min} and {max} characters.")
     @Email(message = "Invalid email.")
     private String email;
 
     @NotEmpty(message = "Password cannot be empty.")
-    @Length(min = 6, max = 255, message = "Password must be contain between 6 and 255 characters.")
+    @Length(min = 6, max = 255, message = "Password must be contain between {min} and {max} characters.")
     private String password;
 
     @NotEmpty(message = "Role cannot be empty.")
