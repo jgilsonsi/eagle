@@ -23,7 +23,7 @@ public class JPasswordUtils {
      */
     public static String generateBCrypt(String password) {
         if (password == null) {
-            log.error("Password generator received null value");
+            log.info("Password generator received null value");
             return password;
         }
         BCryptPasswordEncoder bCryptEncoder = new BCryptPasswordEncoder();
