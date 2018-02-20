@@ -15,9 +15,9 @@ import java.util.Optional;
  * @author JGilson
  */
 @Service
-public class JEquipmentTypeImpl implements IEquipmentTypeService {
+public class JEquipmentTypeServiceImpl implements IEquipmentTypeService {
 
-    private static final Logger log = LoggerFactory.getLogger(JEquipmentTypeImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(JEquipmentTypeServiceImpl.class);
 
     @Autowired
     private IEquipmentTypeRepository equipmentTypeRepository;

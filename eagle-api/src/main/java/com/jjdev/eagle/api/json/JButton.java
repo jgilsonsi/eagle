@@ -1,6 +1,7 @@
 package com.jjdev.eagle.api.json;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,6 +14,10 @@ public class JButton {
     @JsonProperty("block_names")
     private List<String> blockNames;
     private String title;
+
+    public JButton() {
+        blockNames = new ArrayList<>();
+    }
 
     public String getType() {
         return type;

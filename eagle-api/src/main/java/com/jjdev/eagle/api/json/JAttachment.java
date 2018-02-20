@@ -9,6 +9,11 @@ public class JAttachment {
     private String type;
     private JPayload payload;
 
+    public JAttachment() {
+        type = "template";
+        payload = new JPayload();
+    }
+
     public String getType() {
         return type;
     }

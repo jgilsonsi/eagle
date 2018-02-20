@@ -143,6 +143,7 @@ public class JEquipmentTypeController {
         return ResponseEntity.ok(new JResponse<>());
     }
 
+    //--------------------------------------------------------------------------
     /**
      * Convert DTO to JEquipmentType.
      *

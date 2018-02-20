@@ -1,6 +1,7 @@
 package com.jjdev.eagle.api.json;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,17 +10,15 @@ import java.util.List;
  */
 public class JPayload {
 
+    private String text;
     @JsonProperty("template_type")
     private String templateType;
-    private String text;
     private List<JButton> buttons;
 
-    public String getTemplateType() {
-        return templateType;
-    }
-
-    public void setTemplateType(String templateType) {
-        this.templateType = templateType;
+    public JPayload() {
+        templateType = "button";
+        text = "Hello!";
+        buttons = new ArrayList<>();
     }
 
     public String getText() {
@@ -28,6 +27,14 @@ public class JPayload {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getTemplateType() {
+        return templateType;
+    }
+
+    public void setTemplateType(String templateType) {
+        this.templateType = templateType;
     }
 
     public List<JButton> getButtons() {
