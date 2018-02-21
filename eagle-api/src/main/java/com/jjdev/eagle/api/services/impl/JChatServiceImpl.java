@@ -1,7 +1,7 @@
 package com.jjdev.eagle.api.services.impl;
 
-import com.jjdev.eagle.api.json.JButton;
-import com.jjdev.eagle.api.json.JChatButton;
+import com.jjdev.eagle.api.json.button.JButton;
+import com.jjdev.eagle.api.json.button.JChatButton;
 import com.jjdev.eagle.api.repositories.IEquipmentTypeRepository;
 import com.jjdev.eagle.api.services.IChatService;
 import com.jjdev.eagle.api.utils.JJsonUtils;
@@ -19,7 +19,7 @@ public class JChatServiceImpl implements IChatService {
     private IEquipmentTypeRepository equipmentTypeRepository;
 
     @Override
-    public String genEquipmentTypeButtons() {
+    public String readEquipmentTypeButtons() {
 
         JChatButton chatButton = new JChatButton();
         this.equipmentTypeRepository.findAll().stream().map(equipmentType -> {

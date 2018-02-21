@@ -11,21 +11,6 @@ import java.util.Optional;
 public interface IEquipmentTypeService {
 
     /**
-     * Return a equipment type by id.
-     *
-     * @param id
-     * @return Optional<JEquipmentType>
-     */
-    Optional<JEquipmentType> findById(Long id);
-
-    /**
-     * Return list of equipments types.
-     *
-     * @return List<JEquipmentType>
-     */
-    List<JEquipmentType> findAll();
-
-    /**
      * Create equipment type.
      *
      * @param equipmentType
@@ -34,11 +19,19 @@ public interface IEquipmentTypeService {
     JEquipmentType create(JEquipmentType equipmentType);
 
     /**
-     * Remove a equipment type.
+     * Return list of equipment types.
+     *
+     * @return List<JEquipmentType>
+     */
+    List<JEquipmentType> readAll();
+
+    /**
+     * Return a equipment type by id.
      *
      * @param id
+     * @return Optional<JEquipmentType>
      */
-    void remove(Long id);
+    Optional<JEquipmentType> readById(Long id);
 
     /**
      * Update a equipment type.
@@ -47,5 +40,12 @@ public interface IEquipmentTypeService {
      * @return JEquipmentType
      */
     JEquipmentType update(JEquipmentType equipmentType);
+
+    /**
+     * Remove a equipment type.
+     *
+     * @param id
+     */
+    void delete(Long id);
 
 }

@@ -41,30 +41,6 @@ public class JUserController {
     }
 
     /**
-     * Return user by email.
-     *
-     * @param email
-     * @return ResponseEntity<JResponse<JUserDto>>
-     */
-    @GetMapping(value = "/{email:.+}")
-    public ResponseEntity<JResponse<JUserDto>> readByEmail(@PathVariable("email") String email) {
-
-        log.info("Searching user by email: {}", email);
-
-        JResponse<JUserDto> response = new JResponse<>();
-
-        Optional<JUser> user = this.userService.findByEmail(email);
-        if (!user.isPresent()) {
-            log.info("User not found for email: {}", email);
-            response.getErrors().add("User not found for email: " + email);
-            return ResponseEntity.badRequest().body(response);
-        }
-
-        response.setData(this.userToDto(user.get()));
-        return ResponseEntity.ok(response);
-    }
-
-    /**
      * Create a user.
      *
      * @param user
@@ -89,6 +65,30 @@ public class JUserController {
         user = this.userService.create(user);
 
         response.setData(this.userToDto(user));
+        return ResponseEntity.ok(response);
+    }
+
+    /**
+     * Return user by email.
+     *
+     * @param email
+     * @return ResponseEntity<JResponse<JUserDto>>
+     */
+    @GetMapping(value = "/{email:.+}")
+    public ResponseEntity<JResponse<JUserDto>> readByEmail(@PathVariable("email") String email) {
+
+        log.info("Searching user by email: {}", email);
+
+        JResponse<JUserDto> response = new JResponse<>();
+
+        Optional<JUser> user = this.userService.readByEmail(email);
+        if (!user.isPresent()) {
+            log.info("User not found for email: {}", email);
+            response.getErrors().add("User not found for email: " + email);
+            return ResponseEntity.badRequest().body(response);
+        }
+
+        response.setData(this.userToDto(user.get()));
         return ResponseEntity.ok(response);
     }
 
@@ -137,7 +137,7 @@ public class JUserController {
         log.info("Removing user by id: {}", id);
 
         JResponse<String> response = new JResponse<>();
-        Optional<JUser> user = this.userService.findById(id);
+        Optional<JUser> user = this.userService.readById(id);
 
         if (!user.isPresent()) {
             log.info("Invalid user id: {}", id);
@@ -145,7 +145,7 @@ public class JUserController {
             return ResponseEntity.badRequest().body(response);
         }
 
-        this.userService.remove(id);
+        this.userService.delete(id);
 
         return ResponseEntity.ok(new JResponse<>());
     }

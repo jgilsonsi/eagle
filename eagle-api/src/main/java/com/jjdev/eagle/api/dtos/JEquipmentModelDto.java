@@ -7,15 +7,19 @@ import org.hibernate.validator.constraints.NotEmpty;
  *
  * @author JGilson
  */
-public class JEquipmentTypeDto {
+public class JEquipmentModelDto {
 
     private Long id;
 
     @NotEmpty(message = "Name cannot be empty.")
-    @Length(max = 255, message = "Name must be contain a maximum of 255 characters.")
+    @Length(max = 255, message = "Name must be contain a maximum of {max} characters.")
     private String name;
 
-    public JEquipmentTypeDto() {
+    private String description;
+
+    private JEquipmentTypeDto equipmentTypeDto;
+
+    public JEquipmentModelDto() {
     }
 
     public Long getId() {
@@ -34,9 +38,27 @@ public class JEquipmentTypeDto {
         this.name = name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public JEquipmentTypeDto getEquipmentTypeDto() {
+        return equipmentTypeDto;
+    }
+
+    public void setEquipmentTypeDto(JEquipmentTypeDto equipmentTypeDto) {
+        this.equipmentTypeDto = equipmentTypeDto;
+    }
+
     @Override
     public String toString() {
-        return "JEquipmentTypeDto{" + "id=" + id + ", name=" + name + '}';
+        return "JEquipmentModelDto{" + "id=" + id + ", name=" + name
+                + ", description=" + description + ", equipmentTypeDto="
+                + equipmentTypeDto + '}';
     }
 
 }

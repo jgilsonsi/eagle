@@ -1,12 +1,12 @@
 package com.jjdev.eagle.api.repositories;
 
-import com.jjdev.eagle.api.entities.JEquipmentType;
+import com.jjdev.eagle.api.entities.JEquipmentModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author JGilson
  */
-public interface IEquipmentTypeRepository extends JpaRepository<JEquipmentType, Long> {
+public interface IEquipmentModelRepository extends JpaRepository<JEquipmentModel, Long> {
 
 }

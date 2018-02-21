@@ -1,6 +1,6 @@
 package com.jjdev.eagle.api.services;
 
-import com.jjdev.eagle.api.entities.JEquipmentType;
+import com.jjdev.eagle.api.entities.JEquipmentModel;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,44 +8,44 @@ import java.util.Optional;
  *
  * @author JGilson
  */
-public interface IEquipmentTypeService {
+public interface IEquipmentModelService {
 
     /**
-     * Return a equipment type by id.
+     * Create equipment model.
+     *
+     * @param equipmentModel
+     * @return JEquipmentModel
+     */
+    JEquipmentModel create(JEquipmentModel equipmentModel);
+
+    /**
+     * Return list of equipment models.
+     *
+     * @return List<JEquipmentModel>
+     */
+    List<JEquipmentModel> readAll();
+
+    /**
+     * Return a equipment model by id.
      *
      * @param id
-     * @return Optional<JEquipmentType>
+     * @return Optional<JEquipmentModel>
      */
-    Optional<JEquipmentType> findById(Long id);
+    Optional<JEquipmentModel> readById(Long id);
 
     /**
-     * Return list of equipments types.
+     * Update a equipment model.
      *
-     * @return List<JEquipmentType>
+     * @param equipmentModel
+     * @return JEquipmentModel
      */
-    List<JEquipmentType> findAll();
+    JEquipmentModel update(JEquipmentModel equipmentModel);
 
     /**
-     * Create equipment type.
-     *
-     * @param equipmentType
-     * @return JEquipmentType
-     */
-    JEquipmentType create(JEquipmentType equipmentType);
-
-    /**
-     * Remove a equipment type.
+     * Remove a equipment model.
      *
      * @param id
      */
-    void remove(Long id);
-
-    /**
-     * Update a equipment type.
-     *
-     * @param equipmentType
-     * @return JEquipmentType
-     */
-    JEquipmentType update(JEquipmentType equipmentType);
+    void delete(Long id);
 
 }

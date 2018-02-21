@@ -1,4 +1,4 @@
-package com.jjdev.eagle.api.json;
+package com.jjdev.eagle.api.json.button;
 
 /**
  *
@@ -10,8 +10,8 @@ public class JAttachment {
     private JPayload payload;
 
     public JAttachment() {
-        type = "template";
-        payload = new JPayload();
+        this.type = "template";
+        this.payload = new JPayload();
     }
 
     public String getType() {

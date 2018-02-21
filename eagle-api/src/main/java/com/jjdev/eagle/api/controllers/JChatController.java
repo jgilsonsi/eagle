@@ -34,8 +34,9 @@ public class JChatController {
      */
     @GetMapping(value = "/equipment-type")
     @ResponseBody
-    public String getEquipmentTypeButtons() {
-        return this.chatService.genEquipmentTypeButtons();
+    public String readEquipmentTypeButtons() {
+        log.info("Searching equipment types.");
+        return this.chatService.readEquipmentTypeButtons();
     }
 
 }

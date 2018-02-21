@@ -11,6 +11,6 @@ public interface IChatService {
      *
      * @return String
      */
-    String genEquipmentTypeButtons();
+    String readEquipmentTypeButtons();
 
 }

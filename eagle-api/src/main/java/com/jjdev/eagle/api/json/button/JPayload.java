@@ -1,4 +1,4 @@
-package com.jjdev.eagle.api.json;
+package com.jjdev.eagle.api.json.button;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
@@ -16,9 +16,9 @@ public class JPayload {
     private List<JButton> buttons;
 
     public JPayload() {
-        templateType = "button";
-        text = "Hello!";
-        buttons = new ArrayList<>();
+        this.templateType = "button";
+        this.text = "Hello!";
+        this.buttons = new ArrayList<>();
     }
 
     public String getText() {

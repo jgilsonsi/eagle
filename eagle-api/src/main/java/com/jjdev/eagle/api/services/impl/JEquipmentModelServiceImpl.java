@@ -1,10 +1,10 @@
 package com.jjdev.eagle.api.services.impl;
 
-import com.jjdev.eagle.api.entities.JEquipmentType;
-import com.jjdev.eagle.api.repositories.IEquipmentTypeRepository;
+import com.jjdev.eagle.api.entities.JEquipmentModel;
+import com.jjdev.eagle.api.repositories.IEquipmentModelRepository;
+import com.jjdev.eagle.api.services.IEquipmentModelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.jjdev.eagle.api.services.IEquipmentTypeService;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,34 +13,34 @@ import java.util.Optional;
  * @author JGilson
  */
 @Service
-public class JEquipmentTypeServiceImpl implements IEquipmentTypeService {
+public class JEquipmentModelServiceImpl implements IEquipmentModelService {
 
     @Autowired
-    private IEquipmentTypeRepository equipmentTypeRepository;
+    private IEquipmentModelRepository equipmentModelRepository;
 
     @Override
-    public Optional<JEquipmentType> findById(Long id) {
-        return Optional.ofNullable(this.equipmentTypeRepository.findOne(id));
+    public JEquipmentModel create(JEquipmentModel equipmentModel) {
+        return this.equipmentModelRepository.save(equipmentModel);
     }
 
     @Override
-    public List<JEquipmentType> findAll() {
-        return this.equipmentTypeRepository.findAll();
+    public List<JEquipmentModel> readAll() {
+        return this.equipmentModelRepository.findAll();
     }
 
     @Override
-    public JEquipmentType create(JEquipmentType equipmentType) {
-        return this.equipmentTypeRepository.save(equipmentType);
+    public Optional<JEquipmentModel> readById(Long id) {
+        return Optional.ofNullable(this.equipmentModelRepository.findOne(id));
     }
 
     @Override
-    public JEquipmentType update(JEquipmentType equipmentType) {
-        return this.equipmentTypeRepository.save(equipmentType);
+    public JEquipmentModel update(JEquipmentModel equipmentModel) {
+        return this.equipmentModelRepository.save(equipmentModel);
     }
 
     @Override
-    public void remove(Long id) {
-        this.equipmentTypeRepository.delete(id);
+    public void delete(Long id) {
+        this.equipmentModelRepository.delete(id);
     }
 
 }

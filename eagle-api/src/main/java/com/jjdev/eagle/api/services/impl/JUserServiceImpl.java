@@ -18,23 +18,18 @@ public class JUserServiceImpl implements IUserService {
     private IUserRepository userRepository;
 
     @Override
-    public Optional<JUser> findById(Long id) {
-        return Optional.ofNullable(this.userRepository.findOne(id));
-    }
-
-    @Override
-    public Optional<JUser> findByEmail(String email) {
-        return Optional.ofNullable(this.userRepository.findByEmail(email));
-    }
-
-    @Override
     public JUser create(JUser user) {
         return this.userRepository.save(user);
     }
 
     @Override
-    public void remove(Long id) {
-        this.userRepository.delete(id);
+    public Optional<JUser> readByEmail(String email) {
+        return Optional.ofNullable(this.userRepository.findByEmail(email));
+    }
+
+    @Override
+    public Optional<JUser> readById(Long id) {
+        return Optional.ofNullable(this.userRepository.findOne(id));
     }
 
     @Override
@@ -43,6 +38,11 @@ public class JUserServiceImpl implements IUserService {
                 user.getPassword(), user.getRole());
 
         return status == 1;
+    }
+
+    @Override
+    public void delete(Long id) {
+        this.userRepository.delete(id);
     }
 
 }

@@ -1,6 +1,6 @@
 package com.jjdev.eagle.api.utils;
 
-import com.jjdev.eagle.api.json.JChatButton;
+import com.jjdev.eagle.api.json.button.JChatButton;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 

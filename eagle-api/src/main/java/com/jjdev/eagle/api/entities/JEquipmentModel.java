@@ -3,9 +3,11 @@ package com.jjdev.eagle.api.entities;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -13,8 +15,8 @@ import javax.persistence.Table;
  * @author JGilson
  */
 @Entity
-@Table(name = "equipment_type")
-public class JEquipmentType implements Serializable {
+@Table(name = "equipment_model")
+public class JEquipmentModel implements Serializable {
 
     private static final long serialVersionUID = 0L;
 
@@ -25,7 +27,13 @@ public class JEquipmentType implements Serializable {
     @Column(name = "name", nullable = false, length = 255)
     private String name;
 
-    public JEquipmentType() {
+    @Column(name = "description", columnDefinition = "TEXT")
+    private String description;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private JEquipmentType equipmentType;
+
+    public JEquipmentModel() {
     }
 
     public Long getId() {
@@ -44,9 +52,27 @@ public class JEquipmentType implements Serializable {
         this.name = name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public JEquipmentType getEquipmentType() {
+        return equipmentType;
+    }
+
+    public void setEquipmentType(JEquipmentType equipmentType) {
+        this.equipmentType = equipmentType;
+    }
+
     @Override
     public String toString() {
-        return "JEquipmentType{" + "id=" + id + ", name=" + name + '}';
+        return "JEquipmentModel{" + "id=" + id + ", name=" + name
+                + ", description=" + description + ", equipmentType="
+                + equipmentType + '}';
     }
 
 }

@@ -1,9 +1,11 @@
 package com.jjdev.eagle.api.controllers;
 
+import com.jjdev.eagle.api.dtos.JEquipmentModelDto;
 import com.jjdev.eagle.api.dtos.JEquipmentTypeDto;
+import com.jjdev.eagle.api.entities.JEquipmentModel;
 import com.jjdev.eagle.api.entities.JEquipmentType;
 import com.jjdev.eagle.api.response.JResponse;
-import com.jjdev.eagle.api.services.IEquipmentTypeService;
+import com.jjdev.eagle.api.services.IEquipmentModelService;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -28,53 +30,32 @@ import org.springframework.web.bind.annotation.RestController;
  * @author JGilson
  */
 @RestController
-@RequestMapping("/api/v1/equipment-type")
+@RequestMapping("/api/v1/equipment-model")
 @CrossOrigin(origins = "*")
-public class JEquipmentTypeController {
+public class JEquipmentModelController {
 
-    private static final Logger log = LoggerFactory.getLogger(JEquipmentTypeController.class);
+    private static final Logger log = LoggerFactory.getLogger(JEquipmentModelController.class);
 
     @Autowired
-    private IEquipmentTypeService equipmentTypeService;
+    private IEquipmentModelService equipmentModelService;
 
-    public JEquipmentTypeController() {
+    public JEquipmentModelController() {
     }
 
     /**
-     * Return a list of equipment types.
+     * Create a equipment model.
      *
-     * @return ResponseEntity<Response<List<JEquipmentTypeDto>>>
-     */
-    @GetMapping(value = "")
-    public ResponseEntity<JResponse<List<JEquipmentTypeDto>>> readAll() {
-
-        log.info("Searching all equipment types.");
-
-        JResponse<List<JEquipmentTypeDto>> response = new JResponse<>();
-
-        List<JEquipmentType> equipmentTypes = this.equipmentTypeService.findAll();
-        List<JEquipmentTypeDto> equipmentTypesDto = equipmentTypes.stream()
-                .map(equipmentType -> this.equipmentTypeToDto(equipmentType))
-                .collect(Collectors.toList());
-
-        response.setData(equipmentTypesDto);
-        return ResponseEntity.ok(response);
-    }
-
-    /**
-     * Create a equipment type.
-     *
-     * @param equipmentType
+     * @param equipmentModel
      * @param result
-     * @return ResponseEntity<JResponse<JEquipmentTypeDto>>
+     * @return ResponseEntity<JResponse<JEquipmentModelDto>>
      */
     @PostMapping
-    public ResponseEntity<JResponse<JEquipmentTypeDto>> create(
-            @Valid @RequestBody JEquipmentTypeDto equipmentTypeDto, BindingResult result) {
+    public ResponseEntity<JResponse<JEquipmentModelDto>> create(
+            @Valid @RequestBody JEquipmentModelDto equipmentModelDto, BindingResult result) {
 
-        log.info("Creating equipment type: {}", equipmentTypeDto.getName());
+        log.info("Creating equipment model: {}", equipmentModelDto.getName());
 
-        JResponse<JEquipmentTypeDto> response = new JResponse<>();
+        JResponse<JEquipmentModelDto> response = new JResponse<>();
         if (result.hasErrors()) {
             log.info("Validation erros: {}", result.getAllErrors());
             result.getAllErrors().forEach(error -> response.getErrors()
@@ -82,27 +63,48 @@ public class JEquipmentTypeController {
             return ResponseEntity.badRequest().body(response);
         }
 
-        JEquipmentType equipmentType = this.dtoToEquipmentType(equipmentTypeDto);
-        equipmentType = this.equipmentTypeService.create(equipmentType);
+        JEquipmentModel equipmentModel = this.dtoToEquipmentModel(equipmentModelDto);
+        equipmentModel = this.equipmentModelService.create(equipmentModel);
 
-        response.setData(this.equipmentTypeToDto(equipmentType));
+        response.setData(this.equipmentModelToDto(equipmentModel));
         return ResponseEntity.ok(response);
     }
 
     /**
-     * Update equipment type.
+     * Return a list of equipment models.
+     *
+     * @return ResponseEntity<Response<List<JEquipmentModelDto>>>
+     */
+    @GetMapping(value = "")
+    public ResponseEntity<JResponse<List<JEquipmentModelDto>>> readAll() {
+
+        log.info("Searching all equipment models.");
+
+        JResponse<List<JEquipmentModelDto>> response = new JResponse<>();
+
+        List<JEquipmentModel> equipmentModels = this.equipmentModelService.readAll();
+        List<JEquipmentModelDto> equipmentModelsDto = equipmentModels.stream()
+                .map(equipmentModel -> this.equipmentModelToDto(equipmentModel))
+                .collect(Collectors.toList());
+
+        response.setData(equipmentModelsDto);
+        return ResponseEntity.ok(response);
+    }
+
+    /**
+     * Update equipment model.
      *
      * @param id
-     * @param equipmentTypeDto
-     * @return ResponseEntity<JResponse<JEquipmentTypeDto>>
+     * @param equipmentModelDto
+     * @return ResponseEntity<JResponse<JEquipmentModelDto>>
      */
     @PutMapping(value = "/{id}")
-    public ResponseEntity<JResponse<JEquipmentTypeDto>> update(@PathVariable("id") Long id,
-            @Valid @RequestBody JEquipmentTypeDto equipmentTypeDto, BindingResult result) {
+    public ResponseEntity<JResponse<JEquipmentModelDto>> update(@PathVariable("id") Long id,
+            @Valid @RequestBody JEquipmentModelDto equipmentModelDto, BindingResult result) {
 
-        log.info("Updating equipment type: {}", equipmentTypeDto.getName());
+        log.info("Updating equipment model: {}", equipmentModelDto.getName());
 
-        JResponse<JEquipmentTypeDto> response = new JResponse<>();
+        JResponse<JEquipmentModelDto> response = new JResponse<>();
 
         if (result.hasErrors()) {
             log.info("Validation errors: {}", result.getAllErrors());
@@ -110,66 +112,78 @@ public class JEquipmentTypeController {
             return ResponseEntity.badRequest().body(response);
         }
 
-        equipmentTypeDto.setId(id);
-        JEquipmentType equipmentType = this.dtoToEquipmentType(equipmentTypeDto);
-        equipmentType = this.equipmentTypeService.update(equipmentType);
+        equipmentModelDto.setId(id);
+        JEquipmentModel equipmentModel = this.dtoToEquipmentModel(equipmentModelDto);
+        equipmentModel = this.equipmentModelService.update(equipmentModel);
 
-        response.setData(this.equipmentTypeToDto(equipmentType));
+        response.setData(this.equipmentModelToDto(equipmentModel));
         return ResponseEntity.ok(response);
     }
 
     /**
-     * Delete equipment type by id.
+     * Delete equipment model by id.
      *
      * @param id
-     * @return ResponseEntity<JResponse<JEquipmentType>>
+     * @return ResponseEntity<JResponse<JEquipmentModel>>
      */
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<JResponse<String>> delete(@PathVariable("id") Long id) {
 
-        log.info("Removing equipment type by id: {}", id);
+        log.info("Removing equipment model by id: {}", id);
 
         JResponse<String> response = new JResponse<>();
-        Optional<JEquipmentType> equipmentType = this.equipmentTypeService.findById(id);
+        Optional<JEquipmentModel> equipmentModel = this.equipmentModelService.readById(id);
 
-        if (!equipmentType.isPresent()) {
-            log.info("Invalid equipment type id: {}", id);
-            response.getErrors().add("Invalid equipment type id: " + id);
+        if (!equipmentModel.isPresent()) {
+            log.info("Invalid equipment model id: {}", id);
+            response.getErrors().add("Invalid equipment model id: " + id);
             return ResponseEntity.badRequest().body(response);
         }
 
-        this.equipmentTypeService.remove(id);
+        this.equipmentModelService.delete(id);
 
         return ResponseEntity.ok(new JResponse<>());
     }
 
     //--------------------------------------------------------------------------
     /**
-     * Convert DTO to JEquipmentType.
+     * Convert DTO to JEquipmentModel.
      *
-     * @param equipmentTypeDto
-     * @return JEquipmentType
+     * @param equipmentModelDto
+     * @return JEquipmentModel
      */
-    private JEquipmentType dtoToEquipmentType(JEquipmentTypeDto equipmentTypeDto) {
-        JEquipmentType equipmentType = new JEquipmentType();
-        equipmentType.setId(equipmentTypeDto.getId());
-        equipmentType.setName(equipmentTypeDto.getName());
+    private JEquipmentModel dtoToEquipmentModel(JEquipmentModelDto equipmentModelDto) {
+        JEquipmentModel equipmentModel = new JEquipmentModel();
+        equipmentModel.setId(equipmentModelDto.getId());
+        equipmentModel.setName(equipmentModelDto.getName());
+        equipmentModel.setDescription(equipmentModelDto.getDescription());
 
-        return equipmentType;
+        JEquipmentType equipmentType = new JEquipmentType();
+        equipmentType.setId(equipmentModelDto.getEquipmentTypeDto().getId());
+        equipmentModel.setEquipmentType(equipmentType);
+
+        return equipmentModel;
     }
 
     /**
-     * Convert JEquipmentType to DTO.
+     * Convert JEquipmentModel to DTO.
      *
-     * @param equipmentType
-     * @return JEquipmentTypeDto
+     * @param equipmentModel
+     * @return JEquipmentModelDto
      */
-    private JEquipmentTypeDto equipmentTypeToDto(JEquipmentType equipmentType) {
-        JEquipmentTypeDto equipmentTypeDto = new JEquipmentTypeDto();
-        equipmentTypeDto.setId(equipmentType.getId());
-        equipmentTypeDto.setName(equipmentType.getName());
+    private JEquipmentModelDto equipmentModelToDto(JEquipmentModel equipmentModel) {
+        JEquipmentModelDto equipmentModelDto = new JEquipmentModelDto();
+        equipmentModelDto.setId(equipmentModel.getId());
+        equipmentModelDto.setName(equipmentModel.getName());
+        equipmentModelDto.setDescription(equipmentModel.getDescription());
 
-        return equipmentTypeDto;
+        JEquipmentTypeDto equipmentTypeDto = new JEquipmentTypeDto();
+        equipmentTypeDto.setId(equipmentModel.getEquipmentType().getId());
+        equipmentTypeDto.setName(equipmentModel.getEquipmentType().getName());
+
+        equipmentModelDto.setEquipmentTypeDto(equipmentTypeDto);
+
+        return equipmentModelDto;
     }
 
 }

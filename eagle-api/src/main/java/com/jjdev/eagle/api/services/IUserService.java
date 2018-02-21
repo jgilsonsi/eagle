@@ -10,12 +10,12 @@ import java.util.Optional;
 public interface IUserService {
 
     /**
-     * Return a user by id.
+     * Create new user.
      *
-     * @param id
-     * @return Optional<JUser>
+     * @param user
+     * @return JUser
      */
-    Optional<JUser> findById(Long id);
+    JUser create(JUser user);
 
     /**
      * Return a user by email.
@@ -23,15 +23,15 @@ public interface IUserService {
      * @param email
      * @return Optional<JUser>
      */
-    Optional<JUser> findByEmail(String email);
+    Optional<JUser> readByEmail(String email);
 
     /**
-     * Create new user.
+     * Return a user by id.
      *
-     * @param user
-     * @return JUser
+     * @param id
+     * @return Optional<JUser>
      */
-    JUser create(JUser user);
+    Optional<JUser> readById(Long id);
 
     /**
      * Update a user.
@@ -46,5 +46,6 @@ public interface IUserService {
      *
      * @param id
      */
-    void remove(Long id);
+    void delete(Long id);
+
 }

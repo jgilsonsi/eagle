@@ -13,7 +13,7 @@ public class JUserDto {
     private Long id;
 
     @NotEmpty(message = "Name cannot be empty.")
-    @Length(max = 255, message = "Name must be contain a maximum of 255 characters.")
+    @Length(max = 255, message = "Name must be contain a maximum of {max} characters.")
     private String name;
 
     @NotEmpty(message = "Email cannot be empty.")

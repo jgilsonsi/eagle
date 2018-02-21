@@ -1,4 +1,4 @@
-package com.jjdev.eagle.api.json;
+package com.jjdev.eagle.api.json.button;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +12,8 @@ public class JChatButton {
     private List<JMessage> messages;
 
     public JChatButton() {
-        messages = new ArrayList<>();
-        messages.add(new JMessage());
+        this.messages = new ArrayList<>();
+        this.messages.add(new JMessage());
     }
 
     public List<JMessage> getMessages() {

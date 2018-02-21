@@ -41,27 +41,6 @@ public class JEquipmentTypeController {
     }
 
     /**
-     * Return a list of equipment types.
-     *
-     * @return ResponseEntity<Response<List<JEquipmentTypeDto>>>
-     */
-    @GetMapping(value = "")
-    public ResponseEntity<JResponse<List<JEquipmentTypeDto>>> readAll() {
-
-        log.info("Searching all equipment types.");
-
-        JResponse<List<JEquipmentTypeDto>> response = new JResponse<>();
-
-        List<JEquipmentType> equipmentTypes = this.equipmentTypeService.findAll();
-        List<JEquipmentTypeDto> equipmentTypesDto = equipmentTypes.stream()
-                .map(equipmentType -> this.equipmentTypeToDto(equipmentType))
-                .collect(Collectors.toList());
-
-        response.setData(equipmentTypesDto);
-        return ResponseEntity.ok(response);
-    }
-
-    /**
      * Create a equipment type.
      *
      * @param equipmentType
@@ -86,6 +65,27 @@ public class JEquipmentTypeController {
         equipmentType = this.equipmentTypeService.create(equipmentType);
 
         response.setData(this.equipmentTypeToDto(equipmentType));
+        return ResponseEntity.ok(response);
+    }
+
+    /**
+     * Return a list of equipment types.
+     *
+     * @return ResponseEntity<Response<List<JEquipmentTypeDto>>>
+     */
+    @GetMapping(value = "")
+    public ResponseEntity<JResponse<List<JEquipmentTypeDto>>> readAll() {
+
+        log.info("Searching all equipment types.");
+
+        JResponse<List<JEquipmentTypeDto>> response = new JResponse<>();
+
+        List<JEquipmentType> equipmentTypes = this.equipmentTypeService.readAll();
+        List<JEquipmentTypeDto> equipmentTypesDto = equipmentTypes.stream()
+                .map(equipmentType -> this.equipmentTypeToDto(equipmentType))
+                .collect(Collectors.toList());
+
+        response.setData(equipmentTypesDto);
         return ResponseEntity.ok(response);
     }
 
@@ -130,7 +130,7 @@ public class JEquipmentTypeController {
         log.info("Removing equipment type by id: {}", id);
 
         JResponse<String> response = new JResponse<>();
-        Optional<JEquipmentType> equipmentType = this.equipmentTypeService.findById(id);
+        Optional<JEquipmentType> equipmentType = this.equipmentTypeService.readById(id);
 
         if (!equipmentType.isPresent()) {
             log.info("Invalid equipment type id: {}", id);
@@ -138,7 +138,7 @@ public class JEquipmentTypeController {
             return ResponseEntity.badRequest().body(response);
         }
 
-        this.equipmentTypeService.remove(id);
+        this.equipmentTypeService.delete(id);
 
         return ResponseEntity.ok(new JResponse<>());
     }

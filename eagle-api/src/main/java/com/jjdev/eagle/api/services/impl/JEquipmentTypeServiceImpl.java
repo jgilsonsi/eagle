@@ -19,18 +19,18 @@ public class JEquipmentTypeServiceImpl implements IEquipmentTypeService {
     private IEquipmentTypeRepository equipmentTypeRepository;
 
     @Override
-    public Optional<JEquipmentType> findById(Long id) {
-        return Optional.ofNullable(this.equipmentTypeRepository.findOne(id));
+    public JEquipmentType create(JEquipmentType equipmentType) {
+        return this.equipmentTypeRepository.save(equipmentType);
     }
 
     @Override
-    public List<JEquipmentType> findAll() {
+    public List<JEquipmentType> readAll() {
         return this.equipmentTypeRepository.findAll();
     }
 
     @Override
-    public JEquipmentType create(JEquipmentType equipmentType) {
-        return this.equipmentTypeRepository.save(equipmentType);
+    public Optional<JEquipmentType> readById(Long id) {
+        return Optional.ofNullable(this.equipmentTypeRepository.findOne(id));
     }
 
     @Override
@@ -39,7 +39,7 @@ public class JEquipmentTypeServiceImpl implements IEquipmentTypeService {
     }
 
     @Override
-    public void remove(Long id) {
+    public void delete(Long id) {
         this.equipmentTypeRepository.delete(id);
     }
 

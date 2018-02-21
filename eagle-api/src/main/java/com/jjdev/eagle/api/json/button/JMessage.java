@@ -1,4 +1,4 @@
-package com.jjdev.eagle.api.json;
+package com.jjdev.eagle.api.json.button;
 
 /**
  *
@@ -9,7 +9,7 @@ public class JMessage {
     private JAttachment attachment;
 
     public JMessage() {
-        attachment = new JAttachment();
+        this.attachment = new JAttachment();
     }
 
     public JAttachment getAttachment() {
