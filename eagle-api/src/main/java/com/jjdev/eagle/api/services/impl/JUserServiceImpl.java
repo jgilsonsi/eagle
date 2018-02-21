@@ -2,8 +2,6 @@ package com.jjdev.eagle.api.services.impl;
 
 import com.jjdev.eagle.api.entities.JUser;
 import java.util.Optional;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.jjdev.eagle.api.repositories.IUserRepository;
@@ -15,8 +13,6 @@ import com.jjdev.eagle.api.services.IUserService;
  */
 @Service
 public class JUserServiceImpl implements IUserService {
-
-    private static final Logger log = LoggerFactory.getLogger(JUserServiceImpl.class);
 
     @Autowired
     private IUserRepository userRepository;
