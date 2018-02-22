@@ -22,13 +22,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 @ActiveProfiles("test")
 public class JUserRepositoryTest {
-    
+
     @Autowired
     private IUserRepository userRepository;
-    
+
     private static final String EMAIL = "eagle@eagle.com.br";
     private static final String PASSWORD = "123Mudar";
-    
+
     @Before
     public void setUp() throws Exception {
         JUser user = new JUser();
@@ -38,21 +38,22 @@ public class JUserRepositoryTest {
         user.setRole(EUserType.ROLE_USER.name());
         this.userRepository.save(user);
     }
-    
+
     @After
     public final void tearDown() {
         this.userRepository.deleteAll();
     }
-    
+
     @Test
     public void testFindByEmail() {
         JUser user = this.userRepository.findByEmail(EMAIL);
         assertEquals(EMAIL, user.getEmail());
     }
-    
+
     @Test
     public void testPassordValue() {
         JUser user = this.userRepository.findByEmail(EMAIL);
         assertTrue(JPasswordUtils.validPassword(PASSWORD, user.getPassword()));
     }
+    
 }
