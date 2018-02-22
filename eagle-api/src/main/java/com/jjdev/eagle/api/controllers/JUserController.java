@@ -41,7 +41,7 @@ public class JUserController {
     }
 
     /**
-     * Create a user.
+     * Create user.
      *
      * @param user
      * @param result
@@ -129,7 +129,7 @@ public class JUserController {
      * Delete user by id.
      *
      * @param id
-     * @return ResponseEntity<JResponse<JUser>>
+     * @return ResponseEntity<JResponse<String>>
      */
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<JResponse<String>> delete(@PathVariable("id") Long id) {
@@ -150,6 +150,7 @@ public class JUserController {
         return ResponseEntity.ok(new JResponse<>());
     }
 
+    //--------------------------------------------------------------------------
     /**
      * Convert DTO to JUser.
      *

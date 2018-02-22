@@ -26,7 +26,7 @@ public interface IEquipmentModelService {
     List<JEquipmentModel> readAll();
 
     /**
-     * Return a equipment model by id.
+     * Return equipment model by id.
      *
      * @param id
      * @return Optional<JEquipmentModel>
@@ -34,7 +34,7 @@ public interface IEquipmentModelService {
     Optional<JEquipmentModel> readById(Long id);
 
     /**
-     * Update a equipment model.
+     * Update equipment model.
      *
      * @param equipmentModel
      * @return JEquipmentModel
@@ -42,7 +42,7 @@ public interface IEquipmentModelService {
     JEquipmentModel update(JEquipmentModel equipmentModel);
 
     /**
-     * Remove a equipment model.
+     * Remove equipment model.
      *
      * @param id
      */

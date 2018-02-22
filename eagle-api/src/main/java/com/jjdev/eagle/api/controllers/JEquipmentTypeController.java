@@ -41,7 +41,7 @@ public class JEquipmentTypeController {
     }
 
     /**
-     * Create a equipment type.
+     * Create equipment type.
      *
      * @param equipmentType
      * @param result
@@ -122,7 +122,7 @@ public class JEquipmentTypeController {
      * Delete equipment type by id.
      *
      * @param id
-     * @return ResponseEntity<JResponse<JEquipmentType>>
+     * @return ResponseEntity<JResponse<String>>
      */
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<JResponse<String>> delete(@PathVariable("id") Long id) {
