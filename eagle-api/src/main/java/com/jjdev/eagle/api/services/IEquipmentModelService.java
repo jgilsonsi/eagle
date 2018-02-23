@@ -19,7 +19,7 @@ public interface IEquipmentModelService {
     JEquipmentModel create(JEquipmentModel equipmentModel);
 
     /**
-     * Return list of equipment models.
+     * Return a list of equipment models.
      *
      * @return List<JEquipmentModel>
      */

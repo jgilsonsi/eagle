@@ -19,9 +19,9 @@ public interface IClientService {
     JClient create(JClient client);
 
     /**
-     * Return list of equipment models.
+     * Return a list of clients.
      *
-     * @return List<JEquipmentModel>
+     * @return List<JClient>
      */
     List<JClient> readAll();
 

@@ -19,7 +19,7 @@ public interface IEquipmentTypeService {
     JEquipmentType create(JEquipmentType equipmentType);
 
     /**
-     * Return list of equipment types.
+     * Return a list of equipment types.
      *
      * @return List<JEquipmentType>
      */
