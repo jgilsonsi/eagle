@@ -1,7 +1,6 @@
 package com.jjdev.eagle.api.controllers;
 
 import com.jjdev.eagle.api.dtos.JEquipmentModelDto;
-import com.jjdev.eagle.api.dtos.JEquipmentTypeDto;
 import com.jjdev.eagle.api.entities.JEquipmentModel;
 import com.jjdev.eagle.api.entities.JEquipmentType;
 import com.jjdev.eagle.api.response.JResponse;
@@ -153,13 +152,13 @@ public class JEquipmentModelController {
      * @return JEquipmentModel
      */
     private JEquipmentModel dtoToEquipmentModel(JEquipmentModelDto equipmentModelDto) {
+        JEquipmentType equipmentType = new JEquipmentType();
+        equipmentType.setId(equipmentModelDto.getEquipmentTypeId());
+
         JEquipmentModel equipmentModel = new JEquipmentModel();
         equipmentModel.setId(equipmentModelDto.getId());
         equipmentModel.setName(equipmentModelDto.getName());
         equipmentModel.setDescription(equipmentModelDto.getDescription());
-
-        JEquipmentType equipmentType = new JEquipmentType();
-        equipmentType.setId(equipmentModelDto.getEquipmentTypeDto().getId());
         equipmentModel.setEquipmentType(equipmentType);
 
         return equipmentModel;
@@ -176,12 +175,7 @@ public class JEquipmentModelController {
         equipmentModelDto.setId(equipmentModel.getId());
         equipmentModelDto.setName(equipmentModel.getName());
         equipmentModelDto.setDescription(equipmentModel.getDescription());
-
-        JEquipmentTypeDto equipmentTypeDto = new JEquipmentTypeDto();
-        equipmentTypeDto.setId(equipmentModel.getEquipmentType().getId());
-        equipmentTypeDto.setName(equipmentModel.getEquipmentType().getName());
-
-        equipmentModelDto.setEquipmentTypeDto(equipmentTypeDto);
+        equipmentModelDto.setEquipmentTypeId(equipmentModel.getEquipmentType().getId());
 
         return equipmentModelDto;
     }

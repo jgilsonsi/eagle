@@ -1,6 +1,8 @@
 package com.jjdev.eagle.api.entities;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -32,6 +35,9 @@ public class JEquipmentModel implements Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     private JEquipmentType equipmentType;
+
+    @OneToMany(mappedBy = "equipmentModel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<JOrder> orders;
 
     public JEquipmentModel() {
     }
@@ -68,11 +74,19 @@ public class JEquipmentModel implements Serializable {
         this.equipmentType = equipmentType;
     }
 
+    public List<JOrder> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<JOrder> orders) {
+        this.orders = orders;
+    }
+
     @Override
     public String toString() {
         return "JEquipmentModel{" + "id=" + id + ", name=" + name
                 + ", description=" + description + ", equipmentType="
-                + equipmentType + '}';
+                + equipmentType + ", orders=" + orders + '}';
     }
 
 }

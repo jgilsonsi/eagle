@@ -1,7 +1,6 @@
 package com.jjdev.eagle.api.dtos;
 
 import java.util.Date;
-import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
@@ -11,13 +10,15 @@ public class JOrderDto {
 
     private Long id;
 
-    @NotEmpty(message = "Initial date cannot be empty.")
     private Date initialDate;
 
-    @NotEmpty(message = "Final date cannot be empty.")
     private Date finalDate;
 
     private Double value;
+
+    private Long clientId;
+
+    private Long equipmentModelId;
 
     public JOrderDto() {
     }
@@ -54,10 +55,27 @@ public class JOrderDto {
         this.value = value;
     }
 
+    public Long getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(Long clientId) {
+        this.clientId = clientId;
+    }
+
+    public Long getEquipmentModelId() {
+        return equipmentModelId;
+    }
+
+    public void setEquipmentModelId(Long equipmentModelId) {
+        this.equipmentModelId = equipmentModelId;
+    }
+
     @Override
     public String toString() {
         return "JOrderDto{" + "id=" + id + ", initialDate=" + initialDate
-                + ", finalDate=" + finalDate + ", value=" + value + '}';
+                + ", finalDate=" + finalDate + ", value=" + value + ", clientId="
+                + clientId + ", equipmentModelId=" + equipmentModelId + '}';
     }
 
 }

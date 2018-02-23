@@ -1,6 +1,8 @@
 package com.jjdev.eagle.api.controllers;
 
 import com.jjdev.eagle.api.dtos.JOrderDto;
+import com.jjdev.eagle.api.entities.JClient;
+import com.jjdev.eagle.api.entities.JEquipmentModel;
 import com.jjdev.eagle.api.entities.JOrder;
 import com.jjdev.eagle.api.response.JResponse;
 import com.jjdev.eagle.api.services.IOrderService;
@@ -151,11 +153,19 @@ public class JOrderController {
      * @return JOrder
      */
     private JOrder dtoToOrder(JOrderDto orderDto) {
+        JClient client = new JClient();
+        client.setId(orderDto.getClientId());
+
+        JEquipmentModel equipmentModel = new JEquipmentModel();
+        equipmentModel.setId(orderDto.getEquipmentModelId());
+
         JOrder order = new JOrder();
         order.setId(orderDto.getId());
         order.setInitialDate(orderDto.getInitialDate());
         order.setFinalDate(orderDto.getFinalDate());
         order.setValue(orderDto.getValue());
+        order.setClient(client);
+        order.setEquipmentModel(equipmentModel);
 
         return order;
     }
@@ -172,6 +182,8 @@ public class JOrderController {
         orderDto.setInitialDate(order.getInitialDate());
         orderDto.setFinalDate(order.getFinalDate());
         orderDto.setValue(order.getValue());
+        orderDto.setClientId(order.getClient().getId());
+        orderDto.setEquipmentModelId(order.getEquipmentModel().getId());
 
         return orderDto;
     }

@@ -2,11 +2,15 @@ package com.jjdev.eagle.api.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -29,12 +33,15 @@ public class JClient implements Serializable {
     @Column(name = "name", nullable = false, length = 255)
     private String name;
 
-    @Column(name = "chat_id", length = 255)
+    @Column(name = "chat_id", unique = true, length = 255)
     private String chatId;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "date_create", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date dateCreate;
+
+    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<JOrder> orders;
 
     public JClient() {
     }
@@ -76,10 +83,19 @@ public class JClient implements Serializable {
         dateCreate = new Date();
     }
 
+    public List<JOrder> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<JOrder> orders) {
+        this.orders = orders;
+    }
+
     @Override
     public String toString() {
         return "JClient{" + "id=" + id + ", name=" + name + ", chatId="
-                + chatId + ", dateCreate=" + dateCreate + '}';
+                + chatId + ", dateCreate=" + dateCreate + ", orders="
+                + orders + '}';
     }
 
 }

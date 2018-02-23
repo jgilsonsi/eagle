@@ -26,7 +26,7 @@ public class JEquipmentType implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "name", nullable = false, length = 255)
+    @Column(name = "name", nullable = false, unique = true, length = 255)
     private String name;
 
     @OneToMany(mappedBy = "equipmentType", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

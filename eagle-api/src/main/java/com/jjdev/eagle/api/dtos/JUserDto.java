@@ -1,5 +1,6 @@
 package com.jjdev.eagle.api.dtos;
 
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -10,6 +11,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 public class JUserDto {
 
+    @ApiModelProperty(hidden = true)
     private Long id;
 
     @NotEmpty(message = "Name cannot be empty.")
@@ -25,7 +27,7 @@ public class JUserDto {
     @Length(min = 6, max = 255, message = "Password must be contain between {min} and {max} characters.")
     private String password;
 
-    @NotEmpty(message = "Role cannot be empty.")
+    @ApiModelProperty(hidden = true)
     private String role;
 
     public JUserDto() {
