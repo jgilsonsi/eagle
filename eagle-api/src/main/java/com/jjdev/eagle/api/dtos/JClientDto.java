@@ -11,6 +11,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 public class JClientDto {
 
+    @ApiModelProperty(hidden = true)
     private Long id;
 
     @NotEmpty(message = "Name cannot be empty.")

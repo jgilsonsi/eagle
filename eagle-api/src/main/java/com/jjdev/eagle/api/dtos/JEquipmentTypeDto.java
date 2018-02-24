@@ -1,5 +1,6 @@
 package com.jjdev.eagle.api.dtos;
 
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -9,6 +10,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 public class JEquipmentTypeDto {
 
+    @ApiModelProperty(hidden = true)
     private Long id;
 
     @NotEmpty(message = "Name cannot be empty.")

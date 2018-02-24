@@ -1,5 +1,6 @@
 package com.jjdev.eagle.api.dtos;
 
+import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 
 /**
@@ -8,6 +9,7 @@ import java.util.Date;
  */
 public class JOrderDto {
 
+    @ApiModelProperty(hidden = true)
     private Long id;
 
     private Date initialDate;
