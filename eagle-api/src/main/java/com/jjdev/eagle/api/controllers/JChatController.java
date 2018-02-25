@@ -1,11 +1,13 @@
 package com.jjdev.eagle.api.controllers;
 
+import com.jjdev.eagle.api.entities.JEquipmentType;
 import com.jjdev.eagle.api.services.IChatService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,12 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/chat")
 @CrossOrigin(origins = "*")
 public class JChatController {
-
+    
     private static final Logger log = LoggerFactory.getLogger(JChatController.class);
-
+    
     @Autowired
     private IChatService chatService;
-
+    
     public JChatController() {
     }
 
@@ -35,8 +37,26 @@ public class JChatController {
     @GetMapping(value = "/equipment-type")
     @ResponseBody
     public String readEquipmentTypes() {
+        
         log.info("Searching equipment types for Chat.");
+        
         return this.chatService.readEquipmentTypes();
     }
 
+    /**
+     * Return equipment models 'Json object.
+     *
+     * @return String
+     */
+    @GetMapping(value = "/equipment-model/{equipmentTypeId}")
+    @ResponseBody
+    public String readEquipmentModels(@PathVariable("equipmentTypeId") Long equipmentTypeId) {
+        log.info("Searching equipment models for Chat by equipment type id {}.", equipmentTypeId);
+        
+        JEquipmentType equipmentType = new JEquipmentType();
+        equipmentType.setId(equipmentTypeId);
+        
+        return this.chatService.readEquipmentModels(equipmentType);
+    }
+    
 }

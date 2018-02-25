@@ -1,5 +1,7 @@
 package com.jjdev.eagle.api.services;
 
+import com.jjdev.eagle.api.entities.JEquipmentType;
+
 /**
  *
  * @author JGilson
@@ -12,5 +14,13 @@ public interface IChatService {
      * @return String
      */
     String readEquipmentTypes();
+
+    /**
+     * Return equipment models in 'Json
+     *
+     * @param equipmentType
+     * @return String
+     */
+    String readEquipmentModels(JEquipmentType equipmentType);
 
 }

@@ -12,6 +12,7 @@ public class JQuickReplyMessage {
 
     private String text;
     @JsonProperty("quick_replies")
+
     private List<JQuickReply> quickReplies;
 
     public JQuickReplyMessage() {
