@@ -1,7 +1,7 @@
 package com.jjdev.eagle.api.services.impl;
 
-import com.jjdev.eagle.api.json.button.JButton;
-import com.jjdev.eagle.api.json.button.JChatButton;
+import com.jjdev.eagle.api.json.quickreply.JQuickReplyChat;
+import com.jjdev.eagle.api.json.quickreply.JQuickReply;
 import com.jjdev.eagle.api.repositories.IEquipmentTypeRepository;
 import com.jjdev.eagle.api.services.IChatService;
 import com.jjdev.eagle.api.utils.JJsonUtils;
@@ -19,21 +19,21 @@ public class JChatServiceImpl implements IChatService {
     private IEquipmentTypeRepository equipmentTypeRepository;
 
     @Override
-    public String readEquipmentTypeButtons() {
+    public String readEquipmentTypes() {
 
-        JChatButton chatButton = new JChatButton();
+        JQuickReplyChat quickReplyChat = new JQuickReplyChat();
+        quickReplyChat.getMessages().get(0).setText("Escolha uma das opções:");
         this.equipmentTypeRepository.findAll().stream().map(equipmentType -> {
-            JButton button = new JButton();
-            button.setType("show_block");
-            button.setTitle(equipmentType.getName());
-            button.getBlockNames().add(equipmentType.getName());
-            return button;
-        }).forEachOrdered(button -> {
-            chatButton.getMessages().get(0).getAttachment()
-                    .getPayload().getButtons().add(button);
+            JQuickReply quickReply = new JQuickReply();
+            quickReply.setTitle(equipmentType.getName());
+            quickReply.getQuickReplyAttributes().setEquipmentTypeId(equipmentType.getId());
+            quickReply.getQuickReplyAttributes().setEquipmentTypeName(equipmentType.getName());
+            return quickReply;
+        }).forEachOrdered(quickReply -> {
+            quickReplyChat.getMessages().get(0).getQuickReplies().add(quickReply);
         });
 
-        return JJsonUtils.objectToJson(chatButton);
+        return JJsonUtils.objectToJson(quickReplyChat);
     }
 
 }

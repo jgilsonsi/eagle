@@ -19,6 +19,8 @@ public class JEquipmentModelDto {
 
     private String description;
 
+    private Double rate;
+
     private Long equipmentTypeId;
 
     public JEquipmentModelDto() {
@@ -48,6 +50,14 @@ public class JEquipmentModelDto {
         this.description = description;
     }
 
+    public Double getRate() {
+        return rate;
+    }
+
+    public void setRate(Double rate) {
+        this.rate = rate;
+    }
+
     public Long getEquipmentTypeId() {
         return equipmentTypeId;
     }
@@ -59,8 +69,8 @@ public class JEquipmentModelDto {
     @Override
     public String toString() {
         return "JEquipmentModelDto{" + "id=" + id + ", name=" + name
-                + ", description=" + description + ", equipmentTypeId="
-                + equipmentTypeId + '}';
+                + ", description=" + description + ", rate=" + rate
+                + ", equipmentTypeId=" + equipmentTypeId + '}';
     }
 
 }

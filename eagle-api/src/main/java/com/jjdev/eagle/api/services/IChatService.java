@@ -7,10 +7,10 @@ package com.jjdev.eagle.api.services;
 public interface IChatService {
 
     /**
-     * Return equipment type buttons in 'Json
+     * Return equipment types in 'Json
      *
      * @return String
      */
-    String readEquipmentTypeButtons();
+    String readEquipmentTypes();
 
 }

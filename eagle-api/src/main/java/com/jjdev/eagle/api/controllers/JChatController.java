@@ -28,15 +28,15 @@ public class JChatController {
     }
 
     /**
-     * Return 'Json object.
+     * Return equipment types 'Json object.
      *
      * @return String
      */
     @GetMapping(value = "/equipment-type")
     @ResponseBody
-    public String readEquipmentTypeButtons() {
-        log.info("Searching equipment types.");
-        return this.chatService.readEquipmentTypeButtons();
+    public String readEquipmentTypes() {
+        log.info("Searching equipment types for Chat.");
+        return this.chatService.readEquipmentTypes();
     }
 
 }

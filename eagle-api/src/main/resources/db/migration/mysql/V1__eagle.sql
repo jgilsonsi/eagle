@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS equipment_model (
     id BIGINT AUTO_INCREMENT NOT NULL,
     name VARCHAR(255) NOT NULL,
     description TEXT,
+    rate DOUBLE NOT NULL,
     equipment_type_id BIGINT NOT NULL,
     PRIMARY KEY(id),
 

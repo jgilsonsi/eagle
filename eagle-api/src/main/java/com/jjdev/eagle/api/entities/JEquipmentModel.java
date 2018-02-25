@@ -33,6 +33,9 @@ public class JEquipmentModel implements Serializable {
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
+    @Column(name = "rate", nullable = false)
+    private Double rate;
+
     @ManyToOne(fetch = FetchType.EAGER)
     private JEquipmentType equipmentType;
 
@@ -66,6 +69,14 @@ public class JEquipmentModel implements Serializable {
         this.description = description;
     }
 
+    public Double getRate() {
+        return rate;
+    }
+
+    public void setRate(Double rate) {
+        this.rate = rate;
+    }
+
     public JEquipmentType getEquipmentType() {
         return equipmentType;
     }
@@ -85,8 +96,8 @@ public class JEquipmentModel implements Serializable {
     @Override
     public String toString() {
         return "JEquipmentModel{" + "id=" + id + ", name=" + name
-                + ", description=" + description + ", equipmentType="
-                + equipmentType + ", orders=" + orders + '}';
+                + ", description=" + description + ", rate=" + rate
+                + ", equipmentType=" + equipmentType + ", orders=" + orders + '}';
     }
 
 }
