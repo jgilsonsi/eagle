@@ -152,6 +152,7 @@ public class JEquipmentModelController {
      * @return JEquipmentModel
      */
     private JEquipmentModel dtoToEquipmentModel(JEquipmentModelDto equipmentModelDto) {
+        
         JEquipmentType equipmentType = new JEquipmentType();
         equipmentType.setId(equipmentModelDto.getEquipmentTypeId());
 
@@ -172,6 +173,7 @@ public class JEquipmentModelController {
      * @return JEquipmentModelDto
      */
     private JEquipmentModelDto equipmentModelToDto(JEquipmentModel equipmentModel) {
+        
         JEquipmentModelDto equipmentModelDto = new JEquipmentModelDto();
         equipmentModelDto.setId(equipmentModel.getId());
         equipmentModelDto.setName(equipmentModel.getName());

@@ -153,6 +153,7 @@ public class JOrderController {
      * @return JOrder
      */
     private JOrder dtoToOrder(JOrderDto orderDto) {
+        
         JClient client = new JClient();
         client.setId(orderDto.getClientId());
 
@@ -177,6 +178,7 @@ public class JOrderController {
      * @return JOrderDto
      */
     private JOrderDto orderToDto(JOrder order) {
+        
         JOrderDto orderDto = new JOrderDto();
         orderDto.setId(order.getId());
         orderDto.setInitialDate(order.getInitialDate());

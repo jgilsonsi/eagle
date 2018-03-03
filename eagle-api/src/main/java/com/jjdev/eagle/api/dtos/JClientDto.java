@@ -18,11 +18,19 @@ public class JClientDto {
     @Length(max = 255, message = "Name must be contain a maximum of {max} characters.")
     private String name;
 
-    @Length(max = 255, message = "Name must be contain a maximum of {max} characters.")
+    @NotEmpty(message = "Gender cannot be empty.")
+    @Length(max = 32, message = "Gender must be contain a maximum of {max} characters.")
+    private String gender;
+
+    @NotEmpty(message = "ChatId cannot be empty.")
+    @Length(max = 255, message = "ChatId must be contain a maximum of {max} characters.")
     private String chatId;
 
     @ApiModelProperty(hidden = true)
-    private Date dateCreate;
+    private Date created;
+
+    @ApiModelProperty(hidden = true)
+    private Date lastVisit;
 
     public JClientDto() {
     }
@@ -43,6 +51,14 @@ public class JClientDto {
         this.name = name;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     public String getChatId() {
         return chatId;
     }
@@ -51,18 +67,27 @@ public class JClientDto {
         this.chatId = chatId;
     }
 
-    public Date getDateCreate() {
-        return dateCreate;
+    public Date getCreated() {
+        return created;
     }
 
-    public void setDateCreate(Date dateCreate) {
-        this.dateCreate = dateCreate;
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public Date getLastVisit() {
+        return lastVisit;
+    }
+
+    public void setLastVisit(Date lastVisit) {
+        this.lastVisit = lastVisit;
     }
 
     @Override
     public String toString() {
-        return "JClientDto{" + "id=" + id + ", name=" + name + ", chatId="
-                + chatId + ", dateCreate=" + dateCreate + '}';
+        return "JClientDto{" + "id=" + id + ", name=" + name + ", gender="
+                + gender + ", chatId=" + chatId + ", created=" + created
+                + ", lastVisit=" + lastVisit + '}';
     }
 
 }

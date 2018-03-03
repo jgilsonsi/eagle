@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -30,15 +31,22 @@ public class JClient implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "name", nullable = false, length = 255)
+    @Column(name = "_name", nullable = false, length = 255)
     private String name;
 
-    @Column(name = "chat_id", unique = true, length = 255)
+    @Column(name = "gender", nullable = false, length = 32)
+    private String gender;
+
+    @Column(name = "chat_id", unique = true, nullable = false, length = 255)
     private String chatId;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "date_create", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private Date dateCreate;
+    @Column(name = "created", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private Date created;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "last_visit", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private Date lastVisit;
 
     @OneToMany(mappedBy = "client", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<JOrder> orders;
@@ -62,6 +70,14 @@ public class JClient implements Serializable {
         this.name = name;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     public String getChatId() {
         return chatId;
     }
@@ -70,17 +86,20 @@ public class JClient implements Serializable {
         this.chatId = chatId;
     }
 
-    public Date getDateCreate() {
-        return dateCreate;
+    public Date getCreated() {
+        return created;
     }
 
-    public void setDateCreate(Date dateCreate) {
-        this.dateCreate = dateCreate;
+    public void setCreated(Date created) {
+        this.created = created;
     }
 
-    @PrePersist
-    public void prePersist() {
-        dateCreate = new Date();
+    public Date getLastVisit() {
+        return lastVisit;
+    }
+
+    public void setLastVisit(Date lastVisit) {
+        this.lastVisit = lastVisit;
     }
 
     public List<JOrder> getOrders() {
@@ -91,11 +110,22 @@ public class JClient implements Serializable {
         this.orders = orders;
     }
 
+    @PrePersist
+    public void prePersist() {
+        created = new Date();
+        lastVisit = created;
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        lastVisit = new Date();
+    }
+
     @Override
     public String toString() {
-        return "JClient{" + "id=" + id + ", name=" + name + ", chatId="
-                + chatId + ", dateCreate=" + dateCreate + ", orders="
-                + orders + '}';
+        return "JClient{" + "id=" + id + ", name=" + name + ", gender="
+                + gender + ", chatId=" + chatId + ", created=" + created
+                + ", lastVisit=" + lastVisit + ", orders=" + orders + '}';
     }
 
 }

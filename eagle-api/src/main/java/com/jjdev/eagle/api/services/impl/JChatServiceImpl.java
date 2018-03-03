@@ -1,11 +1,13 @@
 package com.jjdev.eagle.api.services.impl;
 
+import com.jjdev.eagle.api.entities.JClient;
 import com.jjdev.eagle.api.entities.JEquipmentModel;
 import com.jjdev.eagle.api.entities.JEquipmentType;
 import com.jjdev.eagle.api.json.list.JListChat;
 import com.jjdev.eagle.api.json.list.JListElement;
 import com.jjdev.eagle.api.json.quickreply.JQuickReplyChat;
 import com.jjdev.eagle.api.json.quickreply.JQuickReply;
+import com.jjdev.eagle.api.repositories.IClientRepository;
 import com.jjdev.eagle.api.repositories.IEquipmentModelRepository;
 import com.jjdev.eagle.api.repositories.IEquipmentTypeRepository;
 import com.jjdev.eagle.api.services.IChatService;
@@ -22,10 +24,30 @@ import org.springframework.stereotype.Service;
 public class JChatServiceImpl implements IChatService {
 
     @Autowired
+    private IClientRepository clientRepository;
+
+    @Autowired
     private IEquipmentTypeRepository equipmentTypeRepository;
 
     @Autowired
     private IEquipmentModelRepository equipmentModelRepository;
+
+    @Override
+    public String createOrUpdateClient(JClient client) {
+
+        JClient localClient = this.clientRepository.findByChatId(client.getChatId());
+        if (localClient != null) {
+            return "{\"set_attributes\": {\"client_id\": \"" + localClient.getId() + "\"}, "
+                    + "\"redirect_to_blocks\": [\"Client exists\"]}";
+        } else {
+            localClient = this.clientRepository.save(client);
+            if (localClient != null) {
+                return "{\"set_attributes\": {\"client_id\": \"" + localClient.getId() + "\"}, "
+                        + "\"redirect_to_blocks\": [\"Default answer\"]}";
+            }
+        }
+        return "{\"redirect_to_blocks\": [\"Default answer\"]}";
+    }
 
     @Override
     public String readEquipmentTypes() {

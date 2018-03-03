@@ -151,9 +151,11 @@ public class JClientController {
      * @return JClient
      */
     private JClient dtoToClient(JClientDto clientDto) {
+        
         JClient client = new JClient();
         client.setId(clientDto.getId());
         client.setName(clientDto.getName());
+        client.setGender(clientDto.getGender());
         client.setChatId(clientDto.getChatId());
 
         return client;
@@ -166,11 +168,14 @@ public class JClientController {
      * @return JClientDto
      */
     private JClientDto clientToDto(JClient client) {
+        
         JClientDto clientDto = new JClientDto();
         clientDto.setId(client.getId());
         clientDto.setName(client.getName());
+        clientDto.setGender(client.getGender());
         clientDto.setChatId(client.getChatId());
-        clientDto.setDateCreate(client.getDateCreate());
+        clientDto.setCreated(client.getCreated());
+        clientDto.setLastVisit(client.getLastVisit());
 
         return clientDto;
     }

@@ -38,14 +38,14 @@ public class JLogController {
     }
 
     /**
-     * Change application log level.
+     * Update application log level.
      *
      * @param logLevel
      * @param package
      * @return String status of log level
      */
     @PostMapping(value = "/{logLevel}")
-    public String changeLogLevel(@PathVariable("logLevel") String logLevel,
+    public String updateLogLevel(@PathVariable("logLevel") String logLevel,
             @RequestParam(value = "package") String packageName) {
 
         log.info("Log level: {}", logLevel);
@@ -81,7 +81,7 @@ public class JLogController {
      * @return log file
      */
     @GetMapping(value = "/file")
-    public void getLogFile(HttpServletResponse response) {
+    public void readLogFile(HttpServletResponse response) {
 
         log.info("Searching log file.");
 
@@ -132,4 +132,5 @@ public class JLogController {
 
         return retVal;
     }
+
 }

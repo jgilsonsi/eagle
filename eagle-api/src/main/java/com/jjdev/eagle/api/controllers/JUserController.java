@@ -158,6 +158,7 @@ public class JUserController {
      * @return JUser
      */
     private JUser dtoToUser(JUserDto userDto) {
+        
         JUser user = new JUser();
         user.setId(userDto.getId());
         user.setName(userDto.getName());
@@ -175,6 +176,7 @@ public class JUserController {
      * @return JUserDto
      */
     private JUserDto userToDto(JUser user) {
+        
         JUserDto userDto = new JUserDto();
         userDto.setId(user.getId());
         userDto.setName(user.getName());
