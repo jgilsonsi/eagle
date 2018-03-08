@@ -32,10 +32,10 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*")
 public class JEquipmentTypeController {
 
-    private static final Logger log = LoggerFactory.getLogger(JEquipmentTypeController.class);
-
     @Autowired
     private IEquipmentTypeService equipmentTypeService;
+
+    private static final Logger log = LoggerFactory.getLogger(JEquipmentTypeController.class);
 
     public JEquipmentTypeController() {
     }
@@ -151,7 +151,7 @@ public class JEquipmentTypeController {
      * @return JEquipmentType
      */
     private JEquipmentType dtoToEquipmentType(JEquipmentTypeDto equipmentTypeDto) {
-        
+
         JEquipmentType equipmentType = new JEquipmentType();
         equipmentType.setId(equipmentTypeDto.getId());
         equipmentType.setName(equipmentTypeDto.getName());
@@ -166,7 +166,7 @@ public class JEquipmentTypeController {
      * @return JEquipmentTypeDto
      */
     private JEquipmentTypeDto equipmentTypeToDto(JEquipmentType equipmentType) {
-        
+
         JEquipmentTypeDto equipmentTypeDto = new JEquipmentTypeDto();
         equipmentTypeDto.setId(equipmentType.getId());
         equipmentTypeDto.setName(equipmentType.getName());

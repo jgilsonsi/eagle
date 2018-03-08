@@ -10,10 +10,8 @@ public class JListSetAttributes {
 
     @JsonProperty("equipment_model_id")
     private Long equipmentModelId;
-
     @JsonProperty("equipment_model_name")
     private String equipmentModelName;
-
     @JsonProperty("equipment_model_rate")
     private Double equipmentModelRate;
 

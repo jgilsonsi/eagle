@@ -32,10 +32,10 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*")
 public class JClientController {
 
-    private static final Logger log = LoggerFactory.getLogger(JClientController.class);
-
     @Autowired
     private IClientService clientService;
+
+    private static final Logger log = LoggerFactory.getLogger(JClientController.class);
 
     public JClientController() {
     }
@@ -151,7 +151,7 @@ public class JClientController {
      * @return JClient
      */
     private JClient dtoToClient(JClientDto clientDto) {
-        
+
         JClient client = new JClient();
         client.setId(clientDto.getId());
         client.setName(clientDto.getName());
@@ -168,7 +168,7 @@ public class JClientController {
      * @return JClientDto
      */
     private JClientDto clientToDto(JClient client) {
-        
+
         JClientDto clientDto = new JClientDto();
         clientDto.setId(client.getId());
         clientDto.setName(client.getName());

@@ -34,10 +34,10 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*")
 public class JOrderController {
 
-    private static final Logger log = LoggerFactory.getLogger(JOrderController.class);
-
     @Autowired
     private IOrderService orderService;
+
+    private static final Logger log = LoggerFactory.getLogger(JOrderController.class);
 
     public JOrderController() {
     }
@@ -153,7 +153,7 @@ public class JOrderController {
      * @return JOrder
      */
     private JOrder dtoToOrder(JOrderDto orderDto) {
-        
+
         JClient client = new JClient();
         client.setId(orderDto.getClientId());
 
@@ -178,7 +178,7 @@ public class JOrderController {
      * @return JOrderDto
      */
     private JOrderDto orderToDto(JOrder order) {
-        
+
         JOrderDto orderDto = new JOrderDto();
         orderDto.setId(order.getId());
         orderDto.setInitialDate(order.getInitialDate());

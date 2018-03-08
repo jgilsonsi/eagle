@@ -5,13 +5,21 @@ import com.jjdev.eagle.api.entities.JEquipmentModel;
 import com.jjdev.eagle.api.entities.JEquipmentType;
 import com.jjdev.eagle.api.response.JResponse;
 import com.jjdev.eagle.api.services.IEquipmentModelService;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -33,10 +41,13 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*")
 public class JEquipmentModelController {
 
-    private static final Logger log = LoggerFactory.getLogger(JEquipmentModelController.class);
-
     @Autowired
     private IEquipmentModelService equipmentModelService;
+
+    @Value("${image.path}")
+    private String imagePath;
+
+    private static final Logger log = LoggerFactory.getLogger(JEquipmentModelController.class);
 
     public JEquipmentModelController() {
     }
@@ -74,7 +85,7 @@ public class JEquipmentModelController {
      *
      * @return ResponseEntity<Response<List<JEquipmentModelDto>>>
      */
-    @GetMapping(value = "")
+    @GetMapping()
     public ResponseEntity<JResponse<List<JEquipmentModelDto>>> readAll() {
 
         log.info("Searching all equipment models.");
@@ -144,6 +155,35 @@ public class JEquipmentModelController {
         return ResponseEntity.ok(new JResponse<>());
     }
 
+    /**
+     * Return a image of model.
+     *
+     * @param id
+     * @return file of image
+     */
+    @GetMapping(value = "/{id}")
+    public void readImage(@PathVariable("id") Long id, HttpServletResponse response) {
+
+        log.info("Searching image for equipment model: {}", id);
+
+        try {
+            File imageFile = new File(imagePath + "/" + id + ".jpg");
+            if (imageFile.exists()) {
+                response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+
+                InputStream in = new FileInputStream(imageFile);
+                IOUtils.copy(in, response.getOutputStream());
+
+                response.flushBuffer();
+            } else {
+                log.info("Image not found for equipment model: {}", id);
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+            }
+        } catch (IOException ex) {
+            log.error("Error writing file to output stream. {}", ex);
+        }
+    }
+
     //--------------------------------------------------------------------------
     /**
      * Convert DTO to JEquipmentModel.
@@ -152,7 +192,7 @@ public class JEquipmentModelController {
      * @return JEquipmentModel
      */
     private JEquipmentModel dtoToEquipmentModel(JEquipmentModelDto equipmentModelDto) {
-        
+
         JEquipmentType equipmentType = new JEquipmentType();
         equipmentType.setId(equipmentModelDto.getEquipmentTypeId());
 
@@ -173,7 +213,7 @@ public class JEquipmentModelController {
      * @return JEquipmentModelDto
      */
     private JEquipmentModelDto equipmentModelToDto(JEquipmentModel equipmentModel) {
-        
+
         JEquipmentModelDto equipmentModelDto = new JEquipmentModelDto();
         equipmentModelDto.setId(equipmentModel.getId());
         equipmentModelDto.setName(equipmentModel.getName());

@@ -28,11 +28,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 @CrossOrigin(origins = "*")
 public class JLogController {
 
-    private static final Logger log = LoggerFactory.getLogger(JLogController.class);
-    private final LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();
-
     @Value("${log.path}")
     private String logPath;
+
+    private static final Logger log = LoggerFactory.getLogger(JLogController.class);
+    private final LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();
 
     public JLogController() {
     }

@@ -23,10 +23,10 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*")
 public class JChatController {
 
-    private static final Logger log = LoggerFactory.getLogger(JChatController.class);
-
     @Autowired
     private IChatService chatService;
+
+    private static final Logger log = LoggerFactory.getLogger(JChatController.class);
 
     public JChatController() {
     }

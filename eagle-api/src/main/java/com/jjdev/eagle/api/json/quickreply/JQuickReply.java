@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class JQuickReply {
 
     private String title;
-
     @JsonProperty("set_attributes")
     private JQuickReplyAttributes quickReplyAttributes;
 

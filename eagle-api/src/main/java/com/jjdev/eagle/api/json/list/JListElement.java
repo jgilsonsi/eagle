@@ -1,5 +1,6 @@
 package com.jjdev.eagle.api.json.list;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,8 +10,10 @@ import java.util.List;
  */
 public class JListElement {
 
-    private String title;
+    private String title;    
     private String subtitle;
+    @JsonProperty("image_url")
+    private String imageUrl;
     private List<JListButton> buttons;
 
     public JListElement() {
@@ -32,6 +35,14 @@ public class JListElement {
 
     public void setSubtitle(String subtitle) {
         this.subtitle = subtitle;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public List<JListButton> getButtons() {

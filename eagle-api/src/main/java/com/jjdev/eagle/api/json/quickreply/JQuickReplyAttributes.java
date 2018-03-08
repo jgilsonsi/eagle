@@ -10,7 +10,6 @@ public class JQuickReplyAttributes {
 
     @JsonProperty("equipment_type_id")
     private Long equipmentTypeId;
-
     @JsonProperty("equipment_type_name")
     private String equipmentTypeName;
 

@@ -32,10 +32,10 @@ import com.jjdev.eagle.api.services.IUserService;
 @CrossOrigin(origins = "*")
 public class JUserController {
 
-    private static final Logger log = LoggerFactory.getLogger(JUserController.class);
-
     @Autowired
     private IUserService userService;
+
+    private static final Logger log = LoggerFactory.getLogger(JUserController.class);
 
     public JUserController() {
     }
@@ -158,7 +158,7 @@ public class JUserController {
      * @return JUser
      */
     private JUser dtoToUser(JUserDto userDto) {
-        
+
         JUser user = new JUser();
         user.setId(userDto.getId());
         user.setName(userDto.getName());
@@ -176,7 +176,7 @@ public class JUserController {
      * @return JUserDto
      */
     private JUserDto userToDto(JUser user) {
-        
+
         JUserDto userDto = new JUserDto();
         userDto.setId(user.getId());
         userDto.setName(user.getName());
