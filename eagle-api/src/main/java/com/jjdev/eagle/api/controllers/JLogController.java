@@ -2,6 +2,7 @@ package com.jjdev.eagle.api.controllers;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.LoggerContext;
+import io.swagger.annotations.ApiOperation;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -44,12 +44,13 @@ public class JLogController {
      * @param package
      * @return String status of log level
      */
-    @PostMapping(value = "/{logLevel}")
+    @PostMapping(value = "/{logLevel}/{packageName:.+}")
+    @ApiOperation(value = "updateLogLevel",
+            notes = "Log levels can be: ALL, DEBUG, ERROR, INFO, OFF, TRACE and WARN")
     public String updateLogLevel(@PathVariable("logLevel") String logLevel,
-            @RequestParam(value = "package") String packageName) {
+            @PathVariable("packageName") String packageName) {
 
-        log.info("Log level: {}", logLevel);
-        log.info("Package name: {}", packageName);
+        log.info("Updating log level to {} for package {}", logLevel, packageName);
 
         return setLogLevel(logLevel, packageName);
     }
@@ -60,14 +61,13 @@ public class JLogController {
      * @param package
      * @return String log level
      */
-    @GetMapping(value = "/{package:.+}")
-    public String readLogLevel(@PathVariable("package") String packageName) {
+    @GetMapping(value = "/{packageName:.+}")
+    public String readLogLevel(@PathVariable("packageName") String packageName) {
 
         String logLevel;
         try {
             logLevel = loggerContext.getLogger(packageName).getLevel().toString();
-            log.info("Log level: {}", logLevel);
-            log.info("Package name: {}", packageName);
+            log.info("Reading log level of package {}: {}", packageName, logLevel);
         } catch (Exception e) {
             log.error("Invalid package: {}", packageName);
             logLevel = "Invalid package: " + packageName;
@@ -83,7 +83,7 @@ public class JLogController {
     @GetMapping(value = "/file")
     public void readLogFile(HttpServletResponse response) {
 
-        log.info("Searching log file.");
+        log.info("Searching log file");
 
         try {
             File logFile = new File(logPath);
@@ -92,11 +92,11 @@ public class JLogController {
                 IOUtils.copy(in, response.getOutputStream());
                 response.flushBuffer();
             } else {
-                log.info("Log file not found.");
+                log.error("Log file not found");
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST);
             }
         } catch (IOException ex) {
-            log.error("Error writing file to output stream. {}", ex);
+            log.error("Error writing file to output stream {}", ex);
         }
     }
 
@@ -107,27 +107,27 @@ public class JLogController {
         if (logLevel.equalsIgnoreCase("ALL")) {
             loggerContext.getLogger(packageName).setLevel(Level.ALL);
             retVal = "ok";
-        } else if (logLevel.equalsIgnoreCase("OFF")) {
-            loggerContext.getLogger(packageName).setLevel(Level.OFF);
+        } else if (logLevel.equalsIgnoreCase("DEBUG")) {
+            loggerContext.getLogger(packageName).setLevel(Level.DEBUG);
             retVal = "ok";
         } else if (logLevel.equalsIgnoreCase("ERROR")) {
             loggerContext.getLogger(packageName).setLevel(Level.ERROR);
             retVal = "ok";
-        } else if (logLevel.equalsIgnoreCase("WARN")) {
-            loggerContext.getLogger(packageName).setLevel(Level.WARN);
-            retVal = "ok";
         } else if (logLevel.equalsIgnoreCase("INFO")) {
             loggerContext.getLogger(packageName).setLevel(Level.INFO);
             retVal = "ok";
-        } else if (logLevel.equalsIgnoreCase("DEBUG")) {
-            loggerContext.getLogger(packageName).setLevel(Level.DEBUG);
+        } else if (logLevel.equalsIgnoreCase("OFF")) {
+            loggerContext.getLogger(packageName).setLevel(Level.OFF);
             retVal = "ok";
         } else if (logLevel.equalsIgnoreCase("TRACE")) {
             loggerContext.getLogger(packageName).setLevel(Level.TRACE);
             retVal = "ok";
+        } else if (logLevel.equalsIgnoreCase("WARN")) {
+            loggerContext.getLogger(packageName).setLevel(Level.WARN);
+            retVal = "ok";
         } else {
-            log.error("Not a known loglevel: " + logLevel);
-            retVal = "Error, not a known loglevel: " + logLevel;
+            log.error("Not a known log level: " + logLevel);
+            retVal = "Error, not a known log level: " + logLevel;
         }
 
         return retVal;
