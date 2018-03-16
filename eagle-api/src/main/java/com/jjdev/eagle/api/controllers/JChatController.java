@@ -34,21 +34,25 @@ public class JChatController {
     /**
      * Create or update client if exists.
      *
-     * @param name
+     * @param firstName
+     * @param lastName
      * @param gender
      * @param chatId
      * @return String
      */
-    @PostMapping(value = "/client/{name}/{gender}/{chatId}")
+    @PostMapping(value = "/client/{firstName}/{lastName}/{gender}/{chatId}")
     @ResponseBody
-    public String createOrUpdateClient(@PathVariable("name") String name,
-            @PathVariable("gender") String gender, @PathVariable("chatId") String chatId) {
+    public String createOrUpdateClient(
+            @PathVariable("firstName") String firstName,
+            @PathVariable("lastName") String lastName,
+            @PathVariable("gender") String gender,
+            @PathVariable("chatId") String chatId) {
 
         log.info("Creating client by Chat whith name: {}, gender: {}, chatId: {}.",
-                name, gender, chatId);
+                firstName, gender, chatId);
 
         JClient client = new JClient();
-        client.setName(name);
+        client.setName(firstName + " " + lastName);
         client.setGender(gender);
         client.setChatId(chatId);
 
