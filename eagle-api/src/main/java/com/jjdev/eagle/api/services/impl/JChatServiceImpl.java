@@ -41,10 +41,14 @@ public class JChatServiceImpl implements IChatService {
 
         JClient localClient = this.clientRepository.findByChatId(client.getChatId());
         if (localClient != null) {
+            this.clientRepository.update(client.getName(), client.getGender(),
+                    client.getLastVisit(), client.getChatId());
+
             return "{\"set_attributes\": {\"client_id\": \"" + localClient.getId() + "\"}, "
                     + "\"redirect_to_blocks\": [\"Client exists\"]}";
         } else {
             localClient = this.clientRepository.save(client);
+
             if (localClient != null) {
                 return "{\"set_attributes\": {\"client_id\": \"" + localClient.getId() + "\"}, "
                         + "\"redirect_to_blocks\": [\"Default answer\"]}";
