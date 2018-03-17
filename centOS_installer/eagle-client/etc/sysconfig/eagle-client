@@ -1,0 +1,19 @@
+# Configuration file for the service.
+# default location: /etc/sysconfig/eagle-client
+
+## Location of binary file.
+#SERVICE_HOME=
+
+## The username who should own the process.
+#SERVICE_USER=
+
+## Location to store the pid file. If you change this value, you should also
+## change the 'pidfile' entry in the header of the corresponding sysvinit script
+## to match the new value. This script is usually in the /etc/init.d directory.
+#SERVICE_PIDFILE=
+
+## Location to store the lock file.
+#SERVICE_LOCKFILE=
+
+## Location to store the log file.
+#SERVICE_LOGFILE=
