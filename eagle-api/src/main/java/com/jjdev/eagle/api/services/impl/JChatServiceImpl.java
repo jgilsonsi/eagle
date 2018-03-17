@@ -45,16 +45,16 @@ public class JChatServiceImpl implements IChatService {
                     client.getLastVisit(), client.getChatId());
 
             return "{\"set_attributes\": {\"client_id\": \"" + localClient.getId() + "\"}, "
-                    + "\"redirect_to_blocks\": [\"Client exists\"]}";
+                    + "\"redirect_to_blocks\": [\"Client old\"]}";
         } else {
             localClient = this.clientRepository.save(client);
 
             if (localClient != null) {
                 return "{\"set_attributes\": {\"client_id\": \"" + localClient.getId() + "\"}, "
-                        + "\"redirect_to_blocks\": [\"Default answer\"]}";
+                        + "\"redirect_to_blocks\": [\"Client new\"]}";
             }
         }
-        return "{\"redirect_to_blocks\": [\"Default answer\"]}";
+        return "{\"redirect_to_blocks\": [\"Client new\"]}";
     }
 
     @Override
