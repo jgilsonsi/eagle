@@ -2,6 +2,7 @@
 /dist
 /out-tsc
 /.vscode
+.vscode/
 /node_modules
 package-lock.json
 
