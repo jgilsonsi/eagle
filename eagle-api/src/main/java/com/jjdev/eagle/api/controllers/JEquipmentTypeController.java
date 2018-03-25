@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author JGilson
  */
 @RestController
-@RequestMapping("/api/v1/equipment-type")
+@RequestMapping("/api/v1/equipment-types")
 @CrossOrigin(origins = "*")
 public class JEquipmentTypeController {
 

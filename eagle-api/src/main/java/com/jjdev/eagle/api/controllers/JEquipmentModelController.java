@@ -37,7 +37,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author JGilson
  */
 @RestController
-@RequestMapping("/api/v1/equipment-model")
+@RequestMapping("/api/v1/equipment-models")
 @CrossOrigin(origins = "*")
 public class JEquipmentModelController {
 

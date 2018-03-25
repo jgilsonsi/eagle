@@ -28,7 +28,7 @@ import com.jjdev.eagle.api.services.IUserService;
  * @author JGilson
  */
 @RestController
-@RequestMapping("/api/v1/user")
+@RequestMapping("/api/v1/users")
 @CrossOrigin(origins = "*")
 public class JUserController {
 

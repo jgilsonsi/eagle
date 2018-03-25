@@ -30,15 +30,15 @@ import org.springframework.web.bind.annotation.RestController;
  * @author JGilson
  */
 @RestController
-@RequestMapping("/api/v1/order")
+@RequestMapping("/api/v1/orders")
 @CrossOrigin(origins = "*")
 public class JOrderController {
-
+    
     @Autowired
     private IOrderService orderService;
-
+    
     private static final Logger log = LoggerFactory.getLogger(JOrderController.class);
-
+    
     public JOrderController() {
     }
 
@@ -52,9 +52,9 @@ public class JOrderController {
     @PostMapping
     public ResponseEntity<JResponse<JOrderDto>> create(
             @Valid @RequestBody JOrderDto orderDto, BindingResult result) {
-
+        
         log.info("Creating order.");
-
+        
         JResponse<JOrderDto> response = new JResponse<>();
         if (result.hasErrors()) {
             log.info("Validation erros: {}", result.getAllErrors());
@@ -62,10 +62,10 @@ public class JOrderController {
                     .add(error.getDefaultMessage()));
             return ResponseEntity.badRequest().body(response);
         }
-
+        
         JOrder order = this.dtoToOrder(orderDto);
         order = this.orderService.create(order);
-
+        
         response.setData(this.orderToDto(order));
         return ResponseEntity.ok(response);
     }
@@ -77,16 +77,16 @@ public class JOrderController {
      */
     @GetMapping(value = "")
     public ResponseEntity<JResponse<List<JOrderDto>>> readAll() {
-
+        
         log.info("Searching all orders.");
-
+        
         JResponse<List<JOrderDto>> response = new JResponse<>();
-
+        
         List<JOrder> orders = this.orderService.readAll();
         List<JOrderDto> ordersDto = orders.stream()
                 .map(order -> this.orderToDto(order))
                 .collect(Collectors.toList());
-
+        
         response.setData(ordersDto);
         return ResponseEntity.ok(response);
     }
@@ -101,21 +101,21 @@ public class JOrderController {
     @PutMapping(value = "/{id}")
     public ResponseEntity<JResponse<JOrderDto>> update(@PathVariable("id") Long id,
             @Valid @RequestBody JOrderDto orderDto, BindingResult result) {
-
+        
         log.info("Updating order: {}", id);
-
+        
         JResponse<JOrderDto> response = new JResponse<>();
-
+        
         if (result.hasErrors()) {
             log.info("Validation errors: {}", result.getAllErrors());
             result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
             return ResponseEntity.badRequest().body(response);
         }
-
+        
         orderDto.setId(id);
         JOrder order = this.dtoToOrder(orderDto);
         order = this.orderService.update(order);
-
+        
         response.setData(this.orderToDto(order));
         return ResponseEntity.ok(response);
     }
@@ -128,20 +128,20 @@ public class JOrderController {
      */
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<JResponse<String>> delete(@PathVariable("id") Long id) {
-
+        
         log.info("Removing order by id: {}", id);
-
+        
         JResponse<String> response = new JResponse<>();
         Optional<JOrder> order = this.orderService.readById(id);
-
+        
         if (!order.isPresent()) {
             log.info("Invalid order id: {}", id);
             response.getErrors().add("Invalid order id: " + id);
             return ResponseEntity.badRequest().body(response);
         }
-
+        
         this.orderService.delete(id);
-
+        
         return ResponseEntity.ok(new JResponse<>());
     }
 
@@ -153,13 +153,13 @@ public class JOrderController {
      * @return JOrder
      */
     private JOrder dtoToOrder(JOrderDto orderDto) {
-
+        
         JClient client = new JClient();
         client.setId(orderDto.getClientId());
-
+        
         JEquipmentModel equipmentModel = new JEquipmentModel();
         equipmentModel.setId(orderDto.getEquipmentModelId());
-
+        
         JOrder order = new JOrder();
         order.setId(orderDto.getId());
         order.setInitialDate(orderDto.getInitialDate());
@@ -167,7 +167,7 @@ public class JOrderController {
         order.setValue(orderDto.getValue());
         order.setClient(client);
         order.setEquipmentModel(equipmentModel);
-
+        
         return order;
     }
 
@@ -178,16 +178,19 @@ public class JOrderController {
      * @return JOrderDto
      */
     private JOrderDto orderToDto(JOrder order) {
-
+        
         JOrderDto orderDto = new JOrderDto();
         orderDto.setId(order.getId());
         orderDto.setInitialDate(order.getInitialDate());
         orderDto.setFinalDate(order.getFinalDate());
         orderDto.setValue(order.getValue());
         orderDto.setClientId(order.getClient().getId());
+        orderDto.setClientName(order.getClient().getName());
         orderDto.setEquipmentModelId(order.getEquipmentModel().getId());
-
+        orderDto.setEquipmentModelName(order.getEquipmentModel().getName());
+        orderDto.setEquipmentTypeName(order.getEquipmentModel().getEquipmentType().getName());
+        
         return orderDto;
     }
-
+    
 }

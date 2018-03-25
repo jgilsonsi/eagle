@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author JGilson
  */
 @RestController
-@RequestMapping("/api/v1/client")
+@RequestMapping("/api/v1/clients")
 @CrossOrigin(origins = "*")
 public class JClientController {
 

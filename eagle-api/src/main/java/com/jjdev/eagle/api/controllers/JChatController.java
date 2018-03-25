@@ -48,11 +48,13 @@ public class JChatController {
             @PathVariable("gender") String gender,
             @PathVariable("chatId") String chatId) {
 
+        String name = removePlus(firstName + " " + lastName);
+
         log.info("Creating client by Chat whith name: {}, gender: {}, chatId: {}.",
-                firstName, gender, chatId);
+                name, gender, chatId);
 
         JClient client = new JClient();
-        client.setName(firstName + " " + lastName);
+        client.setName(name);
         client.setGender(gender);
         client.setChatId(chatId);
 
@@ -90,4 +92,14 @@ public class JChatController {
         return this.chatService.readEquipmentModels(equipmentType);
     }
 
+    //--------------------------------------------------------------------------
+    /**
+     * Remove plus of text.
+     *
+     * @param text
+     * @return String
+     */
+    private String removePlus(String text) {
+        return (text != null && !text.isEmpty() && text.contains("+")) ? text.replace("+", " ") : text;
+    }
 }

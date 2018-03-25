@@ -20,7 +20,16 @@ public class JOrderDto {
 
     private Long clientId;
 
+    @ApiModelProperty(hidden = true)
+    private String clientName;
+
     private Long equipmentModelId;
+
+    @ApiModelProperty(hidden = true)
+    private String equipmentModelName;
+
+    @ApiModelProperty(hidden = true)
+    private String equipmentTypeName;
 
     public JOrderDto() {
     }
@@ -65,6 +74,14 @@ public class JOrderDto {
         this.clientId = clientId;
     }
 
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
+    }
+
     public Long getEquipmentModelId() {
         return equipmentModelId;
     }
@@ -73,11 +90,29 @@ public class JOrderDto {
         this.equipmentModelId = equipmentModelId;
     }
 
+    public String getEquipmentModelName() {
+        return equipmentModelName;
+    }
+
+    public void setEquipmentModelName(String equipmentModelName) {
+        this.equipmentModelName = equipmentModelName;
+    }
+
+    public String getEquipmentTypeName() {
+        return equipmentTypeName;
+    }
+
+    public void setEquipmentTypeName(String equipmentTypeName) {
+        this.equipmentTypeName = equipmentTypeName;
+    }
+
     @Override
     public String toString() {
-        return "JOrderDto{" + "id=" + id + ", initialDate=" + initialDate
-                + ", finalDate=" + finalDate + ", value=" + value + ", clientId="
-                + clientId + ", equipmentModelId=" + equipmentModelId + '}';
+        return "JOrderDto{" + "id=" + id + ", initialDate=" + initialDate 
+                + ", finalDate=" + finalDate + ", value=" + value + ", clientId=" 
+                + clientId + ", clientName=" + clientName + ", equipmentModelId=" 
+                + equipmentModelId + ", equipmentModelName=" + equipmentModelName 
+                + ", equipmentTypeName=" + equipmentTypeName + '}';
     }
 
 }
