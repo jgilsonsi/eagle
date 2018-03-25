@@ -1,10 +1,10 @@
 <nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
     <div class="list-group">
         <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-dashboard"></i>&nbsp;{{ 'Dashboard' | translate }}
+            <i class="fa fa-fw fa-dashboard text-danger"></i>&nbsp;{{ 'Dashboard' | translate }}
         </a>
         <a [routerLink]="['/charts']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-bar-chart-o"></i>&nbsp;{{ 'Charts' | translate }}
+            <i class="fa fa-fw fa-bar-chart-o text-info"></i>&nbsp;{{ 'Charts' | translate }}
         </a>
         <a [routerLink]="['/forms']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-edit"></i>&nbsp;{{ 'Forms' | translate }}
@@ -16,7 +16,10 @@
             <i class="fa fa-th-list"></i>&nbsp;{{ 'Component' | translate }}
         </a>
         <a [routerLink]="['/clients']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-address-card-o"></i>&nbsp;{{ 'Clients' | translate }}
+            <i class="fa fa-address-card-o text-warning"></i>&nbsp;{{ 'Clients' | translate }}
+        </a>
+        <a [routerLink]="['/orders']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-handshake-o text-success"></i>&nbsp;{{ 'Orders' | translate }}
         </a>
         <div class="header-fields">
             <a (click)="rltAndLtr()" class="list-group-item">

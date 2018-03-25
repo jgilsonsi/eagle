@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 import { ClientsService } from './pages/clients/clients.service';
+import { OrdersService } from './pages/orders/orders.service';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -33,7 +34,7 @@ export function createTranslateLoader(http: HttpClient) {
         AppRoutingModule
     ],
     declarations: [AppComponent],
-    providers: [AuthGuard, ClientsService],
+    providers: [AuthGuard, ClientsService, OrdersService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

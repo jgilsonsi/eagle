@@ -13,7 +13,8 @@ const routes: Routes = [
             { path: 'forms', loadChildren: './form/form.module#FormModule' },
             { path: 'bs-element', loadChildren: './bs-element/bs-element.module#BsElementModule' },
             { path: 'components', loadChildren: './bs-component/bs-component.module#BsComponentModule' },
-            { path: 'clients', loadChildren: '../pages/clients/clients.module#ClientsModule' }
+            { path: 'clients', loadChildren: '../pages/clients/clients.module#ClientsModule' },
+            { path: 'orders', loadChildren: '../pages/orders/orders.module#OrdersModule' }
         ]
     }
 ];

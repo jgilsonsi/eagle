@@ -24,8 +24,8 @@
                                 <td>{{ item.name }}</td>
                                 <td>{{ item.gender }}</td>
                                 <td>{{ item.chatId }}</td>
-                                <td>{{ (item.created | date:"dd/MM/yyyy HH:mm") }}</td>
-                                <td>{{ (item.lastVisit | date:"dd/MM/yyyy HH:mm") }}</td>
+                                <td>{{ item.created | date:"dd/MM/yyyy HH:mm" }}</td>
+                                <td>{{ item.lastVisit | date:"dd/MM/yyyy HH:mm" }}</td>
                             </tr>
                         </tbody>
                     </table>
