@@ -1,0 +1,34 @@
+<div [@routerTransition]>
+  <app-page-header [heading]="'Pedidos'" [icon]="'fa fa-handshake-o'"></app-page-header>
+  <div class="row">
+      <div class="col col-xl-12 col-lg-12">
+          <div class="card mb-3">
+              <div class="card-header">
+                  Pedidos
+              </div>
+              <div class="card-body table-responsive table-hover">
+                  <table class="table">
+                      <thead>
+                          <tr>
+                              <th>#</th>
+                              <th>Cliente</th>
+                              <th>Equipamento</th>
+                              <th>Período</th>
+                              <th>Valor</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let item of orders">
+                              <td>{{ item.id }}</td>
+                              <td>{{ item.clientName }}</td>
+                              <td>{{ item.equipmentTypeName }} - {{ item.equipmentModelName }}</td>
+                              <td>{{ item.initialDate | date:"dd/MM/yyyy" }} - {{ item.finalDate | date:"dd/MM/yyyy" }}</td>
+                              <td>{{ item.value | currency:'BRL':2 }}</td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
