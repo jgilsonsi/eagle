@@ -35,7 +35,12 @@ export function createTranslateLoader(http: HttpClient) {
         AppRoutingModule
     ],
     declarations: [AppComponent],
-    providers: [AuthGuard, ClientsService, OrdersService],
+    providers: [
+        AuthGuard,
+        ClientsService,
+        OrdersService,
+        { provide: LocationStrategy, useClass: HashLocationStrategy }
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
