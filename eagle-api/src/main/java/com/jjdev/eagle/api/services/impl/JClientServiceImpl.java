@@ -25,7 +25,7 @@ public class JClientServiceImpl implements IClientService {
 
     @Override
     public List<JClient> readAll() {
-        return this.clientRepository.findAll();
+        return this.clientRepository.findAllByOrderByLastVisitDesc();
     }
 
     @Override

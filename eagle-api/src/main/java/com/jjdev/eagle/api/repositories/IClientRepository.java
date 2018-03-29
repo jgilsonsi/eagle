@@ -2,6 +2,7 @@ package com.jjdev.eagle.api.repositories;
 
 import com.jjdev.eagle.api.entities.JClient;
 import java.util.Date;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -23,5 +24,8 @@ public interface IClientRepository extends JpaRepository<JClient, Long> {
             + "c.lastVisit = :lastVisit WHERE chatId = :chatId")
     int update(@Param("name") String name, @Param("gender") String gender,
             @Param("lastVisit") Date lastVisit, @Param("chatId") String chatId);
+
+    @Transactional(readOnly = true)
+    List<JClient> findAllByOrderByLastVisitDesc();
 
 }
