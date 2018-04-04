@@ -1,0 +1,33 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="'Tipos de equipamento'" [icon]="'fa fa-bicycle'"></app-page-header>
+    <div class="row">
+        <div class="col col-xl-12 col-lg-12">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Tipos de equipamento
+                </div>
+                <div class="card-body table-responsive table-hover">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nome</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of equipmentTypes">
+                                <td>{{ item.id }}</td>
+                                <td>{{ item.name }}</td>
+                                <td class="text-right">
+                                    <button type="button" class="btn btn-sm btn-info"><i class="fa fa-pencil"></i></button>
+                                    <button type="button" class="btn btn-sm btn-danger" (click)="deleteItem(item)"><i class="fa fa-trash-o"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

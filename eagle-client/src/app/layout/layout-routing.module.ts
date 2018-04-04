@@ -14,7 +14,8 @@ const routes: Routes = [
             { path: 'bs-element', loadChildren: './bs-element/bs-element.module#BsElementModule' },
             { path: 'components', loadChildren: './bs-component/bs-component.module#BsComponentModule' },
             { path: 'clients', loadChildren: '../pages/clients/clients.module#ClientsModule' },
-            { path: 'orders', loadChildren: '../pages/orders/orders.module#OrdersModule' }
+            { path: 'orders', loadChildren: '../pages/orders/orders.module#OrdersModule' },
+            { path: 'equipment-types', loadChildren: '../pages/equipment-types/equipment-types.module#EquipmentTypesModule' }
         ]
     }
 ];

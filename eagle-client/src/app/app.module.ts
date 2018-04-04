@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 import { ClientsService } from './pages/clients/clients.service';
 import { OrdersService } from './pages/orders/orders.service';
+import { EquipmentTypesService } from './pages/equipment-types/equipment-types.service';
 import { ROUTER_PROVIDERS } from '@angular/router/src/router_module';
 
 export function createTranslateLoader(http: HttpClient) {
@@ -39,6 +40,7 @@ export function createTranslateLoader(http: HttpClient) {
         AuthGuard,
         ClientsService,
         OrdersService,
+        EquipmentTypesService,
         { provide: LocationStrategy, useClass: HashLocationStrategy }
     ],
     bootstrap: [AppComponent]
