@@ -54,6 +54,7 @@ public class JEquipmentTypeController {
         log.info("Creating equipment type: {}", equipmentTypeDto.getName());
 
         JResponse<JEquipmentTypeDto> response = new JResponse<>();
+
         if (result.hasErrors()) {
             log.info("Validation erros: {}", result.getAllErrors());
             result.getAllErrors().forEach(error -> response.getErrors()
@@ -73,19 +74,42 @@ public class JEquipmentTypeController {
      *
      * @return ResponseEntity<Response<List<JEquipmentTypeDto>>>
      */
-    @GetMapping(value = "")
+    @GetMapping()
     public ResponseEntity<JResponse<List<JEquipmentTypeDto>>> readAll() {
 
         log.info("Searching all equipment types.");
 
         JResponse<List<JEquipmentTypeDto>> response = new JResponse<>();
-
         List<JEquipmentType> equipmentTypes = this.equipmentTypeService.readAll();
+
         List<JEquipmentTypeDto> equipmentTypesDto = equipmentTypes.stream()
                 .map(equipmentType -> this.equipmentTypeToDto(equipmentType))
                 .collect(Collectors.toList());
 
         response.setData(equipmentTypesDto);
+        return ResponseEntity.ok(response);
+    }
+
+    /**
+     * Return a equipment type.
+     *
+     * @return ResponseEntity<Response<JEquipmentTypeDto>>
+     */
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<JResponse<JEquipmentTypeDto>> readById(@PathVariable("id") Long id) {
+
+        log.info("Searching equipment type by id: {}", id);
+
+        JResponse<JEquipmentTypeDto> response = new JResponse<>();
+        Optional<JEquipmentType> equipmentType = this.equipmentTypeService.readById(id);
+
+        if (!equipmentType.isPresent()) {
+            log.info("Invalid equipment type id: {}", id);
+            response.getErrors().add("Invalid equipment type id: " + id);
+            return ResponseEntity.badRequest().body(response);
+        }
+
+        response.setData(this.equipmentTypeToDto(equipmentType.get()));
         return ResponseEntity.ok(response);
     }
 

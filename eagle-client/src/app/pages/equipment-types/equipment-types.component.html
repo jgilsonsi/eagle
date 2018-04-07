@@ -4,7 +4,9 @@
         <div class="col col-xl-12 col-lg-12">
             <div class="card mb-3">
                 <div class="card-header">
-                    Tipos de equipamento
+                    <button type="button" class="btn btn-sm btn-info" title="Novo" [routerLink]="['/equipment-type', '']">
+                        <i class="fa fa-plus"></i>
+                    </button>
                 </div>
                 <div class="card-body table-responsive table-hover">
                     <table class="table">
@@ -20,8 +22,12 @@
                                 <td>{{ item.id }}</td>
                                 <td>{{ item.name }}</td>
                                 <td class="text-right">
-                                    <button type="button" class="btn btn-sm btn-info"><i class="fa fa-pencil"></i></button>
-                                    <button type="button" class="btn btn-sm btn-danger" (click)="deleteItem(item)"><i class="fa fa-trash-o"></i></button>
+                                    <button type="button" class="btn btn-sm btn-info" title="Editar" [routerLink]="['/equipment-type', item.id]">
+                                        <i class="fa fa-pencil"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-danger" title="Excluir" (click)="deleteItem(item)">
+                                        <i class="fa fa-trash-o"></i>
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>

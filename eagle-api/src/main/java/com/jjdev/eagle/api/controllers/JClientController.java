@@ -54,6 +54,7 @@ public class JClientController {
         log.info("Creating client: {}", clientDto.getName());
 
         JResponse<JClientDto> response = new JResponse<>();
+
         if (result.hasErrors()) {
             log.info("Validation erros: {}", result.getAllErrors());
             result.getAllErrors().forEach(error -> response.getErrors()
@@ -73,14 +74,14 @@ public class JClientController {
      *
      * @return ResponseEntity<Response<List<JClientDto>>>
      */
-    @GetMapping(value = "")
+    @GetMapping()
     public ResponseEntity<JResponse<List<JClientDto>>> readAll() {
 
         log.info("Searching all clients.");
 
         JResponse<List<JClientDto>> response = new JResponse<>();
-
         List<JClient> clients = this.clientService.readAll();
+
         List<JClientDto> clientsDto = clients.stream()
                 .map(client -> this.clientToDto(client))
                 .collect(Collectors.toList());

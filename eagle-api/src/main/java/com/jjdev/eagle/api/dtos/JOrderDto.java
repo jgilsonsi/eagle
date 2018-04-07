@@ -108,10 +108,10 @@ public class JOrderDto {
 
     @Override
     public String toString() {
-        return "JOrderDto{" + "id=" + id + ", initialDate=" + initialDate 
-                + ", finalDate=" + finalDate + ", value=" + value + ", clientId=" 
-                + clientId + ", clientName=" + clientName + ", equipmentModelId=" 
-                + equipmentModelId + ", equipmentModelName=" + equipmentModelName 
+        return "JOrderDto{" + "id=" + id + ", initialDate=" + initialDate
+                + ", finalDate=" + finalDate + ", value=" + value + ", clientId="
+                + clientId + ", clientName=" + clientName + ", equipmentModelId="
+                + equipmentModelId + ", equipmentModelName=" + equipmentModelName
                 + ", equipmentTypeName=" + equipmentTypeName + '}';
     }
 

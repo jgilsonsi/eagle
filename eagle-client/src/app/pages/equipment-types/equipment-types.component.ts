@@ -16,12 +16,12 @@ export class EquipmentTypesComponent implements OnInit {
   constructor(private equipmentTypesService: EquipmentTypesService) { }
 
   ngOnInit() {
-    this.equipmentTypesService.equipmentTypes().subscribe(
+    this.equipmentTypesService.getItems().subscribe(
       equipmentTypes => this.equipmentTypes = equipmentTypes);
   }
 
   deleteItem(item) {
-    if (confirm("Deseja realmente deletar o item " + item.name + "?")) {
+    if (confirm("Deseja realmente excluir o item: " + item.name + "?")) {
       var index = this.equipmentTypes.indexOf(item);
       this.equipmentTypes.splice(index, 1);
 

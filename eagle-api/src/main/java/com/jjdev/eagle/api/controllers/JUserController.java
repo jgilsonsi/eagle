@@ -54,6 +54,7 @@ public class JUserController {
         log.info("Creating user: {}", userDto.getEmail());
 
         JResponse<JUserDto> response = new JResponse<>();
+
         if (result.hasErrors()) {
             log.info("Validation erros: {}", result.getAllErrors());
             result.getAllErrors().forEach(error -> response.getErrors()
@@ -80,8 +81,8 @@ public class JUserController {
         log.info("Searching user by email: {}", email);
 
         JResponse<JUserDto> response = new JResponse<>();
-
         Optional<JUser> user = this.userService.readByEmail(email);
+
         if (!user.isPresent()) {
             log.info("User not found for email: {}", email);
             response.getErrors().add("User not found for email: " + email);

@@ -66,6 +66,7 @@ public class JEquipmentModelController {
         log.info("Creating equipment model: {}", equipmentModelDto.getName());
 
         JResponse<JEquipmentModelDto> response = new JResponse<>();
+
         if (result.hasErrors()) {
             log.info("Validation erros: {}", result.getAllErrors());
             result.getAllErrors().forEach(error -> response.getErrors()
@@ -91,8 +92,8 @@ public class JEquipmentModelController {
         log.info("Searching all equipment models.");
 
         JResponse<List<JEquipmentModelDto>> response = new JResponse<>();
-
         List<JEquipmentModel> equipmentModels = this.equipmentModelService.readAll();
+
         List<JEquipmentModelDto> equipmentModelsDto = equipmentModels.stream()
                 .map(equipmentModel -> this.equipmentModelToDto(equipmentModel))
                 .collect(Collectors.toList());

@@ -15,7 +15,8 @@ const routes: Routes = [
             { path: 'components', loadChildren: './bs-component/bs-component.module#BsComponentModule' },
             { path: 'clients', loadChildren: '../pages/clients/clients.module#ClientsModule' },
             { path: 'orders', loadChildren: '../pages/orders/orders.module#OrdersModule' },
-            { path: 'equipment-types', loadChildren: '../pages/equipment-types/equipment-types.module#EquipmentTypesModule' }
+            { path: 'equipment-types', loadChildren: '../pages/equipment-types/equipment-types.module#EquipmentTypesModule' },
+            { path: 'equipment-type/:id', loadChildren: '../pages/equipment-types/equipment-type/equipment-type.module#EquipmentTypeModule' }
         ]
     }
 ];
@@ -24,4 +25,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-export class LayoutRoutingModule {}
+export class LayoutRoutingModule { }
