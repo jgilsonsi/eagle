@@ -8,14 +8,15 @@ import { TranslateService } from '@ngx-translate/core';
     styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+
     pushRightClass: string = 'push-right';
 
     constructor(private translate: TranslateService, public router: Router) {
 
-        this.translate.addLangs(['en', 'fr', 'ur', 'es', 'it', 'fa', 'de', 'zh-CHS']);
-        this.translate.setDefaultLang('en');
+        this.translate.addLangs(['pt', 'en']);
+        this.translate.setDefaultLang('pt');
         const browserLang = this.translate.getBrowserLang();
-        this.translate.use(browserLang.match(/en|fr|ur|es|it|fa|de|zh-CHS/) ? browserLang : 'en');
+        this.translate.use(browserLang.match(/pt|en/) ? browserLang : 'pt');
 
         this.router.events.subscribe(val => {
             if (
@@ -28,7 +29,7 @@ export class HeaderComponent implements OnInit {
         });
     }
 
-    ngOnInit() {}
+    ngOnInit() { }
 
     isToggled(): boolean {
         const dom: Element = document.querySelector('body');
