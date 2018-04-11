@@ -196,6 +196,7 @@ public class JEquipmentModelController {
 
         JEquipmentType equipmentType = new JEquipmentType();
         equipmentType.setId(equipmentModelDto.getEquipmentTypeId());
+        equipmentType.setName(equipmentModelDto.getEquipmentTypeName());
 
         JEquipmentModel equipmentModel = new JEquipmentModel();
         equipmentModel.setId(equipmentModelDto.getId());
@@ -221,6 +222,7 @@ public class JEquipmentModelController {
         equipmentModelDto.setDescription(equipmentModel.getDescription());
         equipmentModelDto.setRate(equipmentModel.getRate());
         equipmentModelDto.setEquipmentTypeId(equipmentModel.getEquipmentType().getId());
+        equipmentModelDto.setEquipmentTypeName(equipmentModel.getEquipmentType().getName());
 
         return equipmentModelDto;
     }

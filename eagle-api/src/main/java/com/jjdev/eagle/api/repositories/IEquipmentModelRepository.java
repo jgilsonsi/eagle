@@ -15,4 +15,6 @@ public interface IEquipmentModelRepository extends JpaRepository<JEquipmentModel
     @Transactional(readOnly = true)
     List<JEquipmentModel> findByEquipmentType(JEquipmentType equipmentType);
 
+    @Transactional(readOnly = true)
+    List<JEquipmentModel> findAllByOrderByNameAsc();
 }

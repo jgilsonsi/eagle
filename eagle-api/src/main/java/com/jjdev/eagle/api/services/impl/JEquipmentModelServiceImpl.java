@@ -25,7 +25,7 @@ public class JEquipmentModelServiceImpl implements IEquipmentModelService {
 
     @Override
     public List<JEquipmentModel> readAll() {
-        return this.equipmentModelRepository.findAll();
+        return this.equipmentModelRepository.findAllByOrderByNameAsc();
     }
 
     @Override
