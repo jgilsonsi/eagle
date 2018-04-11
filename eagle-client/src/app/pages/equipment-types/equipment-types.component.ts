@@ -28,7 +28,7 @@ export class EquipmentTypesComponent implements OnInit {
       this.equipmentTypesService.deleteItem(item.id)
         .subscribe(null,
           err => {
-            alert("Não foi possível deletar o usuário.");
+            alert("Não foi possível deletar o item.");
             // Revert the view back to its original state
             this.equipmentTypes.splice(index, 0, item);
           });

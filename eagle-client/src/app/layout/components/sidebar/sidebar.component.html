@@ -18,9 +18,21 @@
         <a [routerLink]="['/orders']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-handshake-o text-success"></i>&nbsp;{{ 'Orders' | translate }}
         </a>
-        <a [routerLink]="['/equipment-types']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-bicycle text-danger"></i>&nbsp;{{ 'Equipment types' | translate }}
-        </a>
+        <div class="nested-menu">
+            <a class="list-group-item" (click)="addExpandClass('equipments')">
+                <span><i class="fa fa-bicycle text-danger"></i>&nbsp; {{ 'Equipment' | translate }}</span>
+            </a>
+            <li class="nested" [class.expand]="showMenu === 'equipments'">
+                <ul class="submenu">
+                    <a [routerLink]="['/equipment-types']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                        {{ 'Equipment types' | translate }}
+                    </a>
+                    <a [routerLink]="['/equipment-models']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                        {{ 'Equipment models' | translate }}
+                    </a>
+                </ul>
+            </li>
+        </div>
         <div class="header-fields">
             <a (click)="rltAndLtr()" class="list-group-item">
                 <span><i class="fa fa-arrows-h"></i>&nbsp; RTL/LTR</span>

@@ -15,7 +15,9 @@ const routes: Routes = [
             { path: 'clients', loadChildren: '../pages/clients/clients.module#ClientsModule' },
             { path: 'orders', loadChildren: '../pages/orders/orders.module#OrdersModule' },
             { path: 'equipment-types', loadChildren: '../pages/equipment-types/equipment-types.module#EquipmentTypesModule' },
-            { path: 'equipment-type/:id', loadChildren: '../pages/equipment-types/equipment-type/equipment-type.module#EquipmentTypeModule' }
+            { path: 'equipment-type/:id', loadChildren: '../pages/equipment-types/equipment-type/equipment-type.module#EquipmentTypeModule' },
+            { path: 'equipment-models', loadChildren: '../pages/equipment-models/equipment-models.module#EquipmentModelsModule' }
+            //{ path: 'equipment-type/:id', loadChildren: '../pages/equipment-types/equipment-type/equipment-type.module#EquipmentTypeModule' }
         ]
     }
 ];

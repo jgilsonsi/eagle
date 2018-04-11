@@ -28,5 +28,7 @@
     "Log Out" : "Logout",
     "Clients" : "Clients",
     "Orders" : "Orders",
-    "Equipment types" : "Equipament types"
+    "Equipment" : "Equipments",
+    "Equipment types" : "Types",
+    "Equipment models" : "Models"
 }
