@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/jgilsonsi/eagle-api.svg?branch=master)](https://travis-ci.org/jgilsonsi/eagle-api)
 
-# eagle-api
-API do sistema de eagle de locação com Java e Spring Boot.
+# eagle
+Sistema eagle de locação usando Java, Spring Boot e Angular.
 
 ### Detalhes da API RESTful
 A API RESTful contém as seguintes características:  
