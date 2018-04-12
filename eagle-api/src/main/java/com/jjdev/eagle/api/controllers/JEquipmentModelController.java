@@ -103,6 +103,29 @@ public class JEquipmentModelController {
     }
 
     /**
+     * Return a equipment model.
+     *
+     * @return ResponseEntity<Response<JEquipmentModelDto>>
+     */
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<JResponse<JEquipmentModelDto>> readById(@PathVariable("id") Long id) {
+
+        log.info("Searching equipment model by id: {}", id);
+
+        JResponse<JEquipmentModelDto> response = new JResponse<>();
+        Optional<JEquipmentModel> equipmentModel = this.equipmentModelService.readById(id);
+
+        if (!equipmentModel.isPresent()) {
+            log.info("Invalid equipment model id: {}", id);
+            response.getErrors().add("Invalid equipment model id: " + id);
+            return ResponseEntity.badRequest().body(response);
+        }
+
+        response.setData(this.equipmentModelToDto(equipmentModel.get()));
+        return ResponseEntity.ok(response);
+    }
+
+    /**
      * Update equipment model.
      *
      * @param id
@@ -162,7 +185,7 @@ public class JEquipmentModelController {
      * @param id
      * @return file of image
      */
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/{id}/image")
     public void readImage(@PathVariable("id") Long id, HttpServletResponse response) {
 
         log.info("Searching image for equipment model: {}", id);

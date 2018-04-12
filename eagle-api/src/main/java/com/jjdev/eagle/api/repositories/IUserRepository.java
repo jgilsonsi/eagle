@@ -21,4 +21,5 @@ public interface IUserRepository extends JpaRepository<JUser, Long> {
     @Query("UPDATE JUser u SET u.name = :name, u.password = :password, u.role = :role WHERE id = :id")
     int update(@Param("id") Long id, @Param("name") String name,
             @Param("password") String password, @Param("role") String role);
+
 }

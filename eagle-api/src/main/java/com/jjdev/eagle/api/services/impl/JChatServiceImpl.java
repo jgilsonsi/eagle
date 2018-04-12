@@ -100,7 +100,7 @@ public class JChatServiceImpl implements IChatService {
             listElement.setTitle(equipmentModel.getId() + " - "
                     + equipmentModel.getName());
             listElement.setSubtitle(equipmentModel.getDescription());
-            listElement.setImageUrl(imageUrl + equipmentModel.getId());
+            listElement.setImageUrl(imageUrl + equipmentModel.getId() + "/image");
             listElement.getButtons().get(0).getSetAttributes()
                     .setEquipmentModelId(equipmentModel.getId());
             listElement.getButtons().get(0).getSetAttributes()
