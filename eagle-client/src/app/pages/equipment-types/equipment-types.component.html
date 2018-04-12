@@ -12,14 +12,12 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>#</th>
                                 <th>Nome</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let item of equipmentTypes">
-                                <td>{{ item.id }}</td>
                                 <td>{{ item.name }}</td>
                                 <td class="text-right">
                                     <button type="button" class="btn btn-sm btn-info" title="Editar" [routerLink]="['/equipment-type', item.id]">

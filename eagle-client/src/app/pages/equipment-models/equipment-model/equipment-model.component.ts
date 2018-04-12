@@ -4,6 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { routerTransition } from '../../../router.animations';
 import { EquipmentModelsService } from '../equipment-models.service';
+import { EquipmentTypesService } from '../../equipment-types/equipment-types.service';
+import { EquipmentType } from '../../models/equipment-type.model';
 
 @Component({
   selector: 'app-equipment-model',
@@ -12,23 +14,28 @@ import { EquipmentModelsService } from '../equipment-models.service';
 })
 export class EquipmentModelComponent implements OnInit {
 
-  form: FormGroup;
-  title: string;
+  form: FormGroup
+  title: string
+  equipmentTypes: EquipmentType[]
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private equipmentModelsService: EquipmentModelsService
+    private equipmentModelsService: EquipmentModelsService,
+    private equipmentTypesService: EquipmentTypesService
   ) { }
 
   ngOnInit() {
+    this.equipmentTypesService.getItems().subscribe(
+      equipmentTypes => this.equipmentTypes = equipmentTypes);
+
     this.form = this.formBuilder.group({
       id: [],
-      name: ['', [Validators.required]],
+      name: ['', Validators.required],
       description: [],
-      rate: ['', [Validators.required]],
-      equipmentTypeId: ['', [Validators.required]]
+      rate: ['', Validators.required],
+      equipmentTypeId: ['', Validators.required]
     });
 
     var id = this.route.params.subscribe(params => {

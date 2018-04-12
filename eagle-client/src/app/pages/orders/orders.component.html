@@ -10,7 +10,6 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>#</th>
                                 <th>Cliente</th>
                                 <th>Equipamento</th>
                                 <th>Período</th>
@@ -19,7 +18,6 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let item of orders">
-                                <td>{{ item.id }}</td>
                                 <td>{{ item.clientName }}</td>
                                 <td>{{ item.equipmentTypeName }} - {{ item.equipmentModelName }}</td>
                                 <td>{{ item.initialDate | date:"dd/MM/yyyy" }} - {{ item.finalDate | date:"dd/MM/yyyy" }}</td>

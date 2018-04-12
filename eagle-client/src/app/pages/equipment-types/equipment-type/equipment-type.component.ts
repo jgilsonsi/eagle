@@ -12,8 +12,8 @@ import { EquipmentTypesService } from '../equipment-types.service';
 })
 export class EquipmentTypeComponent implements OnInit {
 
-  form: FormGroup;
-  title: string;
+  form: FormGroup
+  title: string
 
   constructor(
     private formBuilder: FormBuilder,
@@ -25,7 +25,7 @@ export class EquipmentTypeComponent implements OnInit {
   ngOnInit() {
     this.form = this.formBuilder.group({
       id: [],
-      name: ['', [Validators.required]]
+      name: ['', Validators.required]
     });
 
     var id = this.route.params.subscribe(params => {
