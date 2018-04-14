@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -43,6 +44,10 @@ public class JOrder implements Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     private JEquipmentModel equipmentModel;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private Date created;
 
     public JOrder() {
     }
@@ -95,11 +100,24 @@ public class JOrder implements Serializable {
         this.equipmentModel = equipmentModel;
     }
 
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    @PrePersist
+    public void prePersist() {
+        created = new Date();
+    }
+
     @Override
     public String toString() {
-        return "JOrder{" + "id=" + id + ", initialDate=" + initialDate
-                + ", finalDate=" + finalDate + ", value=" + value + ", client="
-                + client + ", equipmentModel=" + equipmentModel + '}';
+        return "JOrder{" + "id=" + id + ", initialDate=" + initialDate + ", finalDate="
+                + finalDate + ", value=" + value + ", client=" + client + ", equipmentModel="
+                + equipmentModel + ", created=" + created + '}';
     }
 
 }

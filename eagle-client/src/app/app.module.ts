@@ -14,6 +14,7 @@ import { ClientsService } from './pages/clients/clients.service';
 import { OrdersService } from './pages/orders/orders.service';
 import { EquipmentTypesService } from './pages/equipment-types/equipment-types.service';
 import { EquipmentModelsService } from './pages/equipment-models/equipment-models.service';
+import { DashboardService } from './layout/dashboard/dashboard.service';
 import { ROUTER_PROVIDERS } from '@angular/router/src/router_module';
 
 export function createTranslateLoader(http: HttpClient) {
@@ -43,6 +44,7 @@ export function createTranslateLoader(http: HttpClient) {
         OrdersService,
         EquipmentTypesService,
         EquipmentModelsService,
+        DashboardService,
         { provide: LocationStrategy, useClass: HashLocationStrategy }
     ],
     bootstrap: [AppComponent]

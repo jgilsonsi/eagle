@@ -17,7 +17,7 @@ export class EquipmentModelsComponent implements OnInit {
 
   ngOnInit() {
     this.equipmentModelsService.getItems().subscribe(
-      equipmentModels => this.equipmentModels = equipmentModels);
+      equipmentModels => this.equipmentModels = equipmentModels); 
   }
 
   deleteItem(item) {
