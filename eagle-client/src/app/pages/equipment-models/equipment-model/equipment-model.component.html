@@ -26,13 +26,30 @@
                 *Campo obrigatório
               </div>
             </fieldset>
-            <div class="form-group">
-              <label>Tipo de equipamento</label>
-              <select class="form-control" formControlName="equipmentTypeId">
+            <fieldset class="form-group">
+              <label for="equipmentTypeId">Tipo de equipamento</label>
+              <select id="equipmentTypeId" formControlName="equipmentTypeId" class="form-control">
                 <option value="">Selecione...</option>
                 <option *ngFor="let item of equipmentTypes" [value]="item.id">{{ item.name }}</option>
               </select>
-            </div>
+            </fieldset>
+            <fieldset class="form-group">
+              <label for="inputFile">Imagem</label>
+              <div class="form-control">
+                <div class="row">
+                  <div class="col-md-4">
+                    <img class="img-thumbnail" [src]="equipmentModelImage" *ngIf="isImagePresent; else noImageFound" width="200" height="200">
+                    <ng-template #noImageFound>
+                      <img class="img-thumbnail" src="./assets/images/default.jpg" width="200" height="200">
+                    </ng-template>
+                  </div>
+                  <div class="col-md-8">
+                    <input #fileInput type="file" class="form-control-file mb-1">
+                    <button type="button" class="btn btn-default" (click)="addFile()">Carregar</button>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
             <button type="submit" [disabled]="!form.valid" class="btn btn-info">Salvar</button>
             <button type="reset" routerLink="/equipment-models" class="btn btn-default">Cancelar</button>
           </form>

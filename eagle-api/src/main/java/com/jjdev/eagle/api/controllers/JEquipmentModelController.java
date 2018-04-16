@@ -185,24 +185,23 @@ public class JEquipmentModelController {
      * @param id
      * @return file of image
      */
-    @GetMapping(value = "/{id}/image")
+    @GetMapping(value = "/image/{id}")
     public void readImage(@PathVariable("id") Long id, HttpServletResponse response) {
 
         log.info("Searching image for equipment model: {}", id);
 
         try {
             File imageFile = new File(imagePath + "/" + id + ".jpg");
-            if (imageFile.exists()) {
-                response.setContentType(MediaType.IMAGE_JPEG_VALUE);
-
-                InputStream in = new FileInputStream(imageFile);
-                IOUtils.copy(in, response.getOutputStream());
-
-                response.flushBuffer();
-            } else {
-                log.info("Image not found for equipment model: {}", id);
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+            if (!imageFile.exists()) {
+                imageFile = new File(imagePath + "/default.jpg");
+                log.info("Image not found for equipment model: {}. Returning default image.", id);
             }
+            response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+
+            InputStream in = new FileInputStream(imageFile);
+            IOUtils.copy(in, response.getOutputStream());
+
+            response.flushBuffer();
         } catch (IOException ex) {
             log.error("Error writing file to output stream. {}", ex);
         }
