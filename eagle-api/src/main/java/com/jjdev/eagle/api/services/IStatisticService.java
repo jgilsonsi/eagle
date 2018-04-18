@@ -30,4 +30,11 @@ public interface IStatisticService {
      */
     List<JStatistic> readAmountOfOrdersByMonth();
 
+    /**
+     * Return list of amount of orders by Equipment type and actual month.
+     *
+     * @return List<JStatistic>
+     */
+    List<JStatistic> readAmountOfOrdersByEquipmentType();
+
 }

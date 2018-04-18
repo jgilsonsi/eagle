@@ -1,49 +1,35 @@
 <div [@routerTransition]>
     <div class="row">
-        <div class="col-xl-6 col-lg-6">
+        <div class="col-xl-4 col-lg-4">
             <app-stat [bgClass]="'info'" [icon]="'fa fa-address-card-o'" [count]="26" [label]="'Clientes'" [link]="'/clients'"></app-stat>
         </div>
-        <div class="col-xl-6 col-lg-6">
+        <div class="col-xl-4 col-lg-4">
             <app-stat [bgClass]="'warning'" [icon]="'fa-comments'" [count]="12" [label]="'Contatos'"></app-stat>
+        </div>
+        <div class="col-xl-4 col-lg-4">
+            <app-stat [bgClass]="'dark'" [icon]="'fa-comments'" [count]="12" [label]="'Contatos'"></app-stat>
         </div>
     </div>
     <br>
-    <!--<div class="row">
-        <div class="col col-sm-6">
-            <div class="card mb-3">
-                <div class="card-header">
-                    Bar Chart
-                </div>
-                <div class="card-body">
-                    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
-                        [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
-                    </canvas>
-                </div>
-            </div>
-        </div>
-        <div class="col col-sm-6">
-            <div class="card mb-3">
-                <div class="card-header">
-                    Pie Chart
-                </div>
-                <div class="card-body">
-                    <canvas baseChart height="150px" [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType" (chartHover)="chartHovered($event)"
-                        (chartClick)="chartClicked($event)">
-                    </canvas>
-                </div>
-            </div>
-        </div>
-    </div>-->
     <div class="row">
         <div class="col col-sm-6">
             <div class="card mb-3">
                 <div class="card-header">
-                    Conversion
+                    Annual conversion
                 </div>
                 <div class="card-body">
-                    <canvas baseChart height="130" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors"
-                        [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
-                    </canvas>
+                    <canvas baseChart height="130" [chartType]="lineChartType" [labels]="lineChartLabels" [datasets]="lineChartData" [colors]="lineChartColors"
+                        [options]="lineChartOptions"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col col-sm-6">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Orders by equipment type in the month
+                </div>
+                <div class="card-body">
+                    <canvas baseChart height="130" [chartType]="pieChartType" [labels]="pieChartLabels" [data]="pieChartData" [colors]="pieChartColors"></canvas>
                 </div>
             </div>
         </div>

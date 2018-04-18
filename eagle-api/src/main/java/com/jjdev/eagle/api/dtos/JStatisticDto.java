@@ -14,6 +14,8 @@ public class JStatisticDto {
 
     private List<JStatisticItemDto> amountOfVisitsByMonth;
 
+    private List<JStatisticItemDto> amountOfOrdersByEquipmentType;
+
     public JStatisticDto() {
     }
 
@@ -41,11 +43,19 @@ public class JStatisticDto {
         this.amountOfVisitsByMonth = amountOfVisitsByMonth;
     }
 
+    public List<JStatisticItemDto> getAmountOfOrdersByEquipmentType() {
+        return amountOfOrdersByEquipmentType;
+    }
+
+    public void setAmountOfOrdersByEquipmentType(List<JStatisticItemDto> amountOfOrdersByEquipmentType) {
+        this.amountOfOrdersByEquipmentType = amountOfOrdersByEquipmentType;
+    }
+
     @Override
     public String toString() {
         return "JStatisticDto{" + "amountOfClientsByMonth=" + amountOfClientsByMonth
                 + ", amountOfOrdersByMonth=" + amountOfOrdersByMonth + ", amountOfVisitsByMonth="
-                + amountOfVisitsByMonth + '}';
+                + amountOfVisitsByMonth + ", amountOfOrdersByEquipmentType=" + amountOfOrdersByEquipmentType + '}';
     }
 
 }

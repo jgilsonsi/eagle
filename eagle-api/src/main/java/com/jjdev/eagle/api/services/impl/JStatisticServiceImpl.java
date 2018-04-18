@@ -32,4 +32,9 @@ public class JStatisticServiceImpl implements IStatisticService {
         return this.statisticRepository.findAmountOfOrdersByMonth();
     }
 
+    @Override
+    public List<JStatistic> readAmountOfOrdersByEquipmentType() {
+        return this.statisticRepository.findAmountOfOrdersByEquipmentType();
+    }
+
 }

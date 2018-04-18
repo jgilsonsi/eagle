@@ -64,6 +64,12 @@ public class JStatisticController {
                 .collect(Collectors.toList());
         statisticDto.setAmountOfOrdersByMonth(amountOfOrdersByMonthItemsDto);
 
+        List<JStatistic> amountOfOrdersByEquipmentTypeItems = this.statisticService.readAmountOfOrdersByEquipmentType();
+        List<JStatisticItemDto> amountOfOrdersByEquipmentTypeItemsDto = amountOfOrdersByEquipmentTypeItems.stream()
+                .map(statistic -> this.statisticToDto(statistic))
+                .collect(Collectors.toList());
+        statisticDto.setAmountOfOrdersByEquipmentType(amountOfOrdersByEquipmentTypeItemsDto);
+
         response.setData(statisticDto);
         return ResponseEntity.ok(response);
     }
