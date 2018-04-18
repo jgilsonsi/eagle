@@ -15,8 +15,8 @@ public class JStatistic implements Serializable {
     private static final long serialVersionUID = 0L;
 
     @Id
-    @Column(name = "item", nullable = false, length = 255)
-    private String item;
+    @Column(name = "name", nullable = false, length = 255)
+    private String name;
 
     @Column(name = "value", nullable = false)
     private Long value;
@@ -24,12 +24,12 @@ public class JStatistic implements Serializable {
     public JStatistic() {
     }
 
-    public String getItem() {
-        return item;
+    public String getName() {
+        return name;
     }
 
-    public void setItem(String item) {
-        this.item = item;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Long getValue() {
@@ -42,7 +42,7 @@ public class JStatistic implements Serializable {
 
     @Override
     public String toString() {
-        return "JStatistic{" + "item=" + item + ", value=" + value + '}';
+        return "JStatistic{" + "name=" + name + ", value=" + value + '}';
     }
 
 }

@@ -10,31 +10,33 @@ import java.util.List;
 public interface IStatisticService {
 
     /**
-     * Return list of amount of clients by month.
+     * Returns the list with the number of clients per month in the current
+     * year.
      *
      * @return List<JStatistic>
      */
-    List<JStatistic> readAmountOfClientsByMonth();
+    List<JStatistic> readNumberOfClientsByMonth();
 
     /**
-     * Return list of amount of visits by month.
+     * Returns the list with the number of visits per month in the current year.
      *
      * @return List<JStatistic>
      */
-    List<JStatistic> readAmountOfVisitsByMonth();
+    List<JStatistic> readNumberOfVisitsByMonth();
 
     /**
-     * Return list of amount of orders by month.
+     * Returns the list with the number of orders per month in the current year.
      *
      * @return List<JStatistic>
      */
-    List<JStatistic> readAmountOfOrdersByMonth();
+    List<JStatistic> readNumberOfOrdersByMonth();
 
     /**
-     * Return list of amount of orders by Equipment type and actual month.
+     * Returns the list with the number of orders by Equipment type in the
+     * current month.
      *
      * @return List<JStatistic>
      */
-    List<JStatistic> readAmountOfOrdersByEquipmentType();
+    List<JStatistic> readNumberOfOrdersByEquipmentType();
 
 }

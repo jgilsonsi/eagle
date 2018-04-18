@@ -6,19 +6,19 @@ package com.jjdev.eagle.api.dtos;
  */
 public class JStatisticItemDto {
 
-    private String item;
+    private String name;
 
     private Long value;
 
     public JStatisticItemDto() {
     }
 
-    public String getItem() {
-        return item;
+    public String getName() {
+        return name;
     }
 
-    public void setItem(String item) {
-        this.item = item;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Long getValue() {
@@ -31,7 +31,7 @@ public class JStatisticItemDto {
 
     @Override
     public String toString() {
-        return "JStatisticDto{" + "item=" + item + ", value=" + value + '}';
+        return "JStatisticItemDto{" + "name=" + name + ", value=" + value + '}';
     }
 
 }

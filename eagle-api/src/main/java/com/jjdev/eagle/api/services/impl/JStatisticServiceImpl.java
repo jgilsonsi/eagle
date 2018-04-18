@@ -18,23 +18,23 @@ public class JStatisticServiceImpl implements IStatisticService {
     private IStatisticRepository statisticRepository;
 
     @Override
-    public List<JStatistic> readAmountOfClientsByMonth() {
-        return this.statisticRepository.findAmountOfClientsByMonth();
+    public List<JStatistic> readNumberOfClientsByMonth() {
+        return this.statisticRepository.findNumberOfClientsByMonth();
     }
 
     @Override
-    public List<JStatistic> readAmountOfVisitsByMonth() {
-        return this.statisticRepository.findAmountOfVisitsByMonth();
+    public List<JStatistic> readNumberOfVisitsByMonth() {
+        return this.statisticRepository.findNumberOfVisitsByMonth();
     }
 
     @Override
-    public List<JStatistic> readAmountOfOrdersByMonth() {
-        return this.statisticRepository.findAmountOfOrdersByMonth();
+    public List<JStatistic> readNumberOfOrdersByMonth() {
+        return this.statisticRepository.findNumberOfOrdersByMonth();
     }
 
     @Override
-    public List<JStatistic> readAmountOfOrdersByEquipmentType() {
-        return this.statisticRepository.findAmountOfOrdersByEquipmentType();
+    public List<JStatistic> readNumberOfOrdersByEquipmentType() {
+        return this.statisticRepository.findNumberOfOrdersByEquipmentType();
     }
 
 }

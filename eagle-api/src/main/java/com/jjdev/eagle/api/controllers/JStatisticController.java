@@ -46,29 +46,29 @@ public class JStatisticController {
         JResponse<JStatisticDto> response = new JResponse<>();
         JStatisticDto statisticDto = new JStatisticDto();
 
-        List<JStatistic> amountOfClientsByMonthItems = this.statisticService.readAmountOfClientsByMonth();
-        List<JStatisticItemDto> amountOfClientsByMonthItemsDto = amountOfClientsByMonthItems.stream()
+        List<JStatistic> numberOfClientsByMonthItems = this.statisticService.readNumberOfClientsByMonth();
+        List<JStatisticItemDto> numberOfClientsByMonthItemsDto = numberOfClientsByMonthItems.stream()
                 .map(statistic -> this.statisticToDto(statistic))
                 .collect(Collectors.toList());
-        statisticDto.setAmountOfClientsByMonth(amountOfClientsByMonthItemsDto);
+        statisticDto.setNumberOfClientsByMonth(numberOfClientsByMonthItemsDto);
 
-        List<JStatistic> amountOfVisitsByMonthItems = this.statisticService.readAmountOfVisitsByMonth();
-        List<JStatisticItemDto> amountOfVisitsByMonthItemsDto = amountOfVisitsByMonthItems.stream()
+        List<JStatistic> numberOfVisitsByMonthItems = this.statisticService.readNumberOfVisitsByMonth();
+        List<JStatisticItemDto> numberOfVisitsByMonthItemsDto = numberOfVisitsByMonthItems.stream()
                 .map(statistic -> this.statisticToDto(statistic))
                 .collect(Collectors.toList());
-        statisticDto.setAmountOfVisitsByMonth(amountOfVisitsByMonthItemsDto);
+        statisticDto.setNumberOfVisitsByMonth(numberOfVisitsByMonthItemsDto);
 
-        List<JStatistic> amountOfOrdersByMonthItems = this.statisticService.readAmountOfOrdersByMonth();
-        List<JStatisticItemDto> amountOfOrdersByMonthItemsDto = amountOfOrdersByMonthItems.stream()
+        List<JStatistic> numberOfOrdersByMonthItems = this.statisticService.readNumberOfOrdersByMonth();
+        List<JStatisticItemDto> numberOfOrdersByMonthItemsDto = numberOfOrdersByMonthItems.stream()
                 .map(statistic -> this.statisticToDto(statistic))
                 .collect(Collectors.toList());
-        statisticDto.setAmountOfOrdersByMonth(amountOfOrdersByMonthItemsDto);
+        statisticDto.setNumberOfOrdersByMonth(numberOfOrdersByMonthItemsDto);
 
-        List<JStatistic> amountOfOrdersByEquipmentTypeItems = this.statisticService.readAmountOfOrdersByEquipmentType();
-        List<JStatisticItemDto> amountOfOrdersByEquipmentTypeItemsDto = amountOfOrdersByEquipmentTypeItems.stream()
+        List<JStatistic> numberOfOrdersByEquipmentTypeItems = this.statisticService.readNumberOfOrdersByEquipmentType();
+        List<JStatisticItemDto> numberOfOrdersByEquipmentTypeItemsDto = numberOfOrdersByEquipmentTypeItems.stream()
                 .map(statistic -> this.statisticToDto(statistic))
                 .collect(Collectors.toList());
-        statisticDto.setAmountOfOrdersByEquipmentType(amountOfOrdersByEquipmentTypeItemsDto);
+        statisticDto.setNumberOfOrdersByEquipmentType(numberOfOrdersByEquipmentTypeItemsDto);
 
         response.setData(statisticDto);
         return ResponseEntity.ok(response);
@@ -84,7 +84,7 @@ public class JStatisticController {
     private JStatisticItemDto statisticToDto(JStatistic statistic) {
 
         JStatisticItemDto statisticDto = new JStatisticItemDto();
-        statisticDto.setItem(statistic.getItem());
+        statisticDto.setName(statistic.getName());
         statisticDto.setValue(statistic.getValue());
 
         return statisticDto;

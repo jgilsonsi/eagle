@@ -13,37 +13,37 @@ import org.springframework.transaction.annotation.Transactional;
 public interface IStatisticRepository extends JpaRepository<JStatistic, Long> {
 
     @Transactional(readOnly = true)
-    @Query(value = "SELECT MONTH(created) AS item, COUNT(*) AS value "
+    @Query(value = "SELECT MONTH(created) AS name, COUNT(*) AS value "
             + "FROM client WHERE YEAR(created) = YEAR(current_date()) "
-            + "GROUP BY MONTH(created) ORDER BY item",
+            + "GROUP BY MONTH(created) ORDER BY name",
             nativeQuery = true
     )
-    List<JStatistic> findAmountOfClientsByMonth();
+    List<JStatistic> findNumberOfClientsByMonth();
 
     @Transactional(readOnly = true)
-    @Query(value = "SELECT MONTH(last_visit) AS item, COUNT(*) AS value "
+    @Query(value = "SELECT MONTH(last_visit) AS name, COUNT(*) AS value "
             + "FROM client WHERE YEAR(last_visit) = YEAR(current_date()) "
-            + "GROUP BY MONTH(last_visit) ORDER BY item",
+            + "GROUP BY MONTH(last_visit) ORDER BY name",
             nativeQuery = true
     )
-    List<JStatistic> findAmountOfVisitsByMonth();
+    List<JStatistic> findNumberOfVisitsByMonth();
 
     @Transactional(readOnly = true)
-    @Query(value = "SELECT MONTH(created) AS item, COUNT(*) AS value "
+    @Query(value = "SELECT MONTH(created) AS name, COUNT(*) AS value "
             + "FROM _order WHERE YEAR(created) = YEAR(current_date()) "
-            + "GROUP BY MONTH(created) ORDER BY item",
+            + "GROUP BY MONTH(created) ORDER BY name",
             nativeQuery = true
     )
-    List<JStatistic> findAmountOfOrdersByMonth();
+    List<JStatistic> findNumberOfOrdersByMonth();
 
     @Transactional(readOnly = true)
-    @Query(value = "SELECT et._name AS item, COUNT(*) AS value "
+    @Query(value = "SELECT et._name AS name, COUNT(*) AS value "
             + "FROM _order o LEFT JOIN equipment_model em ON o.equipment_model_id = em.id "
             + "LEFT JOIN equipment_type et ON em.equipment_type_id = et.id "
             + "WHERE MONTH(o.created) = MONTH(current_date()) "
             + "GROUP BY et.id ORDER BY et._name",
             nativeQuery = true
     )
-    List<JStatistic> findAmountOfOrdersByEquipmentType();
+    List<JStatistic> findNumberOfOrdersByEquipmentType();
 
 }

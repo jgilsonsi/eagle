@@ -14,6 +14,10 @@ export class DashboardComponent implements OnInit {
 
     private statistic: any;
 
+    public numberOfContacts: number = 1;
+    public numberOfClients: number = 2;
+    public numberOfOrders: number = 3;
+
     // line chart ---------------------------------------------------
     public lineChartType: string = 'line';
 
@@ -22,13 +26,13 @@ export class DashboardComponent implements OnInit {
         'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
     ];
 
-    private visits = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    private clients = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    private orders = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    private lineChartVisits = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    private lineChartClients = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    private lineChartOrders = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     public lineChartData: Array<any> = [
-        { data: this.visits, label: 'Visits' },
-        { data: this.clients, label: 'New clients' },
-        { data: this.orders, label: 'Orders' }
+        { data: this.lineChartVisits, label: 'Visits' },
+        { data: this.lineChartClients, label: 'New clients' },
+        { data: this.lineChartOrders, label: 'Orders' }
     ];
 
     public lineChartColors: Array<Color>;
@@ -64,43 +68,43 @@ export class DashboardComponent implements OnInit {
 
     private populateGraphs() {
         // line chart -----------------------------------------------
-        this.visits = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-        this.clients = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-        this.orders = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        this.lineChartVisits = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        this.lineChartClients = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        this.lineChartOrders = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-        for (let item of this.statistic.amountOfVisitsByMonth) {
-            let month = Number(item.item);
+        for (let item of this.statistic.numberOfVisitsByMonth) {
+            let month = Number(item.name);
             if (month >= 1 && month <= 12) {
-                this.visits[month - 1] = item.value;
+                this.lineChartVisits[month - 1] = item.value;
             }
         }
 
-        for (let item of this.statistic.amountOfClientsByMonth) {
-            let month = Number(item.item);
+        for (let item of this.statistic.numberOfClientsByMonth) {
+            let month = Number(item.name);
             if (month >= 1 && month <= 12) {
-                this.clients[month - 1] = item.value;
+                this.lineChartClients[month - 1] = item.value;
             }
         }
 
-        for (let item of this.statistic.amountOfOrdersByMonth) {
-            let month = Number(item.item);
+        for (let item of this.statistic.numberOfOrdersByMonth) {
+            let month = Number(item.name);
             if (month >= 1 && month <= 12) {
-                this.orders[month - 1] = item.value;
+                this.lineChartOrders[month - 1] = item.value;
             }
         }
 
         const lineChartDataClone = JSON.parse(JSON.stringify(this.lineChartData));
-        lineChartDataClone[0].data = this.visits;
-        lineChartDataClone[1].data = this.clients;
-        lineChartDataClone[2].data = this.orders;
+        lineChartDataClone[0].data = this.lineChartVisits;
+        lineChartDataClone[1].data = this.lineChartClients;
+        lineChartDataClone[2].data = this.lineChartOrders;
         this.lineChartData = lineChartDataClone;
 
         // pie chart ------------------------------------------------
         this.pieChartLabels.length = 0;
         this.pieChartData.length = 0;
 
-        for (let item of this.statistic.amountOfOrdersByEquipmentType) {
-            this.pieChartLabels.push(item.item);
+        for (let item of this.statistic.numberOfOrdersByEquipmentType) {
+            this.pieChartLabels.push(item.name);
             this.pieChartData.push(item.value);
         }
 

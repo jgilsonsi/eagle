@@ -13,10 +13,10 @@ export class HeaderComponent implements OnInit {
 
     constructor(private translate: TranslateService, public router: Router) {
 
-        this.translate.addLangs(['pt', 'en']);
-        this.translate.setDefaultLang('pt');
+        this.translate.addLangs(['en']);
+        this.translate.setDefaultLang('en');
         const browserLang = this.translate.getBrowserLang();
-        this.translate.use(browserLang.match(/pt|en/) ? browserLang : 'pt');
+        this.translate.use(browserLang.match(/en|pt/) ? browserLang : 'en');
 
         this.router.events.subscribe(val => {
             if (

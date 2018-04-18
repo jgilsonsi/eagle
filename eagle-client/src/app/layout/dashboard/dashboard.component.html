@@ -1,16 +1,16 @@
 <div [@routerTransition]>
     <div class="row">
-        <div class="col-xl-4 col-lg-4">
-            <app-stat [bgClass]="'info'" [icon]="'fa fa-address-card-o'" [count]="26" [label]="'Clientes'" [link]="'/clients'"></app-stat>
+        <div class="col-xl-4 col-lg-4 mb-2">
+            <app-stat [bgClass]="'info'" [icon]="'fa-comments'" [count]=[numberOfContacts] [label]="'Contacts'" [link]="'#/clients'"></app-stat>
         </div>
-        <div class="col-xl-4 col-lg-4">
-            <app-stat [bgClass]="'warning'" [icon]="'fa-comments'" [count]="12" [label]="'Contatos'"></app-stat>
+        <div class="col-xl-4 col-lg-4 mb-2">
+            <app-stat [bgClass]="'warning'" [icon]="'fa fa-address-card-o'" [count]=[numberOfClients] [label]="'Clients'" [link]="'#/clients'"></app-stat>
         </div>
-        <div class="col-xl-4 col-lg-4">
-            <app-stat [bgClass]="'dark'" [icon]="'fa-comments'" [count]="12" [label]="'Contatos'"></app-stat>
+        <div class="col-xl-4 col-lg-4 mb-2">
+            <app-stat [bgClass]="'success'" [icon]="'fa fa-handshake-o'" [count]=[numberOfOrders] [label]="'Orders'" [link]="'#/orders'"></app-stat>
         </div>
     </div>
-    <br>
+    <hr class="ng-tns-c4-0">
     <div class="row">
         <div class="col col-sm-6">
             <div class="card mb-3">

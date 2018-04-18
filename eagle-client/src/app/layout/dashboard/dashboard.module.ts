@@ -5,7 +5,6 @@ import { NgbCarouselModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { ChartsModule as Ng2Charts, Color } from 'ng2-charts';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
-import { TimelineComponent, NotificationComponent, ChatComponent } from './components';
 import { StatModule } from '../../shared';
 
 @NgModule({
@@ -18,10 +17,7 @@ import { StatModule } from '../../shared';
         Ng2Charts
     ],
     declarations: [
-        DashboardComponent,
-        TimelineComponent,
-        NotificationComponent,
-        ChatComponent
+        DashboardComponent
     ]
 })
 export class DashboardModule { }

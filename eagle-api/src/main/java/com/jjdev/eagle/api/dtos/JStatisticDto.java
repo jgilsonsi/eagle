@@ -8,54 +8,56 @@ import java.util.List;
  */
 public class JStatisticDto {
 
-    private List<JStatisticItemDto> amountOfClientsByMonth;
+    private List<JStatisticItemDto> numberOfClientsByMonth;
 
-    private List<JStatisticItemDto> amountOfOrdersByMonth;
+    private List<JStatisticItemDto> numberOfOrdersByMonth;
 
-    private List<JStatisticItemDto> amountOfVisitsByMonth;
+    private List<JStatisticItemDto> numberOfVisitsByMonth;
 
-    private List<JStatisticItemDto> amountOfOrdersByEquipmentType;
+    private List<JStatisticItemDto> numberOfOrdersByEquipmentType;
 
     public JStatisticDto() {
     }
 
-    public List<JStatisticItemDto> getAmountOfClientsByMonth() {
-        return amountOfClientsByMonth;
+    public List<JStatisticItemDto> getNumberOfClientsByMonth() {
+        return numberOfClientsByMonth;
     }
 
-    public void setAmountOfClientsByMonth(List<JStatisticItemDto> amountOfClientsByMonth) {
-        this.amountOfClientsByMonth = amountOfClientsByMonth;
+    public void setNumberOfClientsByMonth(List<JStatisticItemDto> numberOfClientsByMonth) {
+        this.numberOfClientsByMonth = numberOfClientsByMonth;
     }
 
-    public List<JStatisticItemDto> getAmountOfOrdersByMonth() {
-        return amountOfOrdersByMonth;
+    public List<JStatisticItemDto> getNumberOfOrdersByMonth() {
+        return numberOfOrdersByMonth;
     }
 
-    public void setAmountOfOrdersByMonth(List<JStatisticItemDto> amountOfOrdersByMonth) {
-        this.amountOfOrdersByMonth = amountOfOrdersByMonth;
+    public void setNumberOfOrdersByMonth(List<JStatisticItemDto> numberOfOrdersByMonth) {
+        this.numberOfOrdersByMonth = numberOfOrdersByMonth;
     }
 
-    public List<JStatisticItemDto> getAmountOfVisitsByMonth() {
-        return amountOfVisitsByMonth;
+    public List<JStatisticItemDto> getNumberOfVisitsByMonth() {
+        return numberOfVisitsByMonth;
     }
 
-    public void setAmountOfVisitsByMonth(List<JStatisticItemDto> amountOfVisitsByMonth) {
-        this.amountOfVisitsByMonth = amountOfVisitsByMonth;
+    public void setNumberOfVisitsByMonth(List<JStatisticItemDto> numberOfVisitsByMonth) {
+        this.numberOfVisitsByMonth = numberOfVisitsByMonth;
     }
 
-    public List<JStatisticItemDto> getAmountOfOrdersByEquipmentType() {
-        return amountOfOrdersByEquipmentType;
+    public List<JStatisticItemDto> getNumberOfOrdersByEquipmentType() {
+        return numberOfOrdersByEquipmentType;
     }
 
-    public void setAmountOfOrdersByEquipmentType(List<JStatisticItemDto> amountOfOrdersByEquipmentType) {
-        this.amountOfOrdersByEquipmentType = amountOfOrdersByEquipmentType;
+    public void setNumberOfOrdersByEquipmentType(List<JStatisticItemDto> numberOfOrdersByEquipmentType) {
+        this.numberOfOrdersByEquipmentType = numberOfOrdersByEquipmentType;
     }
 
     @Override
     public String toString() {
-        return "JStatisticDto{" + "amountOfClientsByMonth=" + amountOfClientsByMonth
-                + ", amountOfOrdersByMonth=" + amountOfOrdersByMonth + ", amountOfVisitsByMonth="
-                + amountOfVisitsByMonth + ", amountOfOrdersByEquipmentType=" + amountOfOrdersByEquipmentType + '}';
+        return "JStatisticDto{" + "numberOfClientsByMonth="
+                + numberOfClientsByMonth + ", numberOfOrdersByMonth="
+                + numberOfOrdersByMonth + ", numberOfVisitsByMonth="
+                + numberOfVisitsByMonth + ", numberOfOrdersByEquipmentType="
+                + numberOfOrdersByEquipmentType + '}';
     }
 
 }
