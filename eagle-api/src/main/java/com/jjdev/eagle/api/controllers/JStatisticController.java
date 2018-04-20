@@ -70,6 +70,12 @@ public class JStatisticController {
                 .collect(Collectors.toList());
         statisticDto.setNumberOfOrdersByEquipmentType(numberOfOrdersByEquipmentTypeItemsDto);
 
+        statisticDto.setNumberOfVisits(this.statisticToDto(this.statisticService.readNumberOfVisits()));
+
+        statisticDto.setNumberOfClients(this.statisticToDto(this.statisticService.readNumberOfClients()));
+
+        statisticDto.setNumberOfOrders(this.statisticToDto(this.statisticService.readNumberOfOrders()));
+
         response.setData(statisticDto);
         return ResponseEntity.ok(response);
     }

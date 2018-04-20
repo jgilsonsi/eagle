@@ -2,6 +2,7 @@ package com.jjdev.eagle.api.repositories;
 
 import com.jjdev.eagle.api.entities.JStatistic;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,5 +46,26 @@ public interface IStatisticRepository extends JpaRepository<JStatistic, Long> {
             nativeQuery = true
     )
     List<JStatistic> findNumberOfOrdersByEquipmentType();
+
+    @Transactional(readOnly = true)
+    @Query(value = "SELECT 'visits' AS name, COUNT(*) AS value FROM client "
+            + "WHERE DAY(last_visit) = DAY(current_date())",
+            nativeQuery = true
+    )
+    JStatistic findNumberOfVisits();
+
+    @Transactional(readOnly = true)
+    @Query(value = "SELECT 'clients' AS name, COUNT(*) AS value FROM client "
+            + "WHERE DAY(created) = DAY(current_date());",
+            nativeQuery = true
+    )
+    JStatistic findNumberOfClients();
+
+    @Transactional(readOnly = true)
+    @Query(value = "SELECT 'orders' AS name, COUNT(*) AS value FROM _order "
+            + "WHERE DAY(created) = DAY(current_date())",
+            nativeQuery = true
+    )
+    JStatistic findNumberOfOrders();
 
 }

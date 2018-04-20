@@ -16,6 +16,12 @@ public class JStatisticDto {
 
     private List<JStatisticItemDto> numberOfOrdersByEquipmentType;
 
+    private JStatisticItemDto numberOfVisits;
+
+    private JStatisticItemDto numberOfClients;
+
+    private JStatisticItemDto numberOfOrders;
+
     public JStatisticDto() {
     }
 
@@ -51,13 +57,38 @@ public class JStatisticDto {
         this.numberOfOrdersByEquipmentType = numberOfOrdersByEquipmentType;
     }
 
+    public JStatisticItemDto getNumberOfVisits() {
+        return numberOfVisits;
+    }
+
+    public void setNumberOfVisits(JStatisticItemDto numberOfVisits) {
+        this.numberOfVisits = numberOfVisits;
+    }
+
+    public JStatisticItemDto getNumberOfClients() {
+        return numberOfClients;
+    }
+
+    public void setNumberOfClients(JStatisticItemDto numberOfClients) {
+        this.numberOfClients = numberOfClients;
+    }
+
+    public JStatisticItemDto getNumberOfOrders() {
+        return numberOfOrders;
+    }
+
+    public void setNumberOfOrders(JStatisticItemDto numberOfOrders) {
+        this.numberOfOrders = numberOfOrders;
+    }
+
     @Override
     public String toString() {
-        return "JStatisticDto{" + "numberOfClientsByMonth="
-                + numberOfClientsByMonth + ", numberOfOrdersByMonth="
-                + numberOfOrdersByMonth + ", numberOfVisitsByMonth="
+        return "JStatisticDto{" + "numberOfClientsByMonth=" + numberOfClientsByMonth
+                + ", numberOfOrdersByMonth=" + numberOfOrdersByMonth + ", numberOfVisitsByMonth="
                 + numberOfVisitsByMonth + ", numberOfOrdersByEquipmentType="
-                + numberOfOrdersByEquipmentType + '}';
+                + numberOfOrdersByEquipmentType + ", numberOfVisits=" + numberOfVisits
+                + ", numberOfClients=" + numberOfClients + ", numberOfOrders="
+                + numberOfOrders + '}';
     }
 
 }

@@ -39,4 +39,25 @@ public interface IStatisticService {
      */
     List<JStatistic> readNumberOfOrdersByEquipmentType();
 
+    /**
+     * Returns the number of visits today
+     *
+     * @return JStatistic
+     */
+    JStatistic readNumberOfVisits();
+
+    /**
+     * Returns the number of clients today
+     *
+     * @return JStatistic
+     */
+    JStatistic readNumberOfClients();
+
+    /**
+     * Returns the number of orders today
+     *
+     * @return JStatistic
+     */
+    JStatistic readNumberOfOrders();
+
 }

@@ -37,4 +37,19 @@ public class JStatisticServiceImpl implements IStatisticService {
         return this.statisticRepository.findNumberOfOrdersByEquipmentType();
     }
 
+    @Override
+    public JStatistic readNumberOfVisits() {
+        return this.statisticRepository.findNumberOfVisits();
+    }
+
+    @Override
+    public JStatistic readNumberOfClients() {
+        return this.statisticRepository.findNumberOfClients();
+    }
+
+    @Override
+    public JStatistic readNumberOfOrders() {
+        return this.statisticRepository.findNumberOfOrders();
+    }
+
 }
