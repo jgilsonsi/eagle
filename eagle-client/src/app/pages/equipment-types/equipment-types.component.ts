@@ -21,15 +21,14 @@ export class EquipmentTypesComponent implements OnInit {
   }
 
   deleteItem(item) {
-    if (confirm("Deseja realmente excluir o item: " + item.name + "?")) {
+    if (confirm("Do you really want to delete the item: " + item.name + "?")) {
       var index = this.equipmentTypes.indexOf(item);
       this.equipmentTypes.splice(index, 1);
 
       this.equipmentTypesService.deleteItem(item.id)
         .subscribe(null,
           err => {
-            alert("Não foi possível deletar o item.");
-            // Revert the view back to its original state
+            alert("Could not delete the item.");
             this.equipmentTypes.splice(index, 0, item);
           });
     }

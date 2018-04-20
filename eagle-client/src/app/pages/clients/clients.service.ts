@@ -11,12 +11,20 @@ import 'rxjs/add/operator/catch'
 @Injectable()
 export class ClientsService {
 
+    private url: string = EAGLE_API_CLIENTS;
+
     constructor(private http: Http) { }
 
-    clients(): Observable<Client[]> {
-        return this.http.get(`${EAGLE_API_CLIENTS}`)
-            .map(response => response.json().data)
+    getItems() {
+        return this.http.get(this.url)
+            .map(res => res.json().data)
             .catch(ErrorHandler.handleError)
+    }
+
+    deleteItem(id) {
+        return this.http.delete(this.url + `/${id}`)
+            .map(res => res.json().data)
+            .catch(ErrorHandler.handleError);
     }
 
 }

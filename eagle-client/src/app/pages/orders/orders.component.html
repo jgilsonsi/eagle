@@ -1,27 +1,35 @@
 <div [@routerTransition]>
-    <app-page-header [heading]="'Pedidos'" [icon]="'fa fa-handshake-o'"></app-page-header>
+    <app-page-header [heading]="'Orders'" [icon]="'fa fa-handshake-o'"></app-page-header>
     <div class="row">
         <div class="col col-xl-12 col-lg-12">
             <div class="card mb-3">
                 <div class="card-header">
-                    Pedidos
+                    Orders
                 </div>
                 <div class="card-body table-responsive table-hover">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Cliente</th>
-                                <th>Equipamento</th>
-                                <th>Período</th>
-                                <th>Valor</th>
+                                <th>#</th>
+                                <th>Client</th>
+                                <th>Equipment</th>
+                                <th>Period</th>
+                                <th>Total</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let item of orders">
+                                <td>{{ item.id }}</td>
                                 <td>{{ item.clientName }}</td>
                                 <td>{{ item.equipmentTypeName }} - {{ item.equipmentModelName }}</td>
                                 <td>{{ item.initialDate | date:"dd/MM/yyyy" }} - {{ item.finalDate | date:"dd/MM/yyyy" }}</td>
                                 <td>{{ item.value | currency:'BRL':2 }}</td>
+                                <td class="text-right">
+                                    <button type="button" class="btn btn-sm btn-danger" title="Delete" (click)="deleteItem(item)">
+                                        <i class="fa fa-trash-o"></i>
+                                    </button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

@@ -17,19 +17,18 @@ export class EquipmentModelsComponent implements OnInit {
 
   ngOnInit() {
     this.equipmentModelsService.getItems().subscribe(
-      equipmentModels => this.equipmentModels = equipmentModels); 
+      res => this.equipmentModels = res);
   }
 
   deleteItem(item) {
-    if (confirm("Deseja realmente excluir o item: " + item.name + "?")) {
+    if (confirm("Do you really want to delete the item: " + item.name + "?")) {
       var index = this.equipmentModels.indexOf(item);
       this.equipmentModels.splice(index, 1);
 
       this.equipmentModelsService.deleteItem(item.id)
         .subscribe(null,
           err => {
-            alert("Não foi possível deletar o item.");
-            // Revert the view back to its original state
+            alert("Could not delete the item.");
             this.equipmentModels.splice(index, 0, item);
           });
     }

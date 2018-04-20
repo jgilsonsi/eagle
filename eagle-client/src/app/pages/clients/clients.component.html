@@ -1,20 +1,21 @@
 <div [@routerTransition]>
-    <app-page-header [heading]="'Clientes'" [icon]="'fa fa-address-card-o'"></app-page-header>
+    <app-page-header [heading]="'Clients'" [icon]="'fa fa-address-card-o'"></app-page-header>
     <div class="row">
         <div class="col col-xl-12 col-lg-12">
             <div class="card mb-3">
                 <div class="card-header">
-                    Clientes
+                    Clients
                 </div>
                 <div class="card-body table-responsive table-hover">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Nome</th>
-                                <th>Sexo</th>
-                                <th>Chat</th>
-                                <th>Cadastro</th>
-                                <th>Última visita</th>
+                                <th>Name</th>
+                                <th>Gender</th>
+                                <th>Chat id</th>
+                                <th>Register</th>
+                                <th>Last visit</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -24,6 +25,11 @@
                                 <td>{{ item.chatId }}</td>
                                 <td>{{ item.created | date:"dd/MM/yyyy HH:mm" }}</td>
                                 <td>{{ item.lastVisit | date:"dd/MM/yyyy HH:mm" }}</td>
+                                <td class="text-right">
+                                    <button type="button" class="btn btn-sm btn-danger" title="Delete" (click)="deleteItem(item)">
+                                        <i class="fa fa-trash-o"></i>
+                                    </button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

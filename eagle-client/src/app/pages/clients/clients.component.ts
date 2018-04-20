@@ -16,7 +16,22 @@ export class ClientsComponent implements OnInit {
     constructor(private clientsService: ClientsService) { }
 
     ngOnInit() {
-        this.clientsService.clients().subscribe(
-            clients => this.clients = clients);
+        this.clientsService.getItems().subscribe(
+            res => this.clients = res);
     }
+
+    deleteItem(item) {
+        if (confirm("Do you really want to delete the item: " + item.name + "?")) {
+            var index = this.clients.indexOf(item);
+            this.clients.splice(index, 1);
+
+            this.clientsService.deleteItem(item.id)
+                .subscribe(null,
+                    err => {
+                        alert("Could not delete the item.");
+                        this.clients.splice(index, 0, item);
+                    });
+        }
+    }
+
 }

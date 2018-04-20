@@ -1,5 +1,5 @@
 <div [@routerTransition]>
-  <app-page-header [heading]="'Modelo de equipamento'" [icon]="'fa fa-bicycle'"></app-page-header>
+  <app-page-header [heading]="'Equipment model'" [icon]="'fa fa-bicycle'"></app-page-header>
   <div class="row">
     <div class="col col-xl-12 col-lg-12">
       <div class="card mb-3">
@@ -9,32 +9,32 @@
         <div class="card-body">
           <form role="form" [formGroup]="form" (ngSubmit)="save()">
             <fieldset class="form-group">
-              <label for="name">Nome</label>
+              <label for="name">Name</label>
               <input id="name" type="text" formControlName="name" class="form-control">
               <div *ngIf="form.controls.name.errors?.required && form.controls.name.touched" class="error">
-                *Campo obrigatório
+                *Required
               </div>
             </fieldset>
             <fieldset class="form-group">
-              <label for="description">Descrição</label>
+              <label for="description">Description</label>
               <textarea id="description" rows="3" formControlName="description" class="form-control"></textarea>
             </fieldset>
             <fieldset class="form-group">
-              <label for="rate">Diária</label>
+              <label for="rate">Rate</label>
               <input id="rate" type="number" formControlName="rate" class="form-control">
               <div *ngIf="form.controls.rate.errors?.required && form.controls.rate.touched" class="error">
-                *Campo obrigatório
+                *Required
               </div>
             </fieldset>
             <fieldset class="form-group">
-              <label for="equipmentTypeId">Tipo de equipamento</label>
+              <label for="equipmentTypeId">Equipment type</label>
               <select id="equipmentTypeId" formControlName="equipmentTypeId" class="form-control">
-                <option value="">Selecione...</option>
+                <option value="">Select...</option>
                 <option *ngFor="let item of equipmentTypes" [value]="item.id">{{ item.name }}</option>
               </select>
             </fieldset>
             <fieldset class="form-group">
-              <label for="inputFile">Imagem</label>
+              <label for="inputFile">Image</label>
               <div class="form-control">
                 <div class="row">
                   <div class="col-md-4">
@@ -45,13 +45,13 @@
                   </div>
                   <div class="col-md-8">
                     <input #fileInput type="file" class="form-control-file mb-1">
-                    <button type="button" class="btn btn-default" (click)="addFile()">Carregar</button>
+                    <button type="button" class="btn btn-default" (click)="addFile()">Load</button>
                   </div>
                 </div>
               </div>
             </fieldset>
-            <button type="submit" [disabled]="!form.valid" class="btn btn-info">Salvar</button>
-            <button type="reset" routerLink="/equipment-models" class="btn btn-default">Cancelar</button>
+            <button type="submit" [disabled]="!form.valid" class="btn btn-info">Save</button>
+            <button type="reset" routerLink="/equipment-models" class="btn btn-default">Cancel</button>
           </form>
         </div>
       </div>

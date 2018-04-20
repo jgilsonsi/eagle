@@ -1,10 +1,10 @@
 <div [@routerTransition]>
-    <app-page-header [heading]="'Tipos de equipamento'" [icon]="'fa fa-bicycle'"></app-page-header>
+    <app-page-header [heading]="'Equipment type list'" [icon]="'fa fa-bicycle'"></app-page-header>
     <div class="row">
         <div class="col col-xl-12 col-lg-12">
             <div class="card mb-3">
                 <div class="card-header">
-                    <button type="button" class="btn btn-sm btn-info" title="Novo" [routerLink]="['/equipment-type', '']">
+                    <button type="button" class="btn btn-sm btn-info" title="New" [routerLink]="['/equipment-type', '']">
                         <i class="fa fa-plus"></i>
                     </button>
                 </div>
@@ -12,7 +12,7 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Nome</th>
+                                <th>Name</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -20,10 +20,10 @@
                             <tr *ngFor="let item of equipmentTypes">
                                 <td>{{ item.name }}</td>
                                 <td class="text-right">
-                                    <button type="button" class="btn btn-sm btn-info" title="Editar" [routerLink]="['/equipment-type', item.id]">
+                                    <button type="button" class="btn btn-sm btn-info" title="Edit" [routerLink]="['/equipment-type', item.id]">
                                         <i class="fa fa-pencil"></i>
                                     </button>
-                                    <button type="button" class="btn btn-sm btn-danger" title="Excluir" (click)="deleteItem(item)">
+                                    <button type="button" class="btn btn-sm btn-danger" title="Delete" (click)="deleteItem(item)">
                                         <i class="fa fa-trash-o"></i>
                                     </button>
                                 </td>

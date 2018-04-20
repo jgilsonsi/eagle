@@ -30,7 +30,7 @@ export class EquipmentTypeComponent implements OnInit {
 
     var id = this.route.params.subscribe(params => {
       var id = params['id'];
-      this.title = id ? 'Editar ' : 'Novo ';
+      this.title = id ? 'Edit ' : 'New ';
 
       if (!id)
         return;

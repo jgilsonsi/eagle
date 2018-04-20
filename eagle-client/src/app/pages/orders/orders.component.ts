@@ -16,7 +16,22 @@ export class OrdersComponent implements OnInit {
   constructor(private ordersService: OrdersService) { }
 
   ngOnInit() {
-    this.ordersService.orders().subscribe(
+    this.ordersService.getItems().subscribe(
       orders => this.orders = orders);
   }
+
+  deleteItem(item) {
+    if (confirm("Do you really want to delete the item: " + item.id + "?")) {
+      var index = this.orders.indexOf(item);
+      this.orders.splice(index, 1);
+
+      this.ordersService.deleteItem(item.id)
+        .subscribe(null,
+          err => {
+            alert("Could not delete the item.");
+            this.orders.splice(index, 0, item);
+          });
+    }
+  }
+
 }

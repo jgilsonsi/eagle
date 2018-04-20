@@ -1,10 +1,10 @@
 <div [@routerTransition]>
-    <app-page-header [heading]="'Modelos de equipamento'" [icon]="'fa fa-bicycle'"></app-page-header>
+    <app-page-header [heading]="'Equipment model list'" [icon]="'fa fa-bicycle'"></app-page-header>
     <div class="row">
         <div class="col col-xl-12 col-lg-12">
             <div class="card mb-3">
                 <div class="card-header">
-                    <button type="button" class="btn btn-sm btn-info" title="Novo" [routerLink]="['/equipment-model', '']">
+                    <button type="button" class="btn btn-sm btn-info" title="New" [routerLink]="['/equipment-model', '']">
                         <i class="fa fa-plus"></i>
                     </button>
                 </div>
@@ -12,9 +12,9 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Nome</th>
-                                <th>Tipo</th>
-                                <th>Diária</th>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Rate</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -24,10 +24,10 @@
                                 <td>{{ item.equipmentTypeName }}</td>
                                 <td>{{ item.rate | currency:'BRL':2 }}</td>
                                 <td class="text-right">
-                                    <button type="button" class="btn btn-sm btn-info" title="Editar" [routerLink]="['/equipment-model', item.id]">
+                                    <button type="button" class="btn btn-sm btn-info" title="Edit" [routerLink]="['/equipment-model', item.id]">
                                         <i class="fa fa-pencil"></i>
                                     </button>
-                                    <button type="button" class="btn btn-sm btn-danger" title="Excluir" (click)="deleteItem(item)">
+                                    <button type="button" class="btn btn-sm btn-danger" title="Delete" (click)="deleteItem(item)">
                                         <i class="fa fa-trash-o"></i>
                                     </button>
                                 </td>
