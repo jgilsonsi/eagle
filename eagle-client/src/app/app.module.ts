@@ -10,10 +10,10 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
-import { ClientsService } from './pages/clients/clients.service';
-import { OrdersService } from './pages/orders/orders.service';
-import { EquipmentTypesService } from './pages/equipment-types/equipment-types.service';
-import { EquipmentModelsService } from './pages/equipment-models/equipment-models.service';
+import { ClientsService } from './clients/clients.service';
+import { OrdersService } from './orders/orders.service';
+import { EquipmentTypesService } from './equipment-types/equipment-types.service';
+import { EquipmentModelsService } from './equipment-models/equipment-models.service';
 import { DashboardService } from './layout/dashboard/dashboard.service';
 import { ROUTER_PROVIDERS } from '@angular/router/src/router_module';
 

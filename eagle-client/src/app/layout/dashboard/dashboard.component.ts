@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
     private statistic: any;
 
     // blocks -------------------------------------------------------
-    public numberOfContacts: number = 0;
+    public numberOfVisits: number = 0;
     public numberOfClients: number = 0;
     public numberOfOrders: number = 0;
 
@@ -69,11 +69,11 @@ export class DashboardComponent implements OnInit {
 
     private populateGraphs() {
         // blocks ---------------------------------------------------
-        this.numberOfContacts = 0;
+        this.numberOfVisits = 0;
         this.numberOfClients = 0;
         this.numberOfOrders = 0;
 
-        this.numberOfContacts = this.statistic.numberOfVisits.value;
+        this.numberOfVisits = this.statistic.numberOfVisits.value;
         this.numberOfClients = this.statistic.numberOfClients.value;
         this.numberOfOrders = this.statistic.numberOfOrders.value;
 

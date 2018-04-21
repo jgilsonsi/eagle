@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { routerTransition } from '../../router.animations';
+import { routerTransition } from '../router.animations';
 import { EquipmentModelsService } from './equipment-models.service';
 import { EquipmentModel } from './../models/equipment-model.model';
 

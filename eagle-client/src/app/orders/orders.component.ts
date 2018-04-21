@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { routerTransition } from '../../router.animations';
+import { routerTransition } from '../router.animations';
 import { OrdersService } from './orders.service';
 import { Order } from '../models/order.model';
 

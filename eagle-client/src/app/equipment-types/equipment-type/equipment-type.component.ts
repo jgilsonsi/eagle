@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { routerTransition } from '../../../router.animations';
+import { routerTransition } from '../../router.animations';
 import { EquipmentTypesService } from '../equipment-types.service';
 
 @Component({

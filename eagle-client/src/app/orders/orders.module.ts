@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { OrdersRoutingModule } from './orders-routing.module';
 import { OrdersComponent } from './orders.component';
-import { PageHeaderModule } from './../../shared';
+import { PageHeaderModule } from './../shared';
 
 @NgModule({
     imports: [CommonModule, OrdersRoutingModule, PageHeaderModule],

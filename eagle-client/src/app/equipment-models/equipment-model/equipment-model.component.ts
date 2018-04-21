@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { routerTransition } from '../../../router.animations';
+import { routerTransition } from '../../router.animations';
 import { EquipmentModelsService } from '../equipment-models.service';
 import { EquipmentTypesService } from '../../equipment-types/equipment-types.service';
 import { EquipmentType } from '../../models/equipment-type.model';

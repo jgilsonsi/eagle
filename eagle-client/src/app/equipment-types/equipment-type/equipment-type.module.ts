@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { EquipmentTypeRoutingModule } from './equipment-type-routing.module';
 import { EquipmentTypeComponent } from './equipment-type.component';
-import { PageHeaderModule } from './../../../shared';
+import { PageHeaderModule } from './../../shared';
 
 @NgModule({
     imports: [CommonModule, EquipmentTypeRoutingModule, PageHeaderModule, ReactiveFormsModule],

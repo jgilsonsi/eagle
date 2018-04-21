@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core'
 import { Http } from '@angular/http'
 
-import { Client } from '../models/client.model';
-import { EAGLE_API_CLIENTS } from './../../app.api';
+import { Order } from '../models/order.model';
+import { EAGLE_API_ORDERS } from './../app.api';
 import { Observable } from 'rxjs/Observable';
-import { ErrorHandler } from '../../app.error-handler';
+import { ErrorHandler } from '../app.error-handler';
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch'
 
 @Injectable()
-export class ClientsService {
+export class OrdersService {
 
-    private url: string = EAGLE_API_CLIENTS;
+    private url: string = EAGLE_API_ORDERS;
 
     constructor(private http: Http) { }
 
