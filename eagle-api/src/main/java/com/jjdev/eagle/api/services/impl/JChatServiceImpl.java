@@ -3,6 +3,7 @@ package com.jjdev.eagle.api.services.impl;
 import com.jjdev.eagle.api.entities.JClient;
 import com.jjdev.eagle.api.entities.JEquipmentModel;
 import com.jjdev.eagle.api.entities.JEquipmentType;
+import com.jjdev.eagle.api.entities.JOrder;
 import com.jjdev.eagle.api.json.list.JListChat;
 import com.jjdev.eagle.api.json.list.JListElement;
 import com.jjdev.eagle.api.json.quickreply.JQuickReplyChat;
@@ -10,9 +11,13 @@ import com.jjdev.eagle.api.json.quickreply.JQuickReply;
 import com.jjdev.eagle.api.repositories.IClientRepository;
 import com.jjdev.eagle.api.repositories.IEquipmentModelRepository;
 import com.jjdev.eagle.api.repositories.IEquipmentTypeRepository;
+import com.jjdev.eagle.api.repositories.IOrderRepository;
 import com.jjdev.eagle.api.services.IChatService;
 import com.jjdev.eagle.api.utils.JJsonUtils;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -25,6 +30,9 @@ import org.springframework.stereotype.Service;
 public class JChatServiceImpl implements IChatService {
 
     @Autowired
+    private IOrderRepository orderRepository;
+
+    @Autowired
     private IClientRepository clientRepository;
 
     @Autowired
@@ -35,6 +43,46 @@ public class JChatServiceImpl implements IChatService {
 
     @Value("${image.url}")
     private String imageUrl;
+
+    @Override
+    public String createOrder(JOrder order) {
+
+        if (order != null) {
+
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(new Date());
+            cal.set(Calendar.HOUR_OF_DAY, 0);
+            cal.set(Calendar.MINUTE, 0);
+            cal.set(Calendar.SECOND, 0);
+            cal.set(Calendar.MILLISECOND, 0);
+
+            if (order.getInitialDate().getTime() >= cal.getTime().getTime()) {
+
+                long days = -1;
+                try {
+                    days = TimeUnit.DAYS.convert(order.getFinalDate().getTime()
+                            - order.getInitialDate().getTime(), TimeUnit.MILLISECONDS);
+                } catch (Exception e) {
+                }
+
+                if (days >= 0) {
+
+                    JEquipmentModel equipmentModel = this.equipmentModelRepository
+                            .findOne(order.getEquipmentModel().getId());
+
+                    if (equipmentModel != null && this.clientRepository.exists(order.getClient().getId())) {
+                        order.setValue(equipmentModel.getRate() * (days == 0 ? 1 : days));
+
+                        this.orderRepository.save(order);
+
+                        return "{\"set_attributes\": {\"total_value\": \"" + order.getValue() + "\"}, "
+                                + "\"redirect_to_blocks\": [\"Booking status\"]}";
+                    }
+                }
+            }
+        }
+        return "{\"redirect_to_blocks\": [\"Wrong booking\"]}";
+    }
 
     @Override
     public String createOrUpdateClient(JClient client) {

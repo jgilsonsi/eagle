@@ -1,8 +1,11 @@
 package com.jjdev.eagle.api.controllers;
 
 import com.jjdev.eagle.api.entities.JClient;
+import com.jjdev.eagle.api.entities.JEquipmentModel;
 import com.jjdev.eagle.api.entities.JEquipmentType;
+import com.jjdev.eagle.api.entities.JOrder;
 import com.jjdev.eagle.api.services.IChatService;
+import java.text.SimpleDateFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +29,51 @@ public class JChatController {
     @Autowired
     private IChatService chatService;
 
+    private final SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+
     private static final Logger log = LoggerFactory.getLogger(JChatController.class);
 
     public JChatController() {
+    }
+
+    /**
+     * Create order.
+     *
+     * @param initialDate
+     * @param finalDate
+     * @param equipmentModelId
+     * @param clientId
+     * @return String
+     */
+    @PostMapping(value = "/order/{initialDate}/{finalDate}/{equipmentModelId}/{clientId}")
+    @ResponseBody
+    public String createOrder(
+            @PathVariable("initialDate") String initialDate,
+            @PathVariable("finalDate") String finalDate,
+            @PathVariable("equipmentModelId") String equipmentModelId,
+            @PathVariable("clientId") String clientId) {
+
+        log.info("Creating order by Chat whith initialDate: {}, finalDate: {}, "
+                + "equipmentModelId: {}, clientId: {}.",
+                initialDate, finalDate, equipmentModelId, clientId);
+
+        JOrder order;
+        try {
+            order = new JOrder();
+            order.setInitialDate(formatter.parse(initialDate));
+            order.setFinalDate(formatter.parse(finalDate));
+            JEquipmentModel equipmentModel = new JEquipmentModel();
+            equipmentModel.setId(Long.valueOf(equipmentModelId));
+            order.setEquipmentModel(equipmentModel);
+            JClient client = new JClient();
+            client.setId(Long.parseLong(clientId));
+            order.setClient(client);
+        } catch (Exception e) {
+            order = null;
+            log.error("Incorrect object format: order");
+        }
+
+        return this.chatService.createOrder(order);
     }
 
     /**
@@ -102,4 +147,5 @@ public class JChatController {
     private String removePlus(String text) {
         return (text != null && !text.isEmpty() && text.contains("+")) ? text.replace("+", " ") : text;
     }
+
 }

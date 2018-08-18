@@ -2,6 +2,7 @@ package com.jjdev.eagle.api.services;
 
 import com.jjdev.eagle.api.entities.JClient;
 import com.jjdev.eagle.api.entities.JEquipmentType;
+import com.jjdev.eagle.api.entities.JOrder;
 
 /**
  *
@@ -10,8 +11,17 @@ import com.jjdev.eagle.api.entities.JEquipmentType;
 public interface IChatService {
 
     /**
+     * Create order
+     *
+     * @param order
+     * @return String
+     */
+    String createOrder(JOrder order);
+
+    /**
      * Create or update client if exists
      *
+     * @param client
      * @return String
      */
     String createOrUpdateClient(JClient client);
