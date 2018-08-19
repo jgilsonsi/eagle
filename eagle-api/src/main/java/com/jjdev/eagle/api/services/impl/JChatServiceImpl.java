@@ -75,13 +75,14 @@ public class JChatServiceImpl implements IChatService {
 
                         this.orderRepository.save(order);
 
-                        return "{\"set_attributes\": {\"total_value\": \"" + order.getValue() + "\"}, "
-                                + "\"redirect_to_blocks\": [\"Booking status\"]}";
+                        return "{\"set_attributes\": {\"total_value\": \""
+                                + String.format("%,.2f", order.getValue()) + "\"}, "
+                                + "\"redirect_to_blocks\": [\"Order status\"]}";
                     }
                 }
             }
         }
-        return "{\"redirect_to_blocks\": [\"Wrong booking\"]}";
+        return "{\"redirect_to_blocks\": [\"Order wrong\"]}";
     }
 
     @Override
@@ -146,7 +147,8 @@ public class JChatServiceImpl implements IChatService {
         equipmentModels.stream().map(equipmentModel -> {
             JListElement listElement = new JListElement();
             listElement.setTitle(equipmentModel.getId() + " - "
-                    + equipmentModel.getName());
+                    + equipmentModel.getName() + " - Diária: R$"
+                    + String.format("%,.2f", equipmentModel.getRate()));
             listElement.setSubtitle(equipmentModel.getDescription());
             listElement.setImageUrl(imageUrl + "/" + equipmentModel.getId());
             listElement.getButtons().get(0).getSetAttributes()

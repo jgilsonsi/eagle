@@ -21,7 +21,7 @@ public class JListButton {
         this.title = "Escolher";
         this.type = "show_block";
         this.blockNames = new ArrayList<>();
-        this.blockNames.add("Booking confirm");
+        this.blockNames.add("Order form");
         this.setAttributes = new JListSetAttributes();
     }
 

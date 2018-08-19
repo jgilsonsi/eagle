@@ -175,6 +175,7 @@ public class JEquipmentModelController {
         }
 
         this.equipmentModelService.delete(id);
+        //deletar arquivo de foto
 
         return ResponseEntity.ok(new JResponse<>());
     }
@@ -207,6 +208,28 @@ public class JEquipmentModelController {
         }
     }
 
+//    /**
+//     * Create image.
+//     *
+//     * @param id
+//     * @param file
+//     * @return ResponseEntity<JResponse<String>>
+//     */
+//    @PostMapping(value = "/image/{id}")
+//    public ResponseEntity<JResponse<String>> uploadImage(
+//            @PathVariable("id") Long id, @RequestParam("file") MultipartFile file) {
+//
+//        log.info("Uploading image for equipment model: {}", id);
+//
+//        try {
+//            copy(file.getInputStream(), imagePath + "/" + id + ".jpg", REPLACE_EXISTING);
+//        } catch (IOException ex) {
+//            log.error("Error writing file to input stream. {}", ex);
+//            return null;
+//        }
+//
+//        return ResponseEntity.ok(new JResponse<>());
+//    }
     //--------------------------------------------------------------------------
     /**
      * Convert DTO to JEquipmentModel.
