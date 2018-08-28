@@ -25,7 +25,7 @@ public class JOrderServiceImpl implements IOrderService {
 
     @Override
     public List<JOrder> readAll() {
-        return this.orderRepository.findAll();
+        return this.orderRepository.findAllByOrderByIdDesc();
     }
 
     @Override
